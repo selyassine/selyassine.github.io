@@ -101,6 +101,27 @@
     replay.addEventListener("click", play);
   }
 
+  /* ---------- Projets : filtre par domaine ---------- */
+  const chips = Array.from(document.querySelectorAll(".chip"));
+  const items = Array.from(document.querySelectorAll("#projets [data-dom]"));
+  const count = document.getElementById("filtre-compte");
+  const grid = document.querySelector("#projets .projects");
+  const subhead = document.getElementById("t-plateformes");
+  function filter(key) {
+    let shown = 0;
+    items.forEach(el => {
+      const ok = key === "tous" || el.dataset.dom.split(" ").includes(key);
+      el.hidden = !ok;
+      if (ok) shown++;
+    });
+    const inGrid = grid.querySelectorAll(".project:not([hidden])").length;
+    grid.hidden = subhead.hidden = inGrid === 0;
+    chips.forEach(c => c.setAttribute("aria-pressed", String(c.dataset.filter === key)));
+    count.textContent = shown + (shown > 1 ? " projets" : " projet");
+  }
+  chips.forEach(c => c.addEventListener("click", () => filter(c.dataset.filter)));
+  if (chips.length) filter("tous");
+
   /* ---------- Navigation : filet sous la barre au défilement ---------- */
   const nav = document.querySelector(".nav");
   const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);

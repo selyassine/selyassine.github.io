@@ -32,6 +32,7 @@
       <nav aria-label="Navigation principale">
         <ul class="nav__links">
           <li><a href="#projets">Projets</a></li>
+          <li><a href="#methode">Méthode</a></li>
           <li><a href="#parcours">Parcours</a></li>
           <li><a href="#competences">Compétences</a></li>
           <li><a href="#certifications">Certifications</a></li>
@@ -46,7 +47,7 @@
     <section class="hero" aria-labelledby="titre">
       <div class="wrap hero__grid">
         <div class="hero__text">
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>Disponible pour un stage en actuariat ou data science</p>
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>Disponible pour un stage de fin d'études de 6 mois, à partir de janvier 2027</p>
           <h1 id="titre">Je relie le calcul actuariel et l'intelligence artificielle, et je vérifie chaque chiffre.</h1>
           <p class="lead">Élève ingénieur en data science à <strong>ESPRIT</strong> et étudiant en <strong>Master Actuariat à Le Mans Université</strong>. Je construis des outils d'IFRS 17, de provisionnement et de tarification où le code calcule et où le modèle de langage explique.</p>
           <div class="actions">
@@ -87,76 +88,139 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-projets">Projets</h2>
-          <p>Huit projets publiés sur GitHub, chacun avec ses tests, sa documentation et des résultats mesurés.</p>
+          <p>Trois études qui répondent chacune à une question précise, puis les plateformes et les outils. Chaque chiffre vient du dépôt qui le calcule.</p>
         </div>
 
-        <article class="feature">
+        <div class="filters" role="group" aria-label="Filtrer les projets par domaine">
+          <button class="chip" type="button" data-filter="tous" aria-pressed="true">Tous</button>
+          <button class="chip" type="button" data-filter="ifrs" aria-pressed="false">IFRS et risque de crédit</button>
+          <button class="chip" type="button" data-filter="nonvie" aria-pressed="false">Non-vie et réassurance</button>
+          <button class="chip" type="button" data-filter="vie" aria-pressed="false">Assurance-vie</button>
+          <button class="chip" type="button" data-filter="ia" aria-pressed="false">Data et IA</button>
+          <p class="filters__count" id="filtre-compte" aria-live="polite"></p>
+        </div>
+
+        <article class="feature" data-dom="ifrs ia">
           <a class="feature__media" href="https://github.com/selyassine/ifrs17-copilot" tabindex="-1" aria-hidden="true">
             <img src="assets/img/ifrs17-copilot.webp" width="1400" height="875" loading="lazy" alt="">
           </a>
           <div class="feature__body">
-            <p class="kicker">Projet phare</p>
+            <p class="kicker">Un modèle de langage peut-il rédiger une note IFRS 17 sans inventer un chiffre ?</p>
             <h3><a href="https://github.com/selyassine/ifrs17-copilot">IFRS 17 Copilot</a></h3>
-            <p>Un copilote multi-agent lit un dossier d'assurance (PDF, scan, Excel ou question vocale), calcule la marge sur services contractuels et le passif pour sinistres survenus, puis rédige une note actuarielle citée, vérifiée et soumise à validation humaine.</p>
+            <p>Un copilote multi-agent lit un dossier d'assurance (PDF, scan, Excel ou question vocale), calcule la marge sur services contractuels et le passif pour sinistres survenus, puis rédige une note citée, vérifiée et soumise à validation humaine. Le code calcule, le modèle explique.</p>
             <dl class="figures">
               <div><dt>Double calcul contre un script R</dt><dd>50 / 50 dossiers au centime</dd></div>
               <div><dt>Recherche dans la norme</dt><dd>Recall@5 de 0,52 à 0,75</dd></div>
               <div><dt>Tests automatisés</dt><dd>370+, CI verte</dd></div>
             </dl>
             <p class="stack">Python, FastAPI, LangGraph, RAG, Qdrant, n8n</p>
+            <p class="project__links"><a href="https://github.com/selyassine/ifrs17-copilot">Code sur GitHub</a></p>
           </div>
         </article>
 
-        <div class="projects">
-          <article class="project project--text">
-            <div class="pipeline" aria-hidden="true">
-              <span>Freddie Mac</span><span>PD</span><span>LGD</span><span>scénarios</span><span>ECL</span>
-            </div>
+        <article class="feature" data-dom="ifrs ia">
+          <figure class="feature__figure">
+            <svg viewBox="0 0 520 300" role="img" aria-labelledby="g-ecl9">
+              <title id="g-ecl9">Provision au 31 décembre 2007 : 12,7 millions de dollars avec la régression logistique, 19,0 millions avec LightGBM.</title>
+              <text x="24" y="42" class="g-title">Provision au 31/12/2007, en M$</text>
+              <text x="24" y="98" class="g-label">Régression logistique</text>
+              <rect x="24" y="110" width="294" height="34" rx="3" class="g-bar"/>
+              <text x="330" y="134" class="g-value">12,7</text>
+              <text x="24" y="192" class="g-label">LightGBM</text>
+              <rect x="24" y="204" width="440" height="34" rx="3" class="g-bar g-bar--brass"/>
+              <text x="476" y="228" class="g-value g-value--brass">19,0</text>
+              <text x="24" y="276" class="g-note">Mêmes variables, même LGD, mêmes scénarios.</text>
+            </svg>
+          </figure>
+          <div class="feature__body">
+            <p class="kicker">Le machine learning change-t-il vraiment la provision IFRS 9 ?</p>
             <h3><a href="https://github.com/selyassine/ecl9">ecl9</a></h3>
-            <p>Le machine learning change-t-il la provision IFRS 9 ? Régression logistique contre LightGBM sur des prêts immobiliers américains, entraînés avant 2006 et testés sur la crise : +49 % de provision au 31/12/2007, mais les deux modèles ne couvrent que 9 à 13 % des pertes constatées ensuite.</p>
-            <p class="stack">Python, LightGBM, pytest, R, Quarto</p>
-          </article>
-          <article class="project">
+            <p>Un moteur de pertes de crédit attendues, prêt par prêt, sur les prêts immobiliers américains de Freddie Mac. Les modèles sont entraînés sur 2000-2005 et testés sur 2006-2008 : ils traversent la crise sans l'avoir vue.</p>
+            <dl class="figures">
+              <div><dt>LightGBM contre logistique, fin 2007</dt><dd>+49 % de provision</dd></div>
+              <div><dt>Pertes constatées ensuite couvertes</dt><dd>9 à 13 % seulement</dd></div>
+              <div><dt>Recalcul indépendant en R</dt><dd>50 prêts</dd></div>
+            </dl>
+            <p class="stack">Python, LightGBM, survie en temps discret, pytest, Quarto</p>
+            <p class="project__links"><a href="https://selyassine.github.io/ecl9/">Lire la note de provisionnement</a><a href="https://github.com/selyassine/ecl9">Code sur GitHub</a></p>
+          </div>
+        </article>
+
+        <article class="feature" data-dom="nonvie">
+          <figure class="feature__figure">
+            <svg viewBox="0 0 520 300" role="img" aria-labelledby="g-climat">
+              <title id="g-climat">Chargement climatique 2035 : plus 27 pour cent, dans un intervalle bootstrap de moins 59 à plus 142 pour cent, qui contient zéro.</title>
+              <text x="24" y="42" class="g-title">Chargement climatique 2035, tranche 5 Md$ xs 10 Md$</text>
+              <line x1="40" y1="170" x2="490" y2="170" class="g-axis"/>
+              <line x1="220" y1="96" x2="220" y2="222" class="g-zero"/>
+              <text x="220" y="246" class="g-tick">0 %</text>
+              <line x1="113.8" y1="150" x2="475.6" y2="150" class="g-interval"/>
+              <line x1="113.8" y1="138" x2="113.8" y2="162" class="g-interval"/>
+              <line x1="475.6" y1="138" x2="475.6" y2="162" class="g-interval"/>
+              <circle cx="268.6" cy="150" r="8" class="g-point"/>
+              <text x="268.6" y="124" class="g-value g-value--brass g-mid">+27 %</text>
+              <text x="113.8" y="196" class="g-tick">−59 %</text>
+              <text x="475.6" y="196" class="g-tick">+142 %</text>
+              <text x="24" y="276" class="g-note">L'intervalle bootstrap contient zéro : effet non démontré.</text>
+            </svg>
+          </figure>
+          <div class="feature__body">
+            <p class="kicker">Le climat rend-il la réassurance catastrophe plus chère ?</p>
+            <h3><a href="https://github.com/selyassine/climatXL">climatXL</a></h3>
+            <p>Un package R qui ajuste des lois de valeurs extrêmes, stationnaires puis dépendantes du climat, aux dommages NOAA 1996-2024, et qui en tire la prime d'une tranche en excédent de sinistre. Réponse sur cette période : pas de façon démontrable.</p>
+            <dl class="figures">
+              <div><dt>Prime pure de la tranche, 2024 puis 2035</dt><dd>2 176 à 2 762 M$</dd></div>
+              <div><dt>Validation</dt><dd>McNeil (1997) reproduit</dd></div>
+              <div><dt>Backtest</dt><dd>2013-2024</dd></div>
+            </dl>
+            <p class="stack">R, targets, testthat, Quarto, Shiny</p>
+            <p class="project__links"><a href="https://selyassine.github.io/climatXL/">Lire le rapport</a><a href="https://climatxl.shinyapps.io/climatXL/">Ouvrir l'application</a><a href="https://github.com/selyassine/climatXL">Code sur GitHub</a></p>
+          </div>
+        </article>
+
+        <h3 class="subhead" id="t-plateformes">Plateformes et outils</h3>
+        <div class="projects">
+          <article class="project" data-dom="nonvie ia">
             <img src="assets/img/siap.webp" width="1200" height="738" loading="lazy" alt="Détection de dommages sur des véhicules par YOLOv8, avec sévérité et coût estimé">
             <h3><a href="https://github.com/selyassine/SIAP">SIAP</a></h3>
-            <p>Plateforme d'assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude, IBNR par Chain Ladder, Mack et Bootstrap, expertise de dommages par vision.</p>
+            <p>Plateforme d'assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude (AUC 0,82), IBNR par Chain Ladder, Mack et Bootstrap, expertise de dommages par vision.</p>
             <p class="stack">LightGBM, XGBoost, YOLOv8, FastAPI, Next.js</p>
           </article>
-          <article class="project">
+          <article class="project" data-dom="vie">
             <img src="assets/img/vitaai.webp" width="844" height="566" loading="lazy" alt="Courbes de mortalité projetées par le modèle Lee-Carter">
             <h3><a href="https://github.com/selyassine/VITA">VitaAI</a></h3>
-            <p>Une compagnie d'assurance-vie simulée en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité, ALM et ORSA.</p>
+            <p>Une compagnie d'assurance-vie simulée en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité à 99,5 %, ALM et ORSA.</p>
             <p class="stack">Python, pytest, Next.js</p>
           </article>
-          <article class="project">
-            <img src="assets/img/quantai.webp" width="1100" height="520" loading="lazy" alt="Backtest de quatre stratégies sur AAPL comparées à l'achat-conservation">
-            <h3><a href="https://github.com/selyassine/Quant">QuantAI</a></h3>
-            <p>Trading quantitatif en paper trading : ensemble LightGBM, LSTM et Transformer, optimisation Markowitz et Black-Litterman, backtests, agent soumis à validation humaine.</p>
-            <p class="stack">PyTorch, FastAPI, Celery, Next.js</p>
-          </article>
-          <article class="project project--text">
-            <div class="pipeline" aria-hidden="true">
-              <span>push</span><span>GitHub Actions</span><span>GHCR</span><span>Jenkins</span><span>Prefect</span>
-            </div>
-            <h3><a href="https://github.com/selyassine/Mlops">Titanic MLOps</a></h3>
-            <p>Un pipeline CI/CD complet : à chaque push, le modèle est testé, conteneurisé, publié puis réentraîné et orchestré automatiquement.</p>
-            <p class="stack">Docker, GitHub Actions, Jenkins, Prefect</p>
-          </article>
-          <article class="project project--text">
-            <div class="pipeline" aria-hidden="true">
-              <span>NOAA</span><span>GPD</span><span>tranche XL</span><span>bootstrap</span><span>Shiny</span>
-            </div>
-            <h3><a href="https://github.com/selyassine/climatXL">climatXL</a></h3>
-            <p>Le climat rend-il la réassurance catastrophe plus chère ? Valeurs extrêmes non stationnaires et tarification d'une tranche en excédent de sinistre : chargement 2035 de +27 %, dans un intervalle de −59 % à +142 %, donc non démontré.</p>
-            <p class="stack">R, targets, testthat, Quarto, Shiny</p>
-          </article>
-          <article class="project project--text">
+          <article class="project project--text" data-dom="nonvie vie ia">
             <div class="pipeline" aria-hidden="true">
               <span>question</span><span>skill</span><span>scripts Python</span><span>résultat tracé</span>
             </div>
             <h3><a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a></h3>
             <p>Un moteur de calcul actuariel livré comme skill pour Claude, testé contre des résultats publiés (Mack 1993, McNeil 1997) : 59 valeurs justes sur 59 au banc d'essai, contre 47 sans code.</p>
             <p class="stack">Python, pytest, GitHub Actions</p>
+          </article>
+          <article class="project project--text" data-dom="vie">
+            <div class="pipeline" aria-hidden="true">
+              <span>HMD</span><span>Lee-Carter</span><span>5 000 trajectoires</span><span>VAP</span>
+            </div>
+            <h3><a href="https://github.com/selyassine/actuariat-vie-longevite">Risque de longévité</a></h3>
+            <p>Projet de groupe du Master Actuariat : valeur actuelle probable d'une rente de 25 ans pour deux cohortes françaises. La génération 1950 coûte 5,25 % de plus que celle de 1935.</p>
+            <p class="stack">R, StMoMo, R Markdown</p>
+          </article>
+          <article class="project" data-dom="ia">
+            <img src="assets/img/quantai.webp" width="1100" height="520" loading="lazy" alt="Backtest de quatre stratégies sur AAPL comparées à l'achat-conservation">
+            <h3><a href="https://github.com/selyassine/Quant">QuantAI</a></h3>
+            <p>Trading quantitatif en paper trading : ensemble LightGBM, LSTM et Transformer, optimisation Markowitz et Black-Litterman, backtests, agent soumis à validation humaine.</p>
+            <p class="stack">PyTorch, FastAPI, Celery, Next.js</p>
+          </article>
+          <article class="project project--text" data-dom="ia">
+            <div class="pipeline" aria-hidden="true">
+              <span>push</span><span>GitHub Actions</span><span>GHCR</span><span>Jenkins</span><span>Prefect</span>
+            </div>
+            <h3><a href="https://github.com/selyassine/Mlops">Titanic MLOps</a></h3>
+            <p>Un pipeline CI/CD complet : à chaque push, le modèle est testé, conteneurisé, publié puis réentraîné et orchestré automatiquement.</p>
+            <p class="stack">Docker, GitHub Actions, Jenkins, Prefect</p>
           </article>
         </div>
 
@@ -172,8 +236,32 @@
       </div>
     </section>
 
+    <!-- Méthode -->
+    <section class="section section--alt" id="methode" aria-labelledby="t-methode">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-methode">Méthode</h2>
+          <p>Trois habitudes que l'on retrouve dans chaque dépôt, et que l'on peut vérifier en ouvrant le code.</p>
+        </div>
+        <div class="method">
+          <div>
+            <h3>Je valide contre une référence publiée</h3>
+            <p>Avant tout nouveau calcul, je reproduis un résultat connu : Mack (1993) pour le provisionnement, McNeil (1997) pour les valeurs extrêmes. Puis je fais recalculer par un second code indépendant : 50 dossiers IFRS 17 et 50 prêts IFRS 9 refaits en R.</p>
+          </div>
+          <div>
+            <h3>Je publie aussi ce qui ne marche pas</h3>
+            <p>Dans climatXL, l'effet du climat sur la prime n'est pas démontré, et c'est la conclusion du rapport. Dans ecl9, les deux modèles ne couvrent que 9 à 13 % des pertes de la crise. Dans IFRS 17 Copilot, un réentraînement des embeddings a été mesuré puis abandonné.</p>
+          </div>
+          <div>
+            <h3>Le modèle de langage ne calcule pas</h3>
+            <p>Dans mes outils d'IA, chaque chiffre sort d'un code testé. Le modèle lit les documents, cherche dans la norme, explique et rédige. Quand les données ne permettent pas le calcul, l'outil refuse au lieu de rendre un chiffre faux.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Parcours : une vraie chronologie -->
-    <section class="section section--alt" id="parcours" aria-labelledby="t-parcours">
+    <section class="section" id="parcours" aria-labelledby="t-parcours">
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-parcours">Parcours</h2>
@@ -232,7 +320,7 @@
     </section>
 
     <!-- Compétences -->
-    <section class="section" id="competences" aria-labelledby="t-competences">
+    <section class="section section--alt" id="competences" aria-labelledby="t-competences">
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-competences">Compétences</h2>
@@ -282,7 +370,7 @@
     </section>
 
     <!-- Certifications -->
-    <section class="section section--alt" id="certifications" aria-labelledby="t-certifs">
+    <section class="section" id="certifications" aria-labelledby="t-certifs">
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-certifs">Certifications</h2>
@@ -322,11 +410,11 @@
     </section>
 
     <!-- Contact -->
-    <section class="section" id="contact" aria-labelledby="t-contact">
+    <section class="section section--alt" id="contact" aria-labelledby="t-contact">
       <div class="wrap contact">
         <div>
           <h2 id="t-contact">Me contacter</h2>
-          <p>Un stage, un projet ou une question sur mon travail : écrivez-moi, je réponds rapidement.</p>
+          <p>Je cherche un stage de fin d'études de 6 mois à partir de janvier 2027, en actuariat, en modélisation des risques ou en data science. Pour un stage, un projet ou une question sur mon travail, écrivez-moi.</p>
           <dl class="contact__list">
             <div><dt>E-mail</dt><dd><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></dd></div>
             <div><dt>Téléphone</dt><dd><a href="tel:+21696919365">+216 96 919 365</a></dd></div>
