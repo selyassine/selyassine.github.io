@@ -29,9 +29,11 @@
   <header class="nav" id="haut">
     <div class="wrap nav__inner">
       <a class="nav__brand" href="#haut" aria-label="Yassine Selmi, retour en haut">Yassine Selmi</a>
+      <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
       <nav aria-label="Navigation principale">
-        <ul class="nav__links">
+        <ul class="nav__links" id="nav-links">
           <li><a href="#projets">Projets</a></li>
+          <li><a href="#laboratoire">Laboratoire</a></li>
           <li><a href="#methode">Méthode</a></li>
           <li><a href="#parcours">Parcours</a></li>
           <li><a href="#competences">Compétences</a></li>
@@ -52,8 +54,8 @@
           <p class="lead">Élève ingénieur en data science à <strong>ESPRIT</strong> et étudiant en <strong>Master Actuariat à Le Mans Université</strong>. Je construis des outils d'IFRS 17, de provisionnement et de tarification où le code calcule et où le modèle de langage explique.</p>
           <div class="actions">
             <a class="btn btn--primary" href="#projets">Voir mes projets</a>
+            <a class="btn btn--ghost" href="#laboratoire">Essayer le laboratoire</a>
             <a class="btn btn--ghost" href="assets/CV_Yassine_Selmi.pdf" download>Télécharger mon CV</a>
-            <a class="btn btn--ghost" href="#contact">Me contacter</a>
           </div>
           <ul class="links" aria-label="Profils en ligne">
             <li><a href="https://github.com/selyassine" rel="me">GitHub</a></li>
@@ -67,19 +69,26 @@
         </figure>
       </div>
 
-      <!-- Le moment fort : un triangle de développement complété en direct -->
+      <!-- Le moment fort : 5 000 trajectoires simulées en direct -->
       <div class="wrap">
-        <figure class="triangle" id="triangle">
-          <figcaption class="triangle__head">
-            <h2 class="triangle__title">Un triangle de sinistres, complété par Chain Ladder</h2>
-            <p class="triangle__note">Paiements cumulés par année de survenance. Les cellules dorées sont projetées en direct à partir des facteurs de développement observés. Données illustratives.</p>
+        <figure class="sim" id="sim">
+          <figcaption class="sim__head">
+            <h2 class="sim__title">5 000 scénarios de mortalité, simulés à l'instant dans votre navigateur</h2>
+            <p class="sim__note">Chaque ligne est une trajectoire possible d'un indice de mortalité sur 25 ans : une marche aléatoire avec dérive, le moteur du modèle de Lee-Carter que j'utilise pour mesurer le risque de longévité. La bande claire contient 90 % des scénarios. Paramètres illustratifs.</p>
           </figcaption>
-          <div class="triangle__scroll" tabindex="0" role="region" aria-label="Triangle de développement">
-            <table class="tri" id="tri"></table>
+          <canvas class="sim__canvas" id="sim-canvas" role="img" aria-label="Éventail de trajectoires simulées d'un indice de mortalité sur 25 ans, avec la médiane et la bande de 5 à 95 %."></canvas>
+          <div class="sim__foot">
+            <p class="sim__result" id="sim-result" aria-live="polite"></p>
+            <button class="replay" id="sim-replay" type="button">Tirer 5 000 nouveaux scénarios</button>
           </div>
-          <p class="triangle__result" id="tri-result" aria-live="polite"></p>
-          <button class="replay" id="tri-replay" type="button">Rejouer le calcul</button>
         </figure>
+
+        <dl class="facts">
+          <div><dt>Formation</dt><dd>Ingénieur data science à ESPRIT et Master Actuariat à Le Mans Université, diplômes en 2027</dd></div>
+          <div><dt>Recherche</dt><dd>Stage de fin d'études de 6 mois, à partir de janvier 2027</dd></div>
+          <div><dt>Domaines</dt><dd>IFRS 17 et IFRS 9, provisionnement, réassurance, tarification</dd></div>
+          <div><dt>Langues</dt><dd>Arabe, français (B2), anglais (B2)</dd></div>
+        </dl>
       </div>
     </section>
 
@@ -233,6 +242,115 @@
             <li><strong>Analyse de données sociales</strong> : extraction d'indicateurs par machine learning, restitution sous Tableau.</li>
           </ul>
         </details>
+      </div>
+    </section>
+
+    <!-- Laboratoire -->
+    <section class="section" id="laboratoire" aria-labelledby="t-labo">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-labo">Laboratoire</h2>
+          <p>Quatre calculs actuariels qui tournent dans cette page. Changez une hypothèse : le résultat et le graphique se recalculent aussitôt. Les formules sont celles de mes projets, sur des données illustratives.</p>
+        </div>
+
+        <div class="lab">
+          <div class="lab__tabs" role="tablist" aria-label="Calculs du laboratoire">
+            <button class="lab__tab" role="tab" id="tab-cl" aria-controls="panel-cl" aria-selected="true" type="button">Provisionnement<span>Chain Ladder</span></button>
+            <button class="lab__tab" role="tab" id="tab-xl" aria-controls="panel-xl" aria-selected="false" tabindex="-1" type="button">Réassurance<span>Tranche XL, loi GPD</span></button>
+            <button class="lab__tab" role="tab" id="tab-rente" aria-controls="panel-rente" aria-selected="false" tabindex="-1" type="button">Assurance-vie<span>Rente et longévité</span></button>
+            <button class="lab__tab" role="tab" id="tab-ecl" aria-controls="panel-ecl" aria-selected="false" tabindex="-1" type="button">Risque de crédit<span>Provision IFRS 9</span></button>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-cl" aria-labelledby="tab-cl" tabindex="0">
+            <div class="lab__intro">
+              <h3>Complétez un triangle de sinistres</h3>
+              <p>Paiements cumulés par année de survenance, en milliers d'euros. Modifiez une cellule blanche : les facteurs de développement, les cellules dorées et la provision se recalculent.</p>
+            </div>
+            <div class="triangle__scroll" tabindex="0" role="region" aria-label="Triangle de développement modifiable">
+              <table class="tri" id="tri"></table>
+            </div>
+            <div class="lab__out">
+              <div><dt>Provision (IBNR)</dt><dd id="cl-ibnr"></dd></div>
+              <div><dt>Charge ultime</dt><dd id="cl-ult"></dd></div>
+              <div><dt>Déjà payé</dt><dd id="cl-paid"></dd></div>
+            </div>
+            <p class="lab__foot"><button class="replay" id="cl-reset" type="button">Revenir aux données de départ</button><span>La même méthode, avec Mack et le bootstrap, est dans <a href="https://github.com/selyassine/SIAP">SIAP</a> et <a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a>.</span></p>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-xl" aria-labelledby="tab-xl" tabindex="0" hidden>
+            <div class="lab__intro">
+              <h3>Tarifez une tranche en excédent de sinistre</h3>
+              <p>Les sinistres au-delà de 10 M€ suivent une loi de Pareto généralisée. La prime pure est la fréquence multipliée par le coût moyen laissé à la tranche.</p>
+            </div>
+            <div class="lab__grid">
+              <form class="lab__controls" id="xl-form">
+                <label>Indice de queue ξ <output id="xl-xi-o"></output><input type="range" id="xl-xi" min="0.05" max="0.9" step="0.01" value="0.5"></label>
+                <label>Échelle σ, en M€ <output id="xl-sigma-o"></output><input type="range" id="xl-sigma" min="1" max="20" step="0.5" value="7"></label>
+                <label>Sinistres au-delà du seuil, par an <output id="xl-lambda-o"></output><input type="range" id="xl-lambda" min="0.5" max="10" step="0.1" value="3"></label>
+                <label>Priorité, en M€ <output id="xl-prio-o"></output><input type="range" id="xl-prio" min="10" max="100" step="1" value="30"></label>
+                <label>Portée, en M€ <output id="xl-portee-o"></output><input type="range" id="xl-portee" min="5" max="100" step="1" value="30"></label>
+              </form>
+              <div>
+                <div class="lab__chart" id="xl-chart"></div>
+                <div class="lab__out">
+                  <div><dt>Prime pure annuelle</dt><dd id="xl-prime"></dd></div>
+                  <div><dt>Taux sur la portée</dt><dd id="xl-rol"></dd></div>
+                  <div><dt>Sinistres qui touchent la tranche</dt><dd id="xl-touch"></dd></div>
+                </div>
+              </div>
+            </div>
+            <p class="lab__foot"><span>Appliqué à des données réelles, avec une queue qui dépend du climat, dans <a href="https://github.com/selyassine/climatXL">climatXL</a>.</span></p>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-rente" aria-labelledby="tab-rente" tabindex="0" hidden>
+            <div class="lab__intro">
+              <h3>Mesurez le coût de la longévité sur une rente</h3>
+              <p>Valeur actuelle probable d'une rente de 10 000 € par an, payée en fin d'année. Baissez la mortalité pour voir le prix d'une population qui vit plus longtemps. Mortalité illustrative de type Makeham, pas une table réglementaire.</p>
+            </div>
+            <div class="lab__grid">
+              <form class="lab__controls" id="rente-form">
+                <label>Âge à la souscription <output id="rente-age-o"></output><input type="range" id="rente-age" min="50" max="90" step="1" value="65"></label>
+                <label>Durée de la rente, en années <output id="rente-duree-o"></output><input type="range" id="rente-duree" min="5" max="40" step="1" value="25"></label>
+                <label>Taux technique <output id="rente-taux-o"></output><input type="range" id="rente-taux" min="0" max="6" step="0.25" value="2"></label>
+                <label>Baisse de la mortalité <output id="rente-choc-o"></output><input type="range" id="rente-choc" min="0" max="40" step="1" value="20"></label>
+              </form>
+              <div>
+                <div class="lab__chart" id="rente-chart"></div>
+                <div class="lab__out">
+                  <div><dt>Prime unique, mortalité de base</dt><dd id="rente-base"></dd></div>
+                  <div><dt>Prime unique, mortalité abaissée</dt><dd id="rente-choque"></dd></div>
+                  <div><dt>Coût de la longévité</dt><dd id="rente-ecart"></dd></div>
+                </div>
+              </div>
+            </div>
+            <p class="lab__foot"><span>Le choc de 20 % est celui du SCR longévité de Solvabilité II. Sur données réelles : <a href="https://github.com/selyassine/VITA">VitaAI</a> et le <a href="https://github.com/selyassine/actuariat-vie-longevite">projet longévité</a>.</span></p>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-ecl" aria-labelledby="tab-ecl" tabindex="0" hidden>
+            <div class="lab__intro">
+              <h3>Voyez l'effet de falaise du passage en stade 2</h3>
+              <p>Pour un prêt amortissable, IFRS 9 provisionne les pertes attendues à 12 mois en stade 1, puis sur toute la durée de vie dès que le risque augmente fortement. Probabilité de défaut annuelle constante, amortissement linéaire.</p>
+            </div>
+            <div class="lab__grid">
+              <form class="lab__controls" id="ecl-form">
+                <label>Capital restant dû, en k€ <output id="ecl-ead-o"></output><input type="range" id="ecl-ead" min="20" max="500" step="10" value="200"></label>
+                <label>Probabilité de défaut à 1 an <output id="ecl-pd-o"></output><input type="range" id="ecl-pd" min="0.1" max="15" step="0.1" value="2"></label>
+                <label>Perte en cas de défaut <output id="ecl-lgd-o"></output><input type="range" id="ecl-lgd" min="5" max="90" step="1" value="35"></label>
+                <label>Durée restante, en années <output id="ecl-mat-o"></output><input type="range" id="ecl-mat" min="1" max="30" step="1" value="15"></label>
+                <label>Taux d'intérêt effectif <output id="ecl-tie-o"></output><input type="range" id="ecl-tie" min="0" max="8" step="0.25" value="3"></label>
+              </form>
+              <div>
+                <div class="lab__chart" id="ecl-chart"></div>
+                <div class="lab__out">
+                  <div><dt>Provision en stade 1</dt><dd id="ecl-s1"></dd></div>
+                  <div><dt>Provision en stade 2</dt><dd id="ecl-s2"></dd></div>
+                  <div><dt>Multiplication au passage</dt><dd id="ecl-ratio"></dd></div>
+                </div>
+              </div>
+            </div>
+            <p class="lab__foot"><span>Sur 2000-2008 et prêt par prêt, avec survie en temps discret et scénarios pondérés : <a href="https://github.com/selyassine/ecl9">ecl9</a>.</span></p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -444,6 +562,25 @@
       </div>
     </section>
   </main>
+
+  <!-- Assistant du portfolio -->
+  <button class="bot-toggle" id="bot-toggle" type="button" aria-expanded="false" aria-controls="bot">Poser une question</button>
+  <section class="bot" id="bot" role="dialog" aria-labelledby="bot-title" hidden>
+    <header class="bot__head">
+      <div>
+        <h2 id="bot-title">Assistant du portfolio</h2>
+        <p>Réponses préparées, tirées de ce site. Aucun modèle de langage : rien n'est inventé.</p>
+      </div>
+      <button class="bot__close" id="bot-close" type="button" aria-label="Fermer l'assistant">Fermer</button>
+    </header>
+    <div class="bot__log" id="bot-log" role="log" aria-live="polite"></div>
+    <div class="bot__chips" id="bot-chips"></div>
+    <form class="bot__form" id="bot-form">
+      <label class="visually-hidden" for="bot-input">Votre question</label>
+      <input id="bot-input" autocomplete="off" placeholder="Par exemple : quand es-tu disponible ?">
+      <button class="btn btn--primary" type="submit">Envoyer</button>
+    </form>
+  </section>
 
   <footer class="footer">
     <div class="wrap footer__inner">
