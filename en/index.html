@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yassine Selmi — Actuarial science and data science</title>
+  <meta name="description" content="Data science engineering student (ESPRIT) and MSc Actuarial Science student (Le Mans Université). IFRS 17, reserving, Solvency II, machine learning and LLMs.">
+  <meta name="author" content="Yassine Selmi">
+  <link rel="canonical" href="https://selyassine.github.io/en/">
+  <link rel="alternate" hreflang="fr" href="https://selyassine.github.io/">
+  <link rel="alternate" hreflang="en" href="https://selyassine.github.io/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://selyassine.github.io/en/">
+  <meta property="og:title" content="Yassine Selmi — Actuarial science and data science">
+  <meta property="og:description" content="IFRS 17, reserving, Solvency II, machine learning and LLMs: projects, background and certifications.">
+  <meta property="og:image" content="https://selyassine.github.io/assets/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0F1E33">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1E33'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23C8A35A'%3EYS%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Yassine Selmi","jobTitle":"Data science engineering student and actuarial science student","url":"https://selyassine.github.io/en/","email":"mailto:selmi.yassine@esprit.tn","address":{"@type":"PostalAddress","addressLocality":"Tunis","addressCountry":"TN"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"ESPRIT"},{"@type":"CollegeOrUniversity","name":"Le Mans Université"}],"sameAs":["https://github.com/selyassine","https://www.linkedin.com/in/selmi-yassine-437503311/"]}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#contenu">Skip to content</a>
+
+  <header class="nav" id="haut">
+    <div class="wrap nav__inner">
+      <a class="nav__brand" href="#haut" aria-label="Yassine Selmi, back to top">Yassine Selmi</a>
+      <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#projets">Projects</a></li>
+          <li><a href="#laboratoire">Lab</a></li>
+          <li><a href="#methode">Method</a></li>
+          <li><a href="#parcours">Background</a></li>
+          <li><a href="#competences">Skills</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a class="nav__lang" href="../" lang="fr" hreflang="fr">Français</a></li>
+          <li><a class="nav__cta" href="#contact">Contact me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <!-- Présentation -->
+    <section class="hero" aria-labelledby="titre">
+      <div class="wrap hero__grid">
+        <div class="hero__text">
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>Available for a 6-month final-year internship, starting January 2027</p>
+          <h1 id="titre">I connect actuarial calculation with artificial intelligence, and I check every number.</h1>
+          <p class="lead">Data science engineering student at <strong>ESPRIT</strong> and <strong>MSc Actuarial Science student at Le Mans Université</strong>. I build IFRS 17, reserving and pricing tools where code does the calculation and the language model does the explaining.</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="#projets">See my projects</a>
+            <a class="btn btn--ghost" href="#laboratoire">Try the lab</a>
+            <a class="btn btn--ghost" href="../assets/CV_Yassine_Selmi.pdf" download>Download my CV (in French)</a>
+          </div>
+          <ul class="links" aria-label="Online profiles">
+            <li><a href="https://github.com/selyassine" rel="me">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/selmi-yassine-437503311/" rel="me">LinkedIn</a></li>
+            <li><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></li>
+          </ul>
+        </div>
+        <figure class="hero__photo">
+          <img src="../assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait of Yassine Selmi" fetchpriority="high">
+          <figcaption>Tunis, graduating in 2027</figcaption>
+        </figure>
+      </div>
+
+      <!-- Le moment fort : 5 000 trajectoires simulées en direct -->
+      <div class="wrap">
+        <figure class="sim" id="sim">
+          <figcaption class="sim__head">
+            <h2 class="sim__title">5,000 mortality scenarios, simulated just now in your browser</h2>
+            <p class="sim__note">Each line is one possible path of a mortality index over 25 years: a random walk with drift, the engine of the Lee-Carter model I use to measure longevity risk. The light band holds 90% of the scenarios. Illustrative parameters.</p>
+          </figcaption>
+          <canvas class="sim__canvas" id="sim-canvas" role="img" aria-label="Fan of simulated paths of a mortality index over 25 years, with the median and the 5% to 95% band."></canvas>
+          <div class="sim__foot">
+            <p class="sim__result" id="sim-result" aria-live="polite"></p>
+            <button class="replay" id="sim-replay" type="button">Draw 5,000 new scenarios</button>
+          </div>
+        </figure>
+
+        <dl class="facts">
+          <div><dt>Education</dt><dd>Data science engineering at ESPRIT and MSc Actuarial Science at Le Mans Université, graduating in 2027</dd></div>
+          <div><dt>Looking for</dt><dd>A 6-month final-year internship, starting January 2027</dd></div>
+          <div><dt>Fields</dt><dd>IFRS 17 and IFRS 9, reserving, reinsurance, pricing</dd></div>
+          <div><dt>Languages</dt><dd>Arabic, French (B2), English (B2)</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Projets -->
+    <section class="section" id="projets" aria-labelledby="t-projets">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-projets">Projects</h2>
+          <p>Three studies that each answer one precise question, then the platforms and tools. Every figure comes from the repository that computes it.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter projects by field">
+          <button class="chip" type="button" data-filter="tous" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-filter="ifrs" aria-pressed="false">IFRS and credit risk</button>
+          <button class="chip" type="button" data-filter="nonvie" aria-pressed="false">Non-life and reinsurance</button>
+          <button class="chip" type="button" data-filter="vie" aria-pressed="false">Life insurance</button>
+          <button class="chip" type="button" data-filter="ia" aria-pressed="false">Data and AI</button>
+          <p class="filters__count" id="filtre-compte" aria-live="polite"></p>
+        </div>
+
+        <article class="feature" data-dom="ifrs ia">
+          <a class="feature__media" href="https://github.com/selyassine/ifrs17-copilot" tabindex="-1" aria-hidden="true">
+            <img src="../assets/img/ifrs17-copilot.webp" width="1400" height="875" loading="lazy" alt="">
+          </a>
+          <div class="feature__body">
+            <p class="kicker">Can a language model write an IFRS 17 memo without making up a number?</p>
+            <h3><a href="https://github.com/selyassine/ifrs17-copilot">IFRS 17 Copilot</a></h3>
+            <p>A multi-agent copilot reads an insurance file (PDF, scan, Excel or a spoken question), computes the contractual service margin and the liability for incurred claims, then writes a memo that is cited, checked and submitted for human approval. Code calculates, the model explains.</p>
+            <dl class="figures">
+              <div><dt>Recomputed by an independent R script</dt><dd>50 / 50 files to the cent</dd></div>
+              <div><dt>Retrieval in the standard</dt><dd>Recall@5 from 0.52 to 0.75</dd></div>
+              <div><dt>Automated tests</dt><dd>370+, CI passing</dd></div>
+            </dl>
+            <p class="stack">Python, FastAPI, LangGraph, RAG, Qdrant, n8n</p>
+            <p class="project__links"><a href="https://github.com/selyassine/ifrs17-copilot">Code on GitHub</a></p>
+          </div>
+        </article>
+
+        <article class="feature" data-dom="ifrs ia">
+          <figure class="feature__figure">
+            <svg viewBox="0 0 520 300" role="img" aria-labelledby="g-ecl9">
+              <title id="g-ecl9">Allowance at 31 December 2007: 12.7 million dollars with logistic regression, 19.0 million with LightGBM.</title>
+              <text x="24" y="42" class="g-title">Allowance at 31 Dec 2007, in $m</text>
+              <text x="24" y="98" class="g-label">Logistic regression</text>
+              <rect x="24" y="110" width="294" height="34" rx="3" class="g-bar"/>
+              <text x="330" y="134" class="g-value">12.7</text>
+              <text x="24" y="192" class="g-label">LightGBM</text>
+              <rect x="24" y="204" width="440" height="34" rx="3" class="g-bar g-bar--brass"/>
+              <text x="476" y="228" class="g-value g-value--brass">19.0</text>
+              <text x="24" y="276" class="g-note">Same features, same LGD, same scenarios.</text>
+            </svg>
+          </figure>
+          <div class="feature__body">
+            <p class="kicker">Does machine learning really change the IFRS 9 allowance?</p>
+            <h3><a href="https://github.com/selyassine/ecl9">ecl9</a></h3>
+            <p>A loan-by-loan expected credit loss engine on Freddie Mac US mortgages. The models are trained on 2000-2005 and tested on 2006-2008: they go through the crisis without having seen it.</p>
+            <dl class="figures">
+              <div><dt>LightGBM versus logistic, end of 2007</dt><dd>+49% allowance</dd></div>
+              <div><dt>Share of later realised losses covered</dt><dd>only 9 to 13%</dd></div>
+              <div><dt>Independent recalculation in R</dt><dd>50 loans</dd></div>
+            </dl>
+            <p class="stack">Python, LightGBM, discrete-time survival, pytest, Quarto</p>
+            <p class="project__links"><a href="https://selyassine.github.io/ecl9/">Read the provisioning note (in French)</a><a href="https://github.com/selyassine/ecl9">Code on GitHub</a></p>
+          </div>
+        </article>
+
+        <article class="feature" data-dom="nonvie">
+          <figure class="feature__figure">
+            <svg viewBox="0 0 520 300" role="img" aria-labelledby="g-climat">
+              <title id="g-climat">2035 climate loading: plus 27 percent, within a bootstrap interval from minus 59 to plus 142 percent, which contains zero.</title>
+              <text x="24" y="42" class="g-title">2035 climate loading, $5bn xs $10bn layer</text>
+              <line x1="40" y1="170" x2="490" y2="170" class="g-axis"/>
+              <line x1="220" y1="96" x2="220" y2="222" class="g-zero"/>
+              <text x="220" y="246" class="g-tick">0%</text>
+              <line x1="113.8" y1="150" x2="475.6" y2="150" class="g-interval"/>
+              <line x1="113.8" y1="138" x2="113.8" y2="162" class="g-interval"/>
+              <line x1="475.6" y1="138" x2="475.6" y2="162" class="g-interval"/>
+              <circle cx="268.6" cy="150" r="8" class="g-point"/>
+              <text x="268.6" y="124" class="g-value g-value--brass g-mid">+27%</text>
+              <text x="113.8" y="196" class="g-tick">−59%</text>
+              <text x="475.6" y="196" class="g-tick">+142%</text>
+              <text x="24" y="276" class="g-note">The bootstrap interval contains zero: effect not demonstrated.</text>
+            </svg>
+          </figure>
+          <div class="feature__body">
+            <p class="kicker">Does climate make catastrophe reinsurance more expensive?</p>
+            <h3><a href="https://github.com/selyassine/climatXL">climatXL</a></h3>
+            <p>An R package that fits extreme value distributions, first stationary and then climate-dependent, to NOAA damages for 1996-2024, and derives the premium of an excess-of-loss layer. The answer over this period: not demonstrably.</p>
+            <dl class="figures">
+              <div><dt>Pure premium of the layer, 2024 then 2035</dt><dd>$2,176m to $2,762m</dd></div>
+              <div><dt>Validation</dt><dd>McNeil (1997) reproduced</dd></div>
+              <div><dt>Backtest</dt><dd>2013-2024</dd></div>
+            </dl>
+            <p class="stack">R, targets, testthat, Quarto, Shiny</p>
+            <p class="project__links"><a href="https://selyassine.github.io/climatXL/">Read the report (in French)</a><a href="https://climatxl.shinyapps.io/climatXL/">Open the app</a><a href="https://github.com/selyassine/climatXL">Code on GitHub</a></p>
+          </div>
+        </article>
+
+        <h3 class="subhead" id="t-plateformes">Platforms and tools</h3>
+        <div class="projects">
+          <article class="project" data-dom="nonvie ia">
+            <img src="../assets/img/siap.webp" width="1200" height="738" loading="lazy" alt="Vehicle damage detection with YOLOv8, with severity and estimated cost">
+            <h3><a href="https://github.com/selyassine/SIAP">SIAP</a></h3>
+            <p>A non-life insurance platform: GLM and LightGBM pricing on 678,000 policies, fraud detection (AUC 0.82), IBNR by Chain Ladder, Mack and bootstrap, and damage assessment by computer vision.</p>
+            <p class="stack">LightGBM, XGBoost, YOLOv8, FastAPI, Next.js</p>
+          </article>
+          <article class="project" data-dom="vie">
+            <img src="../assets/img/vitaai.webp" width="844" height="566" loading="lazy" alt="Mortality curves projected by the Lee-Carter model">
+            <h3><a href="https://github.com/selyassine/VITA">VitaAI</a></h3>
+            <p>A life insurer simulated in 15 modules: Lee-Carter mortality, reserves, SCR on EIOPA curves, 99.5% longevity VaR, ALM and ORSA.</p>
+            <p class="stack">Python, pytest, Next.js</p>
+          </article>
+          <article class="project project--text" data-dom="nonvie vie ia">
+            <div class="pipeline" aria-hidden="true">
+              <span>question</span><span>skill</span><span>Python scripts</span><span>traceable result</span>
+            </div>
+            <h3><a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a></h3>
+            <p>An actuarial calculation engine shipped as a skill for Claude, tested against published results (Mack 1993, McNeil 1997): 59 correct values out of 59 on the benchmark, against 47 without code.</p>
+            <p class="stack">Python, pytest, GitHub Actions</p>
+          </article>
+          <article class="project project--text" data-dom="vie">
+            <div class="pipeline" aria-hidden="true">
+              <span>HMD</span><span>Lee-Carter</span><span>5,000 paths</span><span>APV</span>
+            </div>
+            <h3><a href="https://github.com/selyassine/actuariat-vie-longevite">Longevity risk</a></h3>
+            <p>A group project of the MSc Actuarial Science: actuarial present value of a 25-year annuity for two French cohorts. The 1950 generation costs 5.25% more than the 1935 one.</p>
+            <p class="stack">R, StMoMo, R Markdown</p>
+          </article>
+          <article class="project" data-dom="ia">
+            <img src="../assets/img/quantai.webp" width="1100" height="520" loading="lazy" alt="Backtest of four strategies on AAPL compared with buy and hold">
+            <h3><a href="https://github.com/selyassine/Quant">QuantAI</a></h3>
+            <p>Quantitative trading in paper-trading mode: a LightGBM, LSTM and Transformer ensemble, Markowitz and Black-Litterman optimisation, backtests, and an agent that needs human approval.</p>
+            <p class="stack">PyTorch, FastAPI, Celery, Next.js</p>
+          </article>
+          <article class="project project--text" data-dom="ia">
+            <div class="pipeline" aria-hidden="true">
+              <span>push</span><span>GitHub Actions</span><span>GHCR</span><span>Jenkins</span><span>Prefect</span>
+            </div>
+            <h3><a href="https://github.com/selyassine/Mlops">Titanic MLOps</a></h3>
+            <p>A complete CI/CD pipeline: on every push, the model is tested, containerised, published, then retrained and orchestrated automatically.</p>
+            <p class="stack">Docker, GitHub Actions, Jenkins, Prefect</p>
+          </article>
+        </div>
+
+        <details class="more">
+          <summary>Other projects</summary>
+          <ul>
+            <li><strong>BI platform with a conversational agent</strong> (2025): Power BI dashboards with role-based security, and a LangChain and Mistral agent that turns questions into SQL.</li>
+            <li><strong>Precision agriculture API</strong>: TensorFlow models served by FastAPI to optimise yields.</li>
+            <li><strong>Donation web platform</strong>: a React, Node.js and MongoDB application that connects donors and recipients.</li>
+            <li><strong>Social data analysis</strong>: indicators extracted with machine learning and reported in Tableau.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- Laboratoire -->
+    <section class="section" id="laboratoire" aria-labelledby="t-labo">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-labo">Lab</h2>
+          <p>Four actuarial calculations that run inside this page. Change an assumption: the result and the chart are recomputed at once. The formulas are the ones from my projects, on illustrative data.</p>
+        </div>
+
+        <div class="lab">
+          <div class="lab__tabs" role="tablist" aria-label="Lab calculations">
+            <button class="lab__tab" role="tab" id="tab-cl" aria-controls="panel-cl" aria-selected="true" type="button">Reserving<span>Chain Ladder</span></button>
+            <button class="lab__tab" role="tab" id="tab-xl" aria-controls="panel-xl" aria-selected="false" tabindex="-1" type="button">Reinsurance<span>XL layer, GPD</span></button>
+            <button class="lab__tab" role="tab" id="tab-rente" aria-controls="panel-rente" aria-selected="false" tabindex="-1" type="button">Life insurance<span>Annuity and longevity</span></button>
+            <button class="lab__tab" role="tab" id="tab-ecl" aria-controls="panel-ecl" aria-selected="false" tabindex="-1" type="button">Credit risk<span>IFRS 9 allowance</span></button>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-cl" aria-labelledby="tab-cl" tabindex="0">
+            <div class="lab__intro">
+              <h3>Complete a claims triangle</h3>
+              <p>Cumulative payments by accident year, in thousands of euros. Edit a white cell: the development factors, the gold cells and the reserve are recomputed.</p>
+            </div>
+            <div class="triangle__scroll" tabindex="0" role="region" aria-label="Editable development triangle">
+              <table class="tri" id="tri"></table>
+            </div>
+            <div class="lab__out">
+              <div><dt>Reserve (IBNR)</dt><dd id="cl-ibnr"></dd></div>
+              <div><dt>Ultimate cost</dt><dd id="cl-ult"></dd></div>
+              <div><dt>Paid to date</dt><dd id="cl-paid"></dd></div>
+            </div>
+            <p class="lab__foot"><button class="replay" id="cl-reset" type="button">Reset to the starting data</button><span>The same method, with Mack and the bootstrap, is in <a href="https://github.com/selyassine/SIAP">SIAP</a> and <a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a>.</span></p>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-xl" aria-labelledby="tab-xl" tabindex="0" hidden>
+            <div class="lab__intro">
+              <h3>Price an excess-of-loss layer</h3>
+              <p>Claims above €10m follow a generalised Pareto distribution. The pure premium is the frequency times the average cost falling in the layer.</p>
+            </div>
+            <div class="lab__grid">
+              <form class="lab__controls" id="xl-form">
+                <label>Tail index ξ <output id="xl-xi-o"></output><input type="range" id="xl-xi" min="0.05" max="0.9" step="0.01" value="0.5"></label>
+                <label>Scale σ, in €m <output id="xl-sigma-o"></output><input type="range" id="xl-sigma" min="1" max="20" step="0.5" value="7"></label>
+                <label>Claims above the threshold, per year <output id="xl-lambda-o"></output><input type="range" id="xl-lambda" min="0.5" max="10" step="0.1" value="3"></label>
+                <label>Attachment point, in €m <output id="xl-prio-o"></output><input type="range" id="xl-prio" min="10" max="100" step="1" value="30"></label>
+                <label>Limit, in €m <output id="xl-portee-o"></output><input type="range" id="xl-portee" min="5" max="100" step="1" value="30"></label>
+              </form>
+              <div>
+                <div class="lab__chart" id="xl-chart"></div>
+                <div class="lab__out">
+                  <div><dt>Annual pure premium</dt><dd id="xl-prime"></dd></div>
+                  <div><dt>Rate on line</dt><dd id="xl-rol"></dd></div>
+                  <div><dt>Claims that reach the layer</dt><dd id="xl-touch"></dd></div>
+                </div>
+              </div>
+            </div>
+            <p class="lab__foot"><span>Applied to real data, with a tail that depends on climate, in <a href="https://github.com/selyassine/climatXL">climatXL</a>.</span></p>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-rente" aria-labelledby="tab-rente" tabindex="0" hidden>
+            <div class="lab__intro">
+              <h3>Measure the cost of longevity on an annuity</h3>
+              <p>Actuarial present value of an annuity of €10,000 a year, paid at year end. Lower mortality to see the price of a population that lives longer. Illustrative Makeham-type mortality, not a regulatory table.</p>
+            </div>
+            <div class="lab__grid">
+              <form class="lab__controls" id="rente-form">
+                <label>Age at purchase <output id="rente-age-o"></output><input type="range" id="rente-age" min="50" max="90" step="1" value="65"></label>
+                <label>Annuity term, in years <output id="rente-duree-o"></output><input type="range" id="rente-duree" min="5" max="40" step="1" value="25"></label>
+                <label>Discount rate <output id="rente-taux-o"></output><input type="range" id="rente-taux" min="0" max="6" step="0.25" value="2"></label>
+                <label>Mortality reduction <output id="rente-choc-o"></output><input type="range" id="rente-choc" min="0" max="40" step="1" value="20"></label>
+              </form>
+              <div>
+                <div class="lab__chart" id="rente-chart"></div>
+                <div class="lab__out">
+                  <div><dt>Single premium, base mortality</dt><dd id="rente-base"></dd></div>
+                  <div><dt>Single premium, reduced mortality</dt><dd id="rente-choque"></dd></div>
+                  <div><dt>Cost of longevity</dt><dd id="rente-ecart"></dd></div>
+                </div>
+              </div>
+            </div>
+            <p class="lab__foot"><span>The 20% shock is the Solvency II longevity SCR shock. On real data: <a href="https://github.com/selyassine/VITA">VitaAI</a> and the <a href="https://github.com/selyassine/actuariat-vie-longevite">longevity project</a>.</span></p>
+          </div>
+
+          <div class="lab__panel" role="tabpanel" id="panel-ecl" aria-labelledby="tab-ecl" tabindex="0" hidden>
+            <div class="lab__intro">
+              <h3>See the cliff effect of moving to stage 2</h3>
+              <p>For an amortising loan, IFRS 9 provides for 12-month expected losses in stage 1, then for lifetime losses once credit risk has increased significantly. Constant annual probability of default, straight-line amortisation.</p>
+            </div>
+            <div class="lab__grid">
+              <form class="lab__controls" id="ecl-form">
+                <label>Outstanding principal, in €k <output id="ecl-ead-o"></output><input type="range" id="ecl-ead" min="20" max="500" step="10" value="200"></label>
+                <label>1-year probability of default <output id="ecl-pd-o"></output><input type="range" id="ecl-pd" min="0.1" max="15" step="0.1" value="2"></label>
+                <label>Loss given default <output id="ecl-lgd-o"></output><input type="range" id="ecl-lgd" min="5" max="90" step="1" value="35"></label>
+                <label>Remaining term, in years <output id="ecl-mat-o"></output><input type="range" id="ecl-mat" min="1" max="30" step="1" value="15"></label>
+                <label>Effective interest rate <output id="ecl-tie-o"></output><input type="range" id="ecl-tie" min="0" max="8" step="0.25" value="3"></label>
+              </form>
+              <div>
+                <div class="lab__chart" id="ecl-chart"></div>
+                <div class="lab__out">
+                  <div><dt>Stage 1 allowance</dt><dd id="ecl-s1"></dd></div>
+                  <div><dt>Stage 2 allowance</dt><dd id="ecl-s2"></dd></div>
+                  <div><dt>Multiplier on transfer</dt><dd id="ecl-ratio"></dd></div>
+                </div>
+              </div>
+            </div>
+            <p class="lab__foot"><span>On 2000-2008, loan by loan, with discrete-time survival and weighted scenarios: <a href="https://github.com/selyassine/ecl9">ecl9</a>.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Méthode -->
+    <section class="section section--alt" id="methode" aria-labelledby="t-methode">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-methode">Method</h2>
+          <p>Three habits found in every repository, which you can check by opening the code.</p>
+        </div>
+        <div class="method">
+          <div>
+            <h3>I validate against a published reference</h3>
+            <p>Before any new calculation, I reproduce a known result: Mack (1993) for reserving, McNeil (1997) for extreme values. Then a second, independent code recomputes the output: 50 IFRS 17 files and 50 IFRS 9 loans redone in R.</p>
+          </div>
+          <div>
+            <h3>I also publish what does not work</h3>
+            <p>In climatXL, the effect of climate on the premium is not demonstrated, and that is the conclusion of the report. In ecl9, both models cover only 9 to 13% of the crisis losses. In IFRS 17 Copilot, an embedding fine-tuning was measured and then dropped.</p>
+          </div>
+          <div>
+            <h3>The language model does not calculate</h3>
+            <p>In my AI tools, every figure comes out of tested code. The model reads the documents, searches the standard, explains and writes. When the data do not allow the calculation, the tool refuses instead of returning a wrong number.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parcours : une vraie chronologie -->
+    <section class="section" id="parcours" aria-labelledby="t-parcours">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-parcours">Background</h2>
+          <p>Education and experience, most recent first.</p>
+        </div>
+        <ol class="timeline">
+          <li>
+            <p class="when"><time>2025</time> to 2027</p>
+            <div>
+              <h3>MSc Actuarial Science</h3>
+              <p class="where">Le Mans Université, double degree with ESPRIT</p>
+              <p>Non-life pricing, reserving (Chain Ladder, Bornhuetter-Ferguson), mortality and survival models, Solvency II, IFRS 17, ALM, risk theory and extreme value theory.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">Summer <time>2026</time></p>
+            <div>
+              <h3>IFRS 9 credit risk internship</h3>
+              <p class="where">ESPRIT, RDI department, Tunis</p>
+              <p>Estimation of PD, LGD and EAD on portfolio data, and calculation of expected credit losses (ECL) by stage.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">Summer <time>2025</time>, 7 weeks</p>
+            <div>
+              <h3>Mobile and AI developer internship</h3>
+              <p class="where">Nour Expert Telecom, Tunis</p>
+              <p>A Flutter app for car diagnostics; fault classification with CamemBERT (92% accuracy on 20,000 examples); FastAPI API, Docker, Jenkins CI/CD and Kibana monitoring.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">June <time>2024</time></p>
+            <div>
+              <h3>Observation internship</h3>
+              <p class="where">La Poste Tunisienne, Tunis</p>
+              <p>Financial and savings operations, customer data flows, and a first look at risk analysis and control processes.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when"><time>2022</time> to 2027</p>
+            <div>
+              <h3>Engineering degree, data science track</h3>
+              <p class="where">ESPRIT, Tunis</p>
+              <p>Machine learning, deep learning, big data, statistics and intelligent systems.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when"><time>2021</time></p>
+            <div>
+              <h3>Baccalaureate in mathematics, with honours</h3>
+              <p class="where">Tunisia</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Compétences -->
+    <section class="section section--alt" id="competences" aria-labelledby="t-competences">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-competences">Skills</h2>
+          <p>What I use in my projects, grouped by field.</p>
+        </div>
+        <div class="skills">
+          <div>
+            <h3>Actuarial science</h3>
+            <ul>
+              <li>IFRS 17: general model, PAA, CSM, risk adjustment</li>
+              <li>Reserving: Chain Ladder, Mack, Bornhuetter-Ferguson, bootstrap</li>
+              <li>IFRS 9: expected credit losses, PD, LGD, EAD</li>
+              <li>Solvency II: SCR, EIOPA curves, ORSA, ALM</li>
+              <li>GLM pricing, Lee-Carter mortality, survival analysis</li>
+              <li>VaR, CVaR, Monte Carlo, extreme values</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Data science and AI</h3>
+            <ul>
+              <li>scikit-learn, LightGBM, XGBoost, SHAP</li>
+              <li>PyTorch, Transformers, NLP, vision (YOLOv8)</li>
+              <li>LLMs, RAG, LangGraph agents, rigorous evaluation</li>
+              <li>Time series, survival analysis</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Engineering</h3>
+            <ul>
+              <li>Python, R, SQL</li>
+              <li>FastAPI, Docker, GitHub Actions, Jenkins</li>
+              <li>n8n, Prefect, MLflow</li>
+              <li>Next.js, React, TypeScript, Power BI</li>
+              <li>Hedera, Solidity smart contracts</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Languages</h3>
+            <ul>
+              <li>Arabic: native</li>
+              <li>French: B2, studies in French</li>
+              <li>English: B2</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section" id="certifications" aria-labelledby="t-certifs">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="t-certifs">Certifications</h2>
+          <p>Eleven certifications and certificates earned, one in progress.</p>
+        </div>
+        <div class="certs">
+          <div class="certs__group">
+            <h3>NVIDIA Deep Learning Institute</h3>
+            <ul>
+              <li><span>Building RAG Agents with LLMs</span><time>Oct 2026</time></li>
+              <li><span>Building Transformer-Based NLP Applications</span><time>Oct 2026</time></li>
+              <li><span>Applications of AI for Anomaly Detection</span><time>Apr 2026</time></li>
+              <li><span>Rapid Application Development with LLMs</span><time>Dec 2025</time></li>
+              <li><span>Building LLM Applications With Prompt Engineering</span><time>Dec 2025</time></li>
+            </ul>
+          </div>
+          <div class="certs__group">
+            <h3>The Hashgraph Association</h3>
+            <ul>
+              <li><span>Hedera Certified Developer Associate (HCDA)</span><time>Oct 2026</time></li>
+              <li><span>Hedera Business Foundation (HBF)</span><time>Oct 2026</time></li>
+              <li><span>Hedera Certified Foundation (HCF)</span><time>Oct 2026</time></li>
+            </ul>
+            <h3>Finance and actuarial science</h3>
+            <ul>
+              <li><span>Credit Risk Modeling in Python (365 Financial Analyst)</span><time>Nov 2026</time></li>
+              <li><span>AIG Actuarial Analyst Job Simulation (Forage)</span><time>Nov 2026</time></li>
+              <li><span>Foundations of Insurance and the IFRS 17 Standard (SAS)</span><time>Nov 2026</time></li>
+            </ul>
+            <h3>DataCamp</h3>
+            <ul>
+              <li><span>Data Analyst Associate</span><span class="pending">in progress</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section--alt" id="contact" aria-labelledby="t-contact">
+      <div class="wrap contact">
+        <div>
+          <h2 id="t-contact">Contact me</h2>
+          <p>I am looking for a 6-month final-year internship starting January 2027, in actuarial science, risk modelling or data science. For an internship, a project or a question about my work, write to me.</p>
+          <dl class="contact__list">
+            <div><dt>Email</dt><dd><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></dd></div>
+            <div><dt>Phone</dt><dd><a href="tel:+21696919365">+216 96 919 365</a></dd></div>
+            <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/selmi-yassine-437503311/">selmi-yassine</a></dd></div>
+            <div><dt>GitHub</dt><dd><a href="https://github.com/selyassine">selyassine</a></dd></div>
+            <div><dt>CV</dt><dd><a href="../assets/CV_Yassine_Selmi.pdf" download>Download the PDF (in French)</a></dd></div>
+            <div><dt>City</dt><dd>Tunis, Tunisia</dd></div>
+          </dl>
+        </div>
+        <form class="form" id="form" novalidate>
+          <div class="field">
+            <label for="f-nom">Name</label>
+            <input id="f-nom" name="nom" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-sujet">Subject</label>
+            <input id="f-sujet" name="sujet" required placeholder="Internship offer, question…">
+          </div>
+          <div class="field">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="6" required></textarea>
+          </div>
+          <p class="form__error" id="form-error" role="alert" hidden>Fill in the name, the subject and the message.</p>
+          <button class="btn btn--primary" type="submit">Prepare the email</button>
+          <p class="form__hint">Your mail app opens with the message already filled in, ready to send to selmi.yassine@esprit.tn.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Assistant du portfolio -->
+  <button class="bot-toggle" id="bot-toggle" type="button" aria-expanded="false" aria-controls="bot">Ask a question</button>
+  <section class="bot" id="bot" role="dialog" aria-labelledby="bot-title" hidden>
+    <header class="bot__head">
+      <div>
+        <h2 id="bot-title">Portfolio assistant</h2>
+        <p>Prepared answers, taken from this site. No language model: nothing is made up.</p>
+      </div>
+      <button class="bot__close" id="bot-close" type="button" aria-label="Close the assistant">Close</button>
+    </header>
+    <div class="bot__log" id="bot-log" role="log" aria-live="polite"></div>
+    <div class="bot__chips" id="bot-chips"></div>
+    <form class="bot__form" id="bot-form">
+      <label class="visually-hidden" for="bot-input">Your question</label>
+      <input id="bot-input" autocomplete="off" placeholder="For example: when are you available?">
+      <button class="btn btn--primary" type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>© <span id="annee">2026</span> Yassine Selmi</p>
+      <p><a href="https://github.com/selyassine/selyassine.github.io">Site source code</a></p>
+    </div>
+  </footer>
+
+  <script src="../assets/main.js" defer></script>
+</body>
+</html>

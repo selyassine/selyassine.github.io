@@ -369,3 +369,5 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .bot__form input:focus { outline: none; border-color: var(--brass); }
 .bot__form .btn { padding: .7rem 1.1rem; }
 .footer { padding-bottom: 5.5rem; }
+
+.nav__lang { font-size: .9rem; }

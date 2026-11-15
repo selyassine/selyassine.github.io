@@ -3,6 +3,7 @@
 Portfolio de **Yassine Selmi** : actuariat, data science et IA. En ligne sur [selyassine.github.io](https://selyassine.github.io/).
 
 - `index.html` : la page (présentation, projets, laboratoire, méthode, parcours, compétences, certifications, contact)
+- `en/index.html` : la même page en anglais ; le script détecte la langue de la page et adapte ses textes et ses formats de nombres
 - `assets/style.css` : styles (bleu nuit et laiton, Spectral et Public Sans)
 - `assets/main.js` : tout ce qui se calcule dans le navigateur
   - la simulation d'ouverture : 5 000 trajectoires d'une marche aléatoire avec dérive ;

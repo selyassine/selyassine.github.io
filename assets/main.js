@@ -6,7 +6,41 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = id => document.getElementById(id);
-  const nf = (min, max = min) => new Intl.NumberFormat("fr-FR", { minimumFractionDigits: min, maximumFractionDigits: max });
+  const EN = document.documentElement.lang.startsWith("en");
+  const BASE = EN ? "../" : "";
+  const nf = (min, max = min) => new Intl.NumberFormat(EN ? "en-GB" : "fr-FR", { minimumFractionDigits: min, maximumFractionDigits: max });
+  const pct = s => s + (EN ? "%" : " %");
+  const keur = s => EN ? "€" + s + "k" : s + " k€";
+  const meur = s => EN ? "€" + s + "m" : s + " M€";
+  const eur = s => EN ? "€" + s : s + " €";
+  // Textes de l'interface générés par le script, en français et en anglais.
+  const TXT = EN ? {
+    today: "today", years: t => "+" + t + " yrs",
+    sim: (m, a, b) => `In 25 years: median index of <strong>${m}</strong>, with 90% of scenarios between ${a} and ${b}.`,
+    origin: "Accident year", dev: j => "Dev. " + j, ultimate: "Ultimate", factor: "Factor",
+    cell: (y, j) => `Accident year ${y}, development ${j}`,
+    layer: "layer",
+    xlTitle: "Probability that a claim above the threshold exceeds a given amount, with the reinsured layer highlighted.",
+    age: a => "age " + a, yrs: n => n + (n > 1 ? " yrs" : " yr"),
+    alive: "Share of annuitants still alive", aliveKey: "solid line: reduced mortality, dashed: base",
+    renteTitle: "Share of annuitants still alive over the years, under base mortality and reduced mortality.",
+    yr: t => "yr " + t, eclHead: "Expected loss per year, in €k", eclKey: "light bar: stage 1, all bars: stage 2",
+    eclTitle: "Expected loss for each year of the loan's life. Stage 1 counts only the first year, stage 2 all years.",
+    projects: n => n + (n > 1 ? " projects" : " project"),
+  } : {
+    today: "aujourd'hui", years: t => "+" + t + " ans",
+    sim: (m, a, b) => `Dans 25 ans : indice médian de <strong>${m}</strong>, et 90 % des scénarios entre ${a} et ${b}.`,
+    origin: "Survenance", dev: j => "Dév. " + j, ultimate: "Ultime", factor: "Facteur",
+    cell: (y, j) => `Survenance ${y}, développement ${j}`,
+    layer: "tranche",
+    xlTitle: "Probabilité qu'un sinistre au-delà du seuil dépasse un montant donné, avec la tranche réassurée en surbrillance.",
+    age: a => a + " ans", yrs: n => n + (n > 1 ? " ans" : " an"),
+    alive: "Part des rentiers encore en vie", aliveKey: "trait plein : mortalité abaissée, pointillé : base",
+    renteTitle: "Part des rentiers encore en vie au fil des années, avec la mortalité de base et la mortalité abaissée.",
+    yr: t => "an " + t, eclHead: "Perte attendue par année, en k€", eclKey: "barre claire : stade 1, toutes les barres : stade 2",
+    eclTitle: "Perte attendue par année de vie du prêt. Le stade 1 ne compte que la première année, le stade 2 toutes les années.",
+    projects: n => n + (n > 1 ? " projets" : " projet"),
+  };
   const f0 = nf(0), f1 = nf(1), f2 = nf(2), f3 = nf(3);
   const sg = v => f1.format(v).replace("-", "−");
   const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -68,7 +102,7 @@
       for (let t = 0; t <= T; t += 5) {
         ctx.beginPath(); ctx.moveTo(X(t), padT); ctx.lineTo(X(t), h - padB); ctx.stroke();
         ctx.textAlign = t === 0 ? "left" : t === T ? "right" : "center";
-        ctx.fillText(t === 0 ? "aujourd'hui" : "+" + t + " ans", X(t), h - 8);
+        ctx.fillText(t === 0 ? TXT.today : TXT.years(t), X(t), h - 8);
       }
 
       const tMax = progress * T;
@@ -105,7 +139,7 @@
 
     function result() {
       $("sim-result").innerHTML =
-        `Dans 25 ans : indice médian de <strong>${sg(q50[T])}</strong>, et 90 % des scénarios entre ${sg(q05[T])} et ${sg(q95[T])}.`;
+        TXT.sim(sg(q50[T]), sg(q05[T]), sg(q95[T]));
     }
 
     function play() {
@@ -169,15 +203,15 @@
   }
 
   function buildTriangle() {
-    const head = `<thead><tr><th scope="col">Survenance</th>${
-      years.map((_, j) => `<th scope="col">Dév. ${j + 1}</th>`).join("")
-    }<th scope="col">Ultime</th></tr></thead>`;
+    const head = `<thead><tr><th scope="col">${TXT.origin}</th>${
+      years.map((_, j) => `<th scope="col">${TXT.dev(j + 1)}</th>`).join("")
+    }<th scope="col">${TXT.ultimate}</th></tr></thead>`;
     const body = observed.map((row, i) => `<tr><th scope="row">${years[i]}</th>${
       years.map((_, j) => j < row.length
-        ? `<td class="obs"><input type="number" inputmode="numeric" min="0" step="10" value="${row[j]}" data-i="${i}" data-j="${j}" aria-label="Survenance ${years[i]}, développement ${j + 1}"></td>`
+        ? `<td class="obs"><input type="number" inputmode="numeric" min="0" step="10" value="${row[j]}" data-i="${i}" data-j="${j}" aria-label="${TXT.cell(years[i], j + 1)}"></td>`
         : `<td class="proj" data-i="${i}" data-j="${j}"></td>`).join("")
     }<td class="ult" data-u="${i}"></td></tr>`).join("");
-    const factors = `<tr class="ldf"><th scope="row">Facteur</th>${
+    const factors = `<tr class="ldf"><th scope="row">${TXT.factor}</th>${
       years.slice(1).map((_, j) => `<td data-f="${j}"></td>`).join("")
     }<td></td><td></td></tr>`;
     table.innerHTML = head + `<tbody>${body}${factors}</tbody>`;
@@ -189,9 +223,9 @@
     table.querySelectorAll("td.ult").forEach(td => { td.textContent = f0.format(ultimate[td.dataset.u]); });
     table.querySelectorAll("td[data-f]").forEach(td => { td.textContent = f3.format(ldf[td.dataset.f]); });
     const sum = a => a.reduce((s, v) => s + v, 0);
-    $("cl-ibnr").textContent = f0.format(sum(ultimate) - sum(paid)) + " k€";
-    $("cl-ult").textContent = f0.format(sum(ultimate)) + " k€";
-    $("cl-paid").textContent = f0.format(sum(paid)) + " k€";
+    $("cl-ibnr").textContent = keur(f0.format(sum(ultimate) - sum(paid)));
+    $("cl-ult").textContent = keur(f0.format(sum(ultimate)));
+    $("cl-paid").textContent = keur(f0.format(sum(paid)));
   }
 
   if (table) {
@@ -226,9 +260,9 @@
     $("xl-lambda-o").textContent = f1.format(lambda);
     $("xl-prio-o").textContent = f0.format(prio);
     $("xl-portee-o").textContent = f0.format(portee);
-    $("xl-prime").textContent = f2.format(prime) + " M€";
-    $("xl-rol").textContent = f1.format(100 * prime / portee) + " %";
-    $("xl-touch").textContent = f1.format(100 * S(prio)) + " %";
+    $("xl-prime").textContent = meur(f2.format(prime));
+    $("xl-rol").textContent = pct(f1.format(100 * prime / portee));
+    $("xl-touch").textContent = pct(f1.format(100 * S(prio)));
 
     // courbe de survie, ordonnée logarithmique
     const xMax = 210, yMin = -3;
@@ -238,14 +272,14 @@
     let g = "";
     for (const e of [0, -1, -2, -3]) {
       g += `<line class="c-grid" x1="${M.l}" x2="${W - M.r}" y1="${Y(10 ** e)}" y2="${Y(10 ** e)}"/>`;
-      g += `<text class="c-text c-text--end" x="${M.l - 8}" y="${Y(10 ** e) + 4}">${(e < -2 ? f1 : f0).format(100 * 10 ** e)} %</text>`;
+      g += `<text class="c-text c-text--end" x="${M.l - 8}" y="${Y(10 ** e) + 4}">${pct((e < -2 ? f1 : f0).format(100 * 10 ** e))}</text>`;
     }
-    for (const x of [10, 50, 100, 150, 200]) g += `<text class="c-text c-text--mid" x="${X(x)}" y="${H - 12}">${x} M€</text>`;
+    for (const x of [10, 50, 100, 150, 200]) g += `<text class="c-text c-text--mid" x="${X(x)}" y="${H - 12}">${meur(x)}</text>`;
     const x0 = X(prio), x1 = X(Math.min(prio + portee, xMax));
     g += `<rect class="c-layer" x="${x0}" y="${M.t}" width="${Math.max(0, x1 - x0)}" height="${H - M.t - M.b}"/>`;
-    g += `<text class="c-text c-text--strong" x="${x0 + 6}" y="${M.t + 16}">tranche</text>`;
+    g += `<text class="c-text c-text--strong" x="${x0 + 6}" y="${M.t + 16}">${TXT.layer}</text>`;
     g += `<path class="c-line" d="${pathFrom(pts)}"/>`;
-    $("xl-chart").innerHTML = svg("Probabilité qu'un sinistre au-delà du seuil dépasse un montant donné, avec la tranche réassurée en surbrillance.", g);
+    $("xl-chart").innerHTML = svg(TXT.xlTitle, g);
   }
 
   /* ================= 3. Rente et longévité =================
@@ -259,30 +293,30 @@
     const vap = s => { let a = 0; for (let k = 1; k <= duree; k++) a += Math.pow(1 + taux, -k) * tpx(k, s); return a; };
     const base = 10000 * vap(0), choque = 10000 * vap(choc);
 
-    $("rente-age-o").textContent = age + " ans";
-    $("rente-duree-o").textContent = duree + " ans";
-    $("rente-taux-o").textContent = f2.format(100 * taux) + " %";
-    $("rente-choc-o").textContent = f0.format(100 * choc) + " %";
-    $("rente-base").textContent = f0.format(base) + " €";
-    $("rente-choque").textContent = f0.format(choque) + " €";
-    $("rente-ecart").textContent = "+" + f2.format(100 * (choque / base - 1)) + " %";
+    $("rente-age-o").textContent = TXT.age(age);
+    $("rente-duree-o").textContent = TXT.yrs(duree);
+    $("rente-taux-o").textContent = pct(f2.format(100 * taux));
+    $("rente-choc-o").textContent = pct(f0.format(100 * choc));
+    $("rente-base").textContent = eur(f0.format(base));
+    $("rente-choque").textContent = eur(f0.format(choque));
+    $("rente-ecart").textContent = "+" + pct(f2.format(100 * (choque / base - 1)));
 
     const X = t => sx(t, 0, duree), Y = p => sy(p, 0, 1);
     const curve = s => { const p = []; for (let t = 0; t <= duree; t += 0.5) p.push([X(t), Y(tpx(t, s))]); return p; };
     let g = "";
     for (const p of [0, 0.25, 0.5, 0.75, 1]) {
       g += `<line class="c-grid" x1="${M.l}" x2="${W - M.r}" y1="${Y(p)}" y2="${Y(p)}"/>`;
-      g += `<text class="c-text c-text--end" x="${M.l - 8}" y="${Y(p) + 4}">${f0.format(100 * p)} %</text>`;
+      g += `<text class="c-text c-text--end" x="${M.l - 8}" y="${Y(p) + 4}">${pct(f0.format(100 * p))}</text>`;
     }
     const stepX = duree <= 10 ? 1 : duree <= 20 ? 5 : 10;
-    for (let t = 0; t <= duree; t += stepX) g += `<text class="c-text c-text--mid" x="${X(t)}" y="${H - 12}">${age + t} ans</text>`;
+    for (let t = 0; t <= duree; t += stepX) g += `<text class="c-text c-text--mid" x="${X(t)}" y="${H - 12}">${TXT.age(age + t)}</text>`;
     const shocked = curve(choc), basePts = curve(0);
     g += `<path class="c-area" d="${pathFrom(shocked)} L${X(duree)} ${Y(0)} L${X(0)} ${Y(0)} Z"/>`;
     g += `<path class="c-line c-line--base" d="${pathFrom(basePts)}"/>`;
     g += `<path class="c-line" d="${pathFrom(shocked)}"/>`;
-    g += `<text class="c-text c-text--strong" x="${M.l + 10}" y="${H - M.b - 30}">Part des rentiers encore en vie</text>`;
-    g += `<text class="c-text" x="${M.l + 10}" y="${H - M.b - 12}">trait plein : mortalité abaissée, pointillé : base</text>`;
-    $("rente-chart").innerHTML = svg("Part des rentiers encore en vie au fil des années, avec la mortalité de base et la mortalité abaissée.", g);
+    g += `<text class="c-text c-text--strong" x="${M.l + 10}" y="${H - M.b - 30}">${TXT.alive}</text>`;
+    g += `<text class="c-text" x="${M.l + 10}" y="${H - M.b - 12}">${TXT.aliveKey}</text>`;
+    $("rente-chart").innerHTML = svg(TXT.renteTitle, g);
   }
 
   /* ================= 4. Provision IFRS 9 =================
@@ -300,13 +334,13 @@
     }
     const s1 = marg[0], s2 = marg.reduce((a, b) => a + b, 0);
 
-    $("ecl-ead-o").textContent = f0.format(ead) + " k€";
-    $("ecl-pd-o").textContent = f1.format(100 * pd) + " %";
-    $("ecl-lgd-o").textContent = f0.format(100 * lgd) + " %";
-    $("ecl-mat-o").textContent = T + (T > 1 ? " ans" : " an");
-    $("ecl-tie-o").textContent = f2.format(100 * tie) + " %";
-    $("ecl-s1").textContent = f2.format(s1) + " k€";
-    $("ecl-s2").textContent = f2.format(s2) + " k€";
+    $("ecl-ead-o").textContent = keur(f0.format(ead));
+    $("ecl-pd-o").textContent = pct(f1.format(100 * pd));
+    $("ecl-lgd-o").textContent = pct(f0.format(100 * lgd));
+    $("ecl-mat-o").textContent = TXT.yrs(T);
+    $("ecl-tie-o").textContent = pct(f2.format(100 * tie));
+    $("ecl-s1").textContent = keur(f2.format(s1));
+    $("ecl-s2").textContent = keur(f2.format(s2));
     $("ecl-ratio").textContent = "× " + f1.format(s2 / s1);
 
     const yMax = Math.max(...marg) * 1.15;
@@ -322,10 +356,10 @@
       g += `<rect class="c-bar${i === 0 ? " c-bar--first" : ""}" x="${M.l + i * bw + bw * 0.14}" y="${y}" width="${bw * 0.72}" height="${H - M.b - y}" rx="2"/>`;
     });
     const stepX = T <= 10 ? 1 : T <= 20 ? 2 : 5;
-    for (let t = 1; t <= T; t += stepX) g += `<text class="c-text c-text--mid" x="${M.l + (t - 0.5) * bw}" y="${H - 12}">an ${t}</text>`;
-    g += `<text class="c-text c-text--strong c-text--end" x="${W - M.r - 6}" y="${M.t + 14}">Perte attendue par année, en k€</text>`;
-    g += `<text class="c-text c-text--end" x="${W - M.r - 6}" y="${M.t + 32}">barre claire : stade 1, toutes les barres : stade 2</text>`;
-    $("ecl-chart").innerHTML = svg("Perte attendue par année de vie du prêt. Le stade 1 ne compte que la première année, le stade 2 toutes les années.", g);
+    for (let t = 1; t <= T; t += stepX) g += `<text class="c-text c-text--mid" x="${M.l + (t - 0.5) * bw}" y="${H - 12}">${TXT.yr(t)}</text>`;
+    g += `<text class="c-text c-text--strong c-text--end" x="${W - M.r - 6}" y="${M.t + 14}">${TXT.eclHead}</text>`;
+    g += `<text class="c-text c-text--end" x="${W - M.r - 6}" y="${M.t + 32}">${TXT.eclKey}</text>`;
+    $("ecl-chart").innerHTML = svg(TXT.eclTitle, g);
   }
 
   [["xl-form", xl], ["rente-form", rente], ["ecl-form", ecl]].forEach(([id, fn]) => {
@@ -369,14 +403,14 @@
     });
     grid.hidden = subhead.hidden = grid.querySelectorAll(".project:not([hidden])").length === 0;
     chips.forEach(c => c.setAttribute("aria-pressed", String(c.dataset.filter === key)));
-    $("filtre-compte").textContent = shown + (shown > 1 ? " projets" : " projet");
+    $("filtre-compte").textContent = TXT.projects(shown);
   }
   chips.forEach(c => c.addEventListener("click", () => filter(c.dataset.filter)));
   if (chips.length) filter("tous");
 
   /* ================= Assistant =================
      Recherche par mots-clés dans des réponses préparées. Aucun modèle de langage, aucun appel réseau. */
-  const KB = [
+  const KB_FR = [
     { k: "disponible disponibilite quand stage debut date commencer pfe fin etudes duree recherche cherche poste",
       a: "<p>Je cherche un <strong>stage de fin d'études de 6 mois, à partir de janvier 2027</strong>, en actuariat, en modélisation des risques ou en data science.</p><p>Le plus simple est de m'écrire : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
     { k: "qui es tu presente presentation profil yassine resume bref",
@@ -408,7 +442,7 @@
     { k: "contact contacter email mail telephone numero linkedin joindre ecrire appeler",
       a: "<p>E-mail : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a><br>Téléphone : <a href='tel:+21696919365'>+216 96 919 365</a><br><a href='https://www.linkedin.com/in/selmi-yassine-437503311/'>LinkedIn</a> et <a href='https://github.com/selyassine'>GitHub</a>.</p>" },
     { k: "cv curriculum telecharger pdf resume",
-      a: "<p>Mon CV est ici : <a href='assets/CV_Yassine_Selmi.pdf' download>télécharger le PDF</a>.</p>" },
+      a: "<p>Mon CV est ici : <a href='" + BASE + "assets/CV_Yassine_Selmi.pdf' download>télécharger le PDF</a>.</p>" },
     { k: "experience stage stages entreprise travail professionnel nour telecom poste rdi",
       a: "<p><strong>Été 2026</strong> : stage en risque de crédit IFRS 9 à ESPRIT (pôle RDI), estimation de la PD, de la LGD et de l'EAD et calcul de l'ECL par stade.</p><p><strong>Été 2025</strong> : stage data science et IA chez Nour Expert Telecom, modèle NLP CamemBERT mis en production (FastAPI, Docker, CI/CD).</p><p><strong>Juin 2024</strong> : stage d'observation à La Poste Tunisienne.</p>" },
     { k: "methode verifier verification validation rigueur fiable confiance test tests qualite erreur",
@@ -422,8 +456,67 @@
     { k: "merci thanks super parfait",
       a: "<p>Avec plaisir. Si vous voulez aller plus loin, écrivez-moi : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
   ];
-  const SUGGESTIONS = ["Quand es-tu disponible ?", "Quel est ton meilleur projet ?", "Comment vérifies-tu tes calculs ?", "Parle-moi d'ecl9", "Comment te contacter ?"];
-  const STOP = new Set("le la les un une des de du d l et ou a au aux en dans sur pour par avec que qui quoi quel quelle quels quelles est es suis sont tu te ton ta tes moi me mon ma mes je il elle on nous vous ce cet cette ces se sa son ses y ne pas plus comment peux peut as avez ai fais fait dis dire c s t m n j qu".split(" "));
+  const KB_EN = [
+    { k: "available availability when start starting internship date begin final year duration looking position role join hire",
+      a: "<p>I am looking for a <strong>6-month final-year internship, starting January 2027</strong>, in actuarial science, risk modelling or data science.</p><p>The simplest is to write to me: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
+    { k: "who are you introduce introduction profile yourself yassine summary",
+      a: "<p>I am Yassine Selmi, a data science engineering student at ESPRIT (Tunis) and an MSc Actuarial Science student at Le Mans Université. Both degrees are expected in 2027.</p><p>I build IFRS 17, reserving and pricing tools where code calculates, the language model explains, and every number is checked.</p>" },
+    { k: "education studies study studied studying degree school university master msc esprit mans engineer engineering baccalaureate",
+      a: "<p><strong>MSc Actuarial Science</strong>, Le Mans Université, double degree with ESPRIT (2025 to 2027): pricing, reserving, extreme values, Solvency II, IFRS 17.</p><p><strong>Engineering degree in data science</strong>, ESPRIT, Tunis (2022 to 2027). Baccalaureate in mathematics, with honours (2021).</p>" },
+    { k: "skill skills technical tools language python sql stack know technologies programming",
+      a: "<p><strong>Actuarial</strong>: GLM pricing, reserving (Chain Ladder, Mack, Bornhuetter-Ferguson, bootstrap), extreme values, XL reinsurance, Solvency II, IFRS 17 and IFRS 9.</p><p><strong>Data and tools</strong>: R, Python, SQL, machine learning, LLMs and RAG, Shiny, Quarto, FastAPI, Docker, Git.</p><p>Details are in the <a href='#competences'>Skills</a> section.</p>" },
+    { k: "ifrs 17 copilot csm margin memo agent rag langgraph multi llm",
+      a: "<p><strong>IFRS 17 Copilot</strong> is a multi-agent copilot: it reads an insurance file, computes the contractual service margin and the liability for incurred claims, then writes a cited, checked memo submitted for human approval.</p><p>Key result: 50 files out of 50 identical to the cent to an independent R script. <a href='https://github.com/selyassine/ifrs17-copilot'>See the code</a>.</p>" },
+    { k: "ecl9 ifrs 9 credit risk pd lgd ead allowance provision freddie lightgbm logistic bank ecl",
+      a: "<p><strong>ecl9</strong> answers one question: does machine learning change the IFRS 9 allowance? On Freddie Mac loans, trained before 2006 and tested on the crisis, LightGBM sets aside 49% more than logistic regression at 31 December 2007. But both models cover only 9 to 13% of the losses realised afterwards.</p><p><a href='https://selyassine.github.io/ecl9/'>Read the note</a> (in French) or <a href='https://github.com/selyassine/ecl9'>see the code</a>. I also did an IFRS 9 credit risk internship at ESPRIT (RDI department) in summer 2026.</p>" },
+    { k: "climatxl climate reinsurance catastrophe gpd extreme values noaa layer xl shiny evt",
+      a: "<p><strong>climatXL</strong> asks whether climate makes catastrophe reinsurance more expensive. On NOAA damages for 1996-2024, the premium of a $5bn xs $10bn layer would rise by 27% by 2035, but the interval runs from −59% to +142%: the effect is not demonstrated, and that is the conclusion of the report.</p><p><a href='https://selyassine.github.io/climatXL/'>Read the report</a> (in French), <a href='https://climatxl.shinyapps.io/climatXL/'>open the app</a>, or try the XL layer in the <a href='#laboratoire'>lab</a>.</p>" },
+    { k: "siap non life motor pricing glm fraud ibnr yolo vision damage platform excel",
+      a: "<p><strong>SIAP</strong> is a non-life insurance platform: GLM and LightGBM pricing on 678,000 policies, fraud detection (AUC 0.82), IBNR by Chain Ladder, Mack and bootstrap, and damage assessment by computer vision. <a href='https://github.com/selyassine/SIAP'>See the code</a>.</p>" },
+    { k: "vita vitaai life mortality lee carter scr solvency longevity annuity alm orsa",
+      a: "<p><strong>VitaAI</strong> simulates a life insurer in 15 modules: Lee-Carter mortality, reserves, SCR on EIOPA curves, 99.5% longevity VaR, ALM and ORSA. <a href='https://github.com/selyassine/VITA'>See the code</a>.</p><p>On the same theme, a group project of the master's measures the cost of longevity on an annuity: the 1950 generation costs 5.25% more than the 1935 one.</p>" },
+    { k: "claude actuaire skill engine calculation benchmark mack",
+      a: "<p><strong>claude_actuaire</strong> is an actuarial calculation engine shipped as a skill for Claude. Calculations are done by Python scripts tested against published results: 59 correct values out of 59 on the benchmark, against 47 without code. <a href='https://github.com/selyassine/claude_actuaire'>See the code</a>.</p>" },
+    { k: "quant quantai trading finance portfolio markowitz stock mlops titanic pipeline jenkins docker",
+      a: "<p><strong>QuantAI</strong> is a paper-trading platform: a LightGBM, LSTM and Transformer ensemble, Markowitz and Black-Litterman optimisation, and an agent that needs human approval. <strong>Titanic MLOps</strong> is a complete CI/CD pipeline (GitHub Actions, GHCR, Jenkins, Prefect).</p><p>Both are in the <a href='#projets'>Projects</a> section, under the “Data and AI” filter.</p>" },
+    { k: "project projects work best main github portfolio built",
+      a: "<p>Three studies each answer one question: <strong>IFRS 17 Copilot</strong>, <strong>ecl9</strong> (IFRS 9) and <strong>climatXL</strong> (reinsurance and climate). Then come SIAP, VitaAI, claude_actuaire, a longevity project, QuantAI and an MLOps pipeline.</p><p>Everything is in the <a href='#projets'>Projects</a> section, with a filter by field. Ask me about a project by name for details.</p>" },
+    { k: "certification certifications certificate certificates nvidia hedera sas aig forage datacamp 365",
+      a: "<p>Eleven certifications and certificates: five from the NVIDIA Deep Learning Institute (RAG, NLP, anomaly detection, LLMs), three from Hedera, Credit Risk Modeling in Python (365 Financial Analyst), AIG Actuarial Analyst Job Simulation (Forage) and Foundations of Insurance and the IFRS 17 Standard (SAS).</p><p>The dated list is in the <a href='#certifications'>Certifications</a> section.</p>" },
+    { k: "language languages english french arabic speak level fluent",
+      a: "<p>Arabic: native. French: B2, my studies are in French. English: B2.</p>" },
+    { k: "contact email mail phone number linkedin reach write call touch",
+      a: "<p>Email: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a><br>Phone: <a href='tel:+21696919365'>+216 96 919 365</a><br><a href='https://www.linkedin.com/in/selmi-yassine-437503311/'>LinkedIn</a> and <a href='https://github.com/selyassine'>GitHub</a>.</p>" },
+    { k: "cv resume curriculum download pdf",
+      a: "<p>My CV is here, in French: <a href='" + BASE + "assets/CV_Yassine_Selmi.pdf' download>download the PDF</a>.</p>" },
+    { k: "experience internship internships company job professional nour telecom worked rdi",
+      a: "<p><strong>Summer 2026</strong>: IFRS 9 credit risk internship at ESPRIT (RDI department), estimating PD, LGD and EAD and computing ECL by stage.</p><p><strong>Summer 2025</strong>: mobile and AI developer internship at Nour Expert Telecom, with a CamemBERT fault classifier served by FastAPI, Docker and CI/CD.</p><p><strong>June 2024</strong>: observation internship at La Poste Tunisienne.</p>" },
+    { k: "method check checking verify verification validation rigour rigor reliable trust test tests quality error",
+      a: "<p>Three habits: I first reproduce a published result (Mack 1993, McNeil 1997) and have a second, independent code recompute the output; I also publish negative results; and in my AI tools the language model never calculates, every number comes out of tested code.</p><p>See the <a href='#methode'>Method</a> section.</p>" },
+    { k: "lab laboratory calculate calculator simulator simulation interactive try chain ladder triangle demo",
+      a: "<p>The <a href='#laboratoire'>lab</a> runs four calculations inside this page: an editable Chain Ladder triangle, the premium of an XL layer under a GPD, the cost of longevity on an annuity, and the IFRS 9 cliff effect between stage 1 and stage 2.</p>" },
+    { k: "where live city country tunis tunisia location based relocate europe france remote",
+      a: "<p>I am based in Tunis, Tunisia. For any question about location or internship arrangements, write to me: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
+    { k: "hello hi hey greetings morning evening",
+      a: "<p>Hello. Ask me about my background, my projects, my skills or my availability.</p>" },
+    { k: "thanks thank great perfect cheers",
+      a: "<p>You're welcome. To take it further, write to me: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
+  ];
+  const KB = EN ? KB_EN : KB_FR;
+  const SUGGESTIONS = EN
+    ? ["When are you available?", "What is your best project?", "How do you check your calculations?", "Tell me about ecl9", "How can I contact you?"]
+    : ["Quand es-tu disponible ?", "Quel est ton meilleur projet ?", "Comment vérifies-tu tes calculs ?", "Parle-moi d'ecl9", "Comment te contacter ?"];
+  const BOT = EN ? {
+    hello: "<p>Hello, I am this portfolio's assistant. Ask about Yassine's background, projects or availability. I answer on his behalf, from the content of this site.</p>",
+    none: "<p>I have no prepared answer to that question, and I would rather not make one up.</p><p>Try one of the suggested questions, or write to me directly: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>",
+  } : {
+    hello: "<p>Bonjour, je suis l'assistant de ce portfolio. Posez une question sur le parcours, les projets ou la disponibilité de Yassine. Je réponds à sa place, à partir du contenu de ce site.</p>",
+    none: "<p>Je n'ai pas de réponse préparée à cette question, et je préfère ne rien inventer.</p><p>Essayez une des questions proposées, ou écrivez-moi directement : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>",
+  };
+  const STOP = new Set((EN
+    ? "the a an of to in on for with and or is are am was be do does did you your yours me my i we us it its this that what which who how can could would will have has had at by from as not no so if tell about please s t m re d ll ve"
+    : "le la les un une des de du d l et ou a au aux en dans sur pour par avec que qui quoi quel quelle quels quelles est es suis sont tu te ton ta tes moi me mon ma mes je il elle on nous vous ce cet cette ces se sa son ses y ne pas plus comment peux peut as avez ai fais fait dis dire c s t m n j qu"
+  ).split(" "));
   const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   const KBN = KB.map(e => ({ words: norm(e.k).split(" "), a: e.a }));
 
@@ -439,7 +532,7 @@
       if (score > bestScore) { bestScore = score; best = e; }
     }
     if (best && bestScore >= 1.5) return best.a;
-    return "<p>Je n'ai pas de réponse préparée à cette question, et je préfère ne rien inventer.</p><p>Essayez une des questions proposées, ou écrivez-moi directement : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>";
+    return BOT.none;
   }
 
   const bot = $("bot"), botToggle = $("bot-toggle"), botLog = $("bot-log"), botInput = $("bot-input");
@@ -456,7 +549,7 @@
       bot.hidden = !on;
       botToggle.setAttribute("aria-expanded", String(on));
       if (on) {
-        if (!botLog.childElementCount) say("<p>Bonjour, je suis l'assistant de ce portfolio. Posez une question sur le parcours, les projets ou la disponibilité de Yassine. Je réponds à sa place, à partir du contenu de ce site.</p>", "bot");
+        if (!botLog.childElementCount) say(BOT.hello, "bot");
         botInput.focus();
       } else botToggle.focus();
     };
