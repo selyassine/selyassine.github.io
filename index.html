@@ -15,11 +15,12 @@
   <meta property="og:description" content="IFRS 17, provisionnement, Solvabilité II, machine learning et LLM : projets, parcours et certifications.">
   <meta property="og:image" content="https://selyassine.github.io/assets/img/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#0F1E33">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1E33'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23C8A35A'%3EYS%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1420'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23F2B544'%3EYS%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0B1420" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F5F7FA" media="(prefers-color-scheme: light)">
+  <link rel="preload" href="assets/fonts/lmroman17-regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400.woff" as="font" type="font/woff" crossorigin>
+  <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="stylesheet" href="assets/style.css">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Yassine Selmi","jobTitle":"Élève ingénieur data science et étudiant en actuariat","url":"https://selyassine.github.io/","email":"mailto:selmi.yassine@esprit.tn","address":{"@type":"PostalAddress","addressLocality":"Tunis","addressCountry":"TN"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"ESPRIT"},{"@type":"CollegeOrUniversity","name":"Le Mans Université"}],"sameAs":["https://github.com/selyassine","https://www.linkedin.com/in/selmi-yassine-437503311/"]}
@@ -44,6 +45,7 @@
           <li><a class="nav__cta" href="#contact">Me contacter</a></li>
         </ul>
       </nav>
+      <button class="nav__theme" id="theme-toggle" type="button" aria-label="Passer au thème clair"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
     </div>
   </header>
 
@@ -52,12 +54,11 @@
     <section class="hero" aria-labelledby="titre">
       <div class="wrap hero__grid">
         <div class="hero__text">
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>Disponible pour un stage de fin d'études de 6 mois, à partir de janvier 2027</p>
-          <h1 id="titre">Je relie le calcul actuariel et l'intelligence artificielle, et je vérifie chaque chiffre.</h1>
-          <p class="lead">Élève ingénieur en data science à <strong>ESPRIT</strong> et étudiant en <strong>Master Actuariat à Le Mans Université</strong>. Je construis des outils d'IFRS 17, de provisionnement et de tarification où le code calcule et où le modèle de langage explique.</p>
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>Disponible pour un stage de fin d’études de 6 mois, à partir de janvier 2027</p>
+          <h1 id="titre">Je relie le calcul actuariel et l’intelligence artificielle, et je vérifie chaque chiffre.</h1>
+          <p class="lead">Élève ingénieur en data science à <strong>ESPRIT</strong> et étudiant en <strong>Master Actuariat à Le Mans Université</strong>. Je construis des outils d’IFRS 17, de provisionnement et de tarification où le code calcule et où le modèle de langage explique.</p>
           <div class="actions">
             <a class="btn btn--primary" href="#projets">Voir mes projets</a>
-            <a class="btn btn--ghost" href="#laboratoire">Essayer le laboratoire</a>
             <a class="btn btn--ghost" href="assets/CV_Yassine_Selmi.pdf" download>Télécharger mon CV</a>
           </div>
           <ul class="links" aria-label="Profils en ligne">
@@ -66,32 +67,45 @@
             <li><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></li>
           </ul>
         </div>
-        <figure class="hero__photo">
-          <img src="assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait de Yassine Selmi" fetchpriority="high">
-          <figcaption>Tunis, diplômes attendus en 2027</figcaption>
-        </figure>
+        <aside class="idcard" aria-label="En bref">
+          <img class="idcard__photo" src="assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait de Yassine Selmi" fetchpriority="high">
+          <div class="idcard__body">
+            <p class="idcard__name">Yassine Selmi</p>
+            <p class="idcard__place">Tunis, diplômes en 2027</p>
+          </div>
+          <dl class="idcard__facts">
+            <div><dt>Formation</dt><dd>Ingénieur data science, ESPRIT<br>Master Actuariat, Le Mans Université</dd></div>
+            <div><dt>Domaines</dt><dd>IFRS 17 et IFRS 9, provisionnement, réassurance, tarification</dd></div>
+            <div><dt>Langues</dt><dd>Arabe, français (B2), anglais (B2)</dd></div>
+          </dl>
+        </aside>
       </div>
 
       <!-- Le moment fort : 5 000 trajectoires simulées en direct -->
       <div class="wrap">
         <figure class="sim" id="sim">
           <figcaption class="sim__head">
-            <h2 class="sim__title">5 000 scénarios de mortalité, simulés à l'instant dans votre navigateur</h2>
-            <p class="sim__note">Chaque ligne est une trajectoire possible d'un indice de mortalité sur 25 ans : une marche aléatoire avec dérive, le moteur du modèle de Lee-Carter que j'utilise pour mesurer le risque de longévité. La bande claire contient 90 % des scénarios. Paramètres illustratifs.</p>
+            <h2 class="sim__title">5 000 scénarios de mortalité, simulés à l’instant dans votre navigateur</h2>
+            <p class="sim__note">Chaque ligne est une trajectoire possible d’un indice de mortalité sur 25 ans : une marche aléatoire avec dérive, le moteur du modèle de Lee-Carter que j’utilise pour mesurer le risque de longévité. Paramètres illustratifs.</p>
           </figcaption>
-          <canvas class="sim__canvas" id="sim-canvas" role="img" aria-label="Éventail de trajectoires simulées d'un indice de mortalité sur 25 ans, avec la médiane et la bande de 5 à 95 %."></canvas>
+          <canvas class="sim__canvas" id="sim-canvas" role="img" aria-label="Éventail de trajectoires simulées d’un indice de mortalité sur 25 ans, avec la médiane et la bande de 5 à 95 %."></canvas>
           <div class="sim__foot">
+            <ul class="sim__legend">
+              <li><span class="key key--path" aria-hidden="true"></span>Trajectoires simulées</li>
+              <li><span class="key key--median" aria-hidden="true"></span>Médiane</li>
+              <li><span class="key key--band" aria-hidden="true"></span>90 % des scénarios</li>
+            </ul>
             <p class="sim__result" id="sim-result" aria-live="polite"></p>
-            <button class="replay" id="sim-replay" type="button">Tirer 5 000 nouveaux scénarios</button>
+            <button class="replay" id="sim-replay" type="button">Tirer 5 000 nouveaux scénarios</button>
           </div>
         </figure>
 
-        <dl class="facts">
-          <div><dt>Formation</dt><dd>Ingénieur data science à ESPRIT et Master Actuariat à Le Mans Université, diplômes en 2027</dd></div>
-          <div><dt>Recherche</dt><dd>Stage de fin d'études de 6 mois, à partir de janvier 2027</dd></div>
-          <div><dt>Domaines</dt><dd>IFRS 17 et IFRS 9, provisionnement, réassurance, tarification</dd></div>
-          <div><dt>Langues</dt><dd>Arabe, français (B2), anglais (B2)</dd></div>
-        </dl>
+        <ul class="proofs" aria-label="Chiffres vérifiables, chacun relié au dépôt qui le calcule">
+          <li><a href="https://github.com/selyassine/ifrs17-copilot"><span class="proof__value">50 / 50</span><span class="proof__label">dossiers IFRS 17 recalculés au centime par un script R indépendant</span><span class="proof__src">Source : IFRS 17 Copilot</span></a></li>
+          <li><a href="https://github.com/selyassine/claude_actuaire"><span class="proof__value">59 / 59</span><span class="proof__label">valeurs publiées retrouvées (Mack 1993, McNeil 1997)</span><span class="proof__src">Source : claude_actuaire</span></a></li>
+          <li><a href="https://github.com/selyassine/ecl9"><span class="proof__value">+41 %</span><span class="proof__label">de provision IFRS 9 avec LightGBM au 31 décembre 2007</span><span class="proof__src">Source : ecl9</span></a></li>
+          <li><a href="https://github.com/selyassine/SIAP"><span class="proof__value">678 000</span><span class="proof__label">polices tarifées par GLM et LightGBM</span><span class="proof__src">Source : SIAP</span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -115,21 +129,21 @@
         <article class="feature" data-dom="ifrs ia">
           <figure class="gallery feature__media">
             <a class="gallery__main" href="assets/img/projets/ifrs17-copilot-1.webp">
-              <img src="assets/img/projets/ifrs17-copilot-1.webp" width="1400" height="875" loading="lazy" alt="Vue d'ensemble de l'espace de travail">
+              <img src="assets/img/projets/ifrs17-copilot-1.webp" width="1400" height="875" loading="lazy" alt="Vue d’ensemble de l’espace de travail">
             </a>
             <div class="gallery__thumbs">
-              <a class="gallery__thumb" href="assets/img/projets/ifrs17-copilot-1.webp" data-caption="Vue d'ensemble de l'espace de travail" aria-label="Afficher l'image 1 : Vue d'ensemble de l'espace de travail" aria-current="true"><img src="assets/img/projets/ifrs17-copilot-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="assets/img/projets/ifrs17-copilot-2.webp" data-caption="Chaîne d'agents sur un dossier" aria-label="Afficher l'image 2 : Chaîne d'agents sur un dossier"><img src="assets/img/projets/ifrs17-copilot-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="assets/img/projets/ifrs17-copilot-3.webp" data-caption="Note actuarielle IFRS 17 générée" aria-label="Afficher l'image 3 : Note actuarielle IFRS 17 générée"><img src="assets/img/projets/ifrs17-copilot-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/ifrs17-copilot-1.webp" data-caption="Vue d’ensemble de l’espace de travail" aria-label="Afficher l’image 1 : Vue d’ensemble de l’espace de travail" aria-current="true"><img src="assets/img/projets/ifrs17-copilot-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/ifrs17-copilot-2.webp" data-caption="Chaîne d’agents sur un dossier" aria-label="Afficher l’image 2 : Chaîne d’agents sur un dossier"><img src="assets/img/projets/ifrs17-copilot-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/ifrs17-copilot-3.webp" data-caption="Note actuarielle IFRS 17 générée" aria-label="Afficher l’image 3 : Note actuarielle IFRS 17 générée"><img src="assets/img/projets/ifrs17-copilot-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
             </div>
-            <figcaption class="gallery__caption">Vue d'ensemble de l'espace de travail</figcaption>
+            <figcaption class="gallery__caption">Vue d’ensemble de l’espace de travail</figcaption>
           </figure>
           <div class="feature__body">
-            <p class="kicker">Un modèle de langage peut-il rédiger une note IFRS 17 sans inventer un chiffre ?</p>
-            <h3><a href="https://github.com/selyassine/ifrs17-copilot">IFRS 17 Copilot</a></h3>
-            <p>Un copilote multi-agent lit un dossier d'assurance (PDF, scan, Excel ou question vocale), calcule la marge sur services contractuels et le passif pour sinistres survenus, puis rédige une note citée, vérifiée et soumise à validation humaine. Le code calcule, le modèle explique.</p>
+            <p class="kicker">Un modèle de langage peut-il rédiger une note IFRS 17 sans inventer un chiffre ?</p>
+            <h3><a href="https://github.com/selyassine/ifrs17-copilot">IFRS 17 Copilot</a></h3>
+            <p>Un copilote multi-agent lit un dossier d’assurance (PDF, scan, Excel ou question vocale), calcule la marge sur services contractuels et le passif pour sinistres survenus, puis rédige une note citée, vérifiée et soumise à validation humaine. Le code calcule, le modèle explique.</p>
             <dl class="figures">
-              <div><dt>Double calcul contre un script R</dt><dd>50 / 50 dossiers au centime</dd></div>
+              <div><dt>Double calcul contre un script R</dt><dd>50 / 50 dossiers au centime</dd></div>
               <div><dt>Recherche dans la norme</dt><dd>Recall@5 de 0,52 à 0,75</dd></div>
               <div><dt>Tests automatisés</dt><dd>370+, CI verte</dd></div>
             </dl>
@@ -144,20 +158,20 @@
               <img src="assets/img/projets/ecl9-1.webp" width="1400" height="875" loading="lazy" alt="La réponse : +41 % de provision au 31/12/2007">
             </a>
             <div class="gallery__thumbs">
-              <a class="gallery__thumb" href="assets/img/projets/ecl9-1.webp" data-caption="La réponse : +41 % de provision au 31/12/2007" aria-label="Afficher l'image 1 : La réponse : +41 % de provision au 31/12/2007" aria-current="true"><img src="assets/img/projets/ecl9-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="assets/img/projets/ecl9-2.webp" data-caption="Provision et pertes, arrêté par arrêté" aria-label="Afficher l'image 2 : Provision et pertes, arrêté par arrêté"><img src="assets/img/projets/ecl9-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="assets/img/projets/ecl9-3.webp" data-caption="Poids des scénarios et effet sur la provision" aria-label="Afficher l'image 3 : Poids des scénarios et effet sur la provision"><img src="assets/img/projets/ecl9-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/ecl9-1.webp" data-caption="La réponse : +41 % de provision au 31/12/2007" aria-label="Afficher l’image 1 : La réponse : +41 % de provision au 31/12/2007" aria-current="true"><img src="assets/img/projets/ecl9-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/ecl9-2.webp" data-caption="Provision et pertes, arrêté par arrêté" aria-label="Afficher l’image 2 : Provision et pertes, arrêté par arrêté"><img src="assets/img/projets/ecl9-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/ecl9-3.webp" data-caption="Poids des scénarios et effet sur la provision" aria-label="Afficher l’image 3 : Poids des scénarios et effet sur la provision"><img src="assets/img/projets/ecl9-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
             </div>
-            <figcaption class="gallery__caption">La réponse : +41 % de provision au 31/12/2007</figcaption>
+            <figcaption class="gallery__caption">La réponse : +41 % de provision au 31/12/2007</figcaption>
           </figure>
           <div class="feature__body">
-            <p class="kicker">Le machine learning change-t-il vraiment la provision IFRS 9 ?</p>
+            <p class="kicker">Le machine learning change-t-il vraiment la provision IFRS 9 ?</p>
             <h3><a href="https://github.com/selyassine/ecl9">ecl9</a></h3>
-            <p>Un moteur de pertes de crédit attendues, prêt par prêt, sur les prêts immobiliers américains de Freddie Mac. Les modèles sont entraînés sur 2000-2005 et testés sur 2006-2008 : ils traversent la crise sans l'avoir vue.</p>
+            <p>Un moteur de pertes de crédit attendues, prêt par prêt, sur les prêts immobiliers américains de Freddie Mac. Les modèles sont entraînés sur 2000-2005 et testés sur 2006-2008 : ils traversent la crise sans l’avoir vue.</p>
             <dl class="figures">
-              <div><dt>LightGBM contre logistique, fin 2007</dt><dd>+49 % de provision</dd></div>
-              <div><dt>Pertes constatées ensuite couvertes</dt><dd>9 à 13 % seulement</dd></div>
-              <div><dt>Recalcul indépendant en R</dt><dd>50 prêts</dd></div>
+              <div><dt>LightGBM contre logistique, fin 2007</dt><dd>+49 % de provision</dd></div>
+              <div><dt>Pertes constatées ensuite couvertes</dt><dd>9 à 13 % seulement</dd></div>
+              <div><dt>Recalcul indépendant en R</dt><dd>50 prêts</dd></div>
             </dl>
             <p class="stack">Python, LightGBM, survie en temps discret, pytest, Quarto</p>
             <p class="project__links"><a href="https://selyassine.github.io/ecl9/">Lire la note de provisionnement</a><a href="https://github.com/selyassine/ecl9">Code sur GitHub</a></p>
@@ -167,26 +181,26 @@
         <article class="feature" data-dom="nonvie">
           <figure class="gallery feature__media">
             <a class="gallery__main" href="assets/img/projets/climatxl-1.webp">
-              <img src="assets/img/projets/climatxl-1.webp" width="1400" height="667" loading="lazy" alt="Application Shiny de tarification">
+              <img src="assets/img/projets/climatxl-1.webp" width="1400" height="875" loading="lazy" alt="Application Shiny de tarification">
             </a>
             <div class="gallery__thumbs">
-              <a class="gallery__thumb" href="assets/img/projets/climatxl-1.webp" data-caption="Application Shiny de tarification" aria-label="Afficher l'image 1 : Application Shiny de tarification" aria-current="true"><img src="assets/img/projets/climatxl-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="assets/img/projets/climatxl-2.webp" data-caption="Chargement climatique 2035 : distribution bootstrap" aria-label="Afficher l'image 2 : Chargement climatique 2035 : distribution bootstrap"><img src="assets/img/projets/climatxl-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="assets/img/projets/climatxl-3.webp" data-caption="Choix du seuil : excès moyens et stabilité de ξ" aria-label="Afficher l'image 3 : Choix du seuil : excès moyens et stabilité de ξ"><img src="assets/img/projets/climatxl-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/climatxl-1.webp" data-caption="Application Shiny de tarification" aria-label="Afficher l’image 1 : Application Shiny de tarification" aria-current="true"><img src="assets/img/projets/climatxl-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/climatxl-2.webp" data-caption="Chargement climatique 2035 : distribution bootstrap" aria-label="Afficher l’image 2 : Chargement climatique 2035 : distribution bootstrap"><img src="assets/img/projets/climatxl-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="assets/img/projets/climatxl-3.webp" data-caption="Choix du seuil : excès moyens et stabilité de ξ" aria-label="Afficher l’image 3 : Choix du seuil : excès moyens et stabilité de ξ"><img src="assets/img/projets/climatxl-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
             </div>
             <figcaption class="gallery__caption">Application Shiny de tarification</figcaption>
           </figure>
           <div class="feature__body">
-            <p class="kicker">Le climat rend-il la réassurance catastrophe plus chère ?</p>
+            <p class="kicker">Le climat rend-il la réassurance catastrophe plus chère ?</p>
             <h3><a href="https://github.com/selyassine/climatXL">climatXL</a></h3>
-            <p>Un package R qui ajuste des lois de valeurs extrêmes, stationnaires puis dépendantes du climat, aux dommages NOAA 1996-2024, et qui en tire la prime d'une tranche en excédent de sinistre. Réponse sur cette période : pas de façon démontrable.</p>
+            <p>Un package R qui ajuste des lois de valeurs extrêmes, stationnaires puis dépendantes du climat, aux dommages NOAA 1996-2024, et qui en tire la prime d’une tranche en excédent de sinistre. Réponse sur cette période : pas de façon démontrable.</p>
             <dl class="figures">
-              <div><dt>Prime pure de la tranche, 2024 puis 2035</dt><dd>2 176 à 2 762 M$</dd></div>
-              <div><dt>Validation</dt><dd>McNeil (1997) reproduit</dd></div>
+              <div><dt>Prime pure de la tranche, 2024 puis 2035</dt><dd>2 176 à 2 762 M$</dd></div>
+              <div><dt>Validation</dt><dd>McNeil (1997) reproduit</dd></div>
               <div><dt>Backtest</dt><dd>2013-2024</dd></div>
             </dl>
             <p class="stack">R, targets, testthat, Quarto, Shiny</p>
-            <p class="project__links"><a href="https://selyassine.github.io/climatXL/">Lire le rapport</a><a href="https://climatxl.shinyapps.io/climatXL/">Ouvrir l'application</a><a href="https://github.com/selyassine/climatXL">Code sur GitHub</a></p>
+            <p class="project__links"><a href="https://selyassine.github.io/climatXL/">Lire le rapport</a><a href="https://climatxl.shinyapps.io/climatXL/">Ouvrir l’application</a><a href="https://github.com/selyassine/climatXL">Code sur GitHub</a></p>
           </div>
         </article>
 
@@ -195,18 +209,19 @@
           <article class="project" data-dom="nonvie ia">
             <figure class="gallery">
               <a class="gallery__main" href="assets/img/projets/siap-1.webp">
-                <img src="assets/img/projets/siap-1.webp" width="1400" height="632" loading="lazy" alt="Tarification : prime recommandée">
+                <img src="assets/img/projets/siap-1.webp" width="1400" height="875" loading="lazy" alt="Tarification : prime recommandée">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="assets/img/projets/siap-1.webp" data-caption="Tarification : prime recommandée" aria-label="Afficher l'image 1 : Tarification : prime recommandée" aria-current="true"><img src="assets/img/projets/siap-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/siap-2.webp" data-caption="Provisionnement IBNR : triangle et réserves" aria-label="Afficher l'image 2 : Provisionnement IBNR : triangle et réserves"><img src="assets/img/projets/siap-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/siap-3.webp" data-caption="Vision : dommages détectés et coût estimé" aria-label="Afficher l'image 3 : Vision : dommages détectés et coût estimé"><img src="assets/img/projets/siap-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/siap-1.webp" data-caption="Tarification : prime recommandée" aria-label="Afficher l’image 1 : Tarification : prime recommandée" aria-current="true"><img src="assets/img/projets/siap-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/siap-2.webp" data-caption="Provisionnement IBNR : triangle et réserves" aria-label="Afficher l’image 2 : Provisionnement IBNR : triangle et réserves"><img src="assets/img/projets/siap-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/siap-3.webp" data-caption="Vision : dommages détectés et coût estimé" aria-label="Afficher l’image 3 : Vision : dommages détectés et coût estimé"><img src="assets/img/projets/siap-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
-              <figcaption class="gallery__caption">Tarification : prime recommandée</figcaption>
+              <figcaption class="gallery__caption">Tarification : prime recommandée</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/SIAP">SIAP</a></h3>
-            <p>Plateforme d'assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude (AUC 0,82), IBNR par Chain Ladder, Mack et Bootstrap, expertise de dommages par vision.</p>
+            <p>Plateforme d’assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude (AUC 0,82), IBNR par Chain Ladder, Mack et Bootstrap, expertise de dommages par vision.</p>
             <p class="stack">LightGBM, XGBoost, YOLOv8, FastAPI, Next.js</p>
+            <p class="project__links"><a href="https://github.com/selyassine/SIAP">Code sur GitHub</a></p>
           </article>
           <article class="project" data-dom="vie">
             <figure class="gallery">
@@ -214,47 +229,50 @@
                 <img src="assets/img/projets/vitaai-1.webp" width="1400" height="875" loading="lazy" alt="Accueil de la plateforme">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="assets/img/projets/vitaai-1.webp" data-caption="Accueil de la plateforme" aria-label="Afficher l'image 1 : Accueil de la plateforme" aria-current="true"><img src="assets/img/projets/vitaai-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/vitaai-2.webp" data-caption="Module M4 : SCR" aria-label="Afficher l'image 2 : Module M4 : SCR"><img src="assets/img/projets/vitaai-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/vitaai-3.webp" data-caption="Démo : arbitrage marge / rachat (M9)" aria-label="Afficher l'image 3 : Démo : arbitrage marge / rachat (M9)"><img src="assets/img/projets/vitaai-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/vitaai-1.webp" data-caption="Accueil de la plateforme" aria-label="Afficher l’image 1 : Accueil de la plateforme" aria-current="true"><img src="assets/img/projets/vitaai-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/vitaai-2.webp" data-caption="Module M4 : SCR" aria-label="Afficher l’image 2 : Module M4 : SCR"><img src="assets/img/projets/vitaai-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/vitaai-3.webp" data-caption="Démo : arbitrage marge / rachat (M9)" aria-label="Afficher l’image 3 : Démo : arbitrage marge / rachat (M9)"><img src="assets/img/projets/vitaai-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
               <figcaption class="gallery__caption">Accueil de la plateforme</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/VITA">VitaAI</a></h3>
-            <p>Une compagnie d'assurance-vie simulée en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité à 99,5 %, ALM et ORSA.</p>
+            <p>Une compagnie d’assurance-vie simulée en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité à 99,5 %, ALM et ORSA.</p>
             <p class="stack">Python, pytest, Next.js</p>
+            <p class="project__links"><a href="https://github.com/selyassine/VITA">Code sur GitHub</a></p>
           </article>
           <article class="project" data-dom="nonvie vie ia">
             <figure class="gallery">
               <a class="gallery__main" href="assets/img/projets/claude-actuaire-1.webp">
-                <img src="assets/img/projets/claude-actuaire-1.webp" width="1400" height="752" loading="lazy" alt="Mack (1993) sur le triangle RAA">
+                <img src="assets/img/projets/claude-actuaire-1.webp" width="1400" height="875" loading="lazy" alt="Mack (1993) sur le triangle RAA">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="assets/img/projets/claude-actuaire-1.webp" data-caption="Mack (1993) sur le triangle RAA" aria-label="Afficher l'image 1 : Mack (1993) sur le triangle RAA" aria-current="true"><img src="assets/img/projets/claude-actuaire-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/claude-actuaire-2.webp" data-caption="GPD sur les sinistres incendie danois" aria-label="Afficher l'image 2 : GPD sur les sinistres incendie danois"><img src="assets/img/projets/claude-actuaire-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/claude-actuaire-3.webp" data-caption="Commandes du moteur et 409 tests réussis" aria-label="Afficher l'image 3 : Commandes du moteur et 409 tests réussis"><img src="assets/img/projets/claude-actuaire-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/claude-actuaire-1.webp" data-caption="Mack (1993) sur le triangle RAA" aria-label="Afficher l’image 1 : Mack (1993) sur le triangle RAA" aria-current="true"><img src="assets/img/projets/claude-actuaire-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/claude-actuaire-2.webp" data-caption="GPD sur les sinistres incendie danois" aria-label="Afficher l’image 2 : GPD sur les sinistres incendie danois"><img src="assets/img/projets/claude-actuaire-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/claude-actuaire-3.webp" data-caption="Commandes du moteur et 409 tests réussis" aria-label="Afficher l’image 3 : Commandes du moteur et 409 tests réussis"><img src="assets/img/projets/claude-actuaire-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
-              <figcaption class="gallery__caption">Mack (1993) sur le triangle RAA</figcaption>
+              <figcaption class="gallery__caption">Mack (1993) sur le triangle RAA</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a></h3>
-            <p>Un moteur de calcul actuariel livré comme skill pour Claude, testé contre des résultats publiés (Mack 1993, McNeil 1997) : 59 valeurs justes sur 59 au banc d'essai, contre 47 sans code.</p>
+            <p>Un moteur de calcul actuariel livré comme skill pour Claude, testé contre des résultats publiés (Mack 1993, McNeil 1997) : 59 valeurs justes sur 59 au banc d’essai, contre 47 sans code.</p>
             <p class="stack">Python, pytest, GitHub Actions</p>
+            <p class="project__links"><a href="https://github.com/selyassine/claude_actuaire">Code sur GitHub</a></p>
           </article>
           <article class="project" data-dom="vie">
             <figure class="gallery">
               <a class="gallery__main" href="assets/img/projets/longevite-1.webp">
-                <img src="assets/img/projets/longevite-1.webp" width="1400" height="778" loading="lazy" alt="Paramètres Lee-Carter a(x), b(x), k(t)">
+                <img src="assets/img/projets/longevite-1.webp" width="1400" height="875" loading="lazy" alt="Paramètres Lee-Carter a(x), b(x), k(t)">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="assets/img/projets/longevite-1.webp" data-caption="Paramètres Lee-Carter a(x), b(x), k(t)" aria-label="Afficher l'image 1 : Paramètres Lee-Carter a(x), b(x), k(t)" aria-current="true"><img src="assets/img/projets/longevite-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/longevite-2.webp" data-caption="Cohorte 1950 : trajectoires simulées" aria-label="Afficher l'image 2 : Cohorte 1950 : trajectoires simulées"><img src="assets/img/projets/longevite-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/longevite-3.webp" data-caption="Distribution des VAP des deux cohortes" aria-label="Afficher l'image 3 : Distribution des VAP des deux cohortes"><img src="assets/img/projets/longevite-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/longevite-1.webp" data-caption="Paramètres Lee-Carter a(x), b(x), k(t)" aria-label="Afficher l’image 1 : Paramètres Lee-Carter a(x), b(x), k(t)" aria-current="true"><img src="assets/img/projets/longevite-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/longevite-2.webp" data-caption="Cohorte 1950 : trajectoires simulées" aria-label="Afficher l’image 2 : Cohorte 1950 : trajectoires simulées"><img src="assets/img/projets/longevite-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/longevite-3.webp" data-caption="Distribution des VAP des deux cohortes" aria-label="Afficher l’image 3 : Distribution des VAP des deux cohortes"><img src="assets/img/projets/longevite-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
               <figcaption class="gallery__caption">Paramètres Lee-Carter a(x), b(x), k(t)</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/actuariat-vie-longevite">Risque de longévité</a></h3>
-            <p>Projet de groupe du Master Actuariat : valeur actuelle probable d'une rente de 25 ans pour deux cohortes françaises. La génération 1950 coûte 5,25 % de plus que celle de 1935.</p>
+            <p>Projet de groupe du Master Actuariat : valeur actuelle probable d’une rente de 25 ans pour deux cohortes françaises. La génération 1950 coûte 5,25 % de plus que celle de 1935.</p>
             <p class="stack">R, StMoMo, R Markdown</p>
+            <p class="project__links"><a href="https://github.com/selyassine/actuariat-vie-longevite">Code sur GitHub</a></p>
           </article>
           <article class="project" data-dom="ia">
             <figure class="gallery">
@@ -262,41 +280,43 @@
                 <img src="assets/img/projets/quantai-1.webp" width="1400" height="875" loading="lazy" alt="Backtesting : quatre stratégies comparées">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="assets/img/projets/quantai-1.webp" data-caption="Backtesting : quatre stratégies comparées" aria-label="Afficher l'image 1 : Backtesting : quatre stratégies comparées" aria-current="true"><img src="assets/img/projets/quantai-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/quantai-2.webp" data-caption="Optimisation de portefeuille Markowitz" aria-label="Afficher l'image 2 : Optimisation de portefeuille Markowitz"><img src="assets/img/projets/quantai-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/quantai-3.webp" data-caption="Backtest sur AAPL, deux ans de données" aria-label="Afficher l'image 3 : Backtest sur AAPL, deux ans de données"><img src="assets/img/projets/quantai-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/quantai-1.webp" data-caption="Backtesting : quatre stratégies comparées" aria-label="Afficher l’image 1 : Backtesting : quatre stratégies comparées" aria-current="true"><img src="assets/img/projets/quantai-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/quantai-2.webp" data-caption="Optimisation de portefeuille Markowitz" aria-label="Afficher l’image 2 : Optimisation de portefeuille Markowitz"><img src="assets/img/projets/quantai-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/quantai-3.webp" data-caption="Backtest sur AAPL, deux ans de données" aria-label="Afficher l’image 3 : Backtest sur AAPL, deux ans de données"><img src="assets/img/projets/quantai-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
-              <figcaption class="gallery__caption">Backtesting : quatre stratégies comparées</figcaption>
+              <figcaption class="gallery__caption">Backtesting : quatre stratégies comparées</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/Quant">QuantAI</a></h3>
-            <p>Trading quantitatif en paper trading : ensemble LightGBM, LSTM et Transformer, optimisation Markowitz et Black-Litterman, backtests, agent soumis à validation humaine.</p>
+            <p>Trading quantitatif en paper trading : ensemble LightGBM, LSTM et Transformer, optimisation Markowitz et Black-Litterman, backtests, agent soumis à validation humaine.</p>
             <p class="stack">PyTorch, FastAPI, Celery, Next.js</p>
+            <p class="project__links"><a href="https://github.com/selyassine/Quant">Code sur GitHub</a></p>
           </article>
           <article class="project" data-dom="ia">
             <figure class="gallery">
               <a class="gallery__main" href="assets/img/projets/mlops-1.webp">
-                <img src="assets/img/projets/mlops-1.webp" width="1400" height="658" loading="lazy" alt="Étapes du pipeline, accuracy 0,87">
+                <img src="assets/img/projets/mlops-1.webp" width="1400" height="875" loading="lazy" alt="Étapes du pipeline, accuracy 0,87">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="assets/img/projets/mlops-1.webp" data-caption="Étapes du pipeline, accuracy 0,87" aria-label="Afficher l'image 1 : Étapes du pipeline, accuracy 0,87" aria-current="true"><img src="assets/img/projets/mlops-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/mlops-2.webp" data-caption="Tests pytest" aria-label="Afficher l'image 2 : Tests pytest"><img src="assets/img/projets/mlops-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-                <a class="gallery__thumb" href="assets/img/projets/mlops-3.webp" data-caption="Workflow GitHub Actions" aria-label="Afficher l'image 3 : Workflow GitHub Actions"><img src="assets/img/projets/mlops-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/mlops-1.webp" data-caption="Étapes du pipeline, accuracy 0,87" aria-label="Afficher l’image 1 : Étapes du pipeline, accuracy 0,87" aria-current="true"><img src="assets/img/projets/mlops-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/mlops-2.webp" data-caption="Tests pytest" aria-label="Afficher l’image 2 : Tests pytest"><img src="assets/img/projets/mlops-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="assets/img/projets/mlops-3.webp" data-caption="Workflow GitHub Actions" aria-label="Afficher l’image 3 : Workflow GitHub Actions"><img src="assets/img/projets/mlops-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
               <figcaption class="gallery__caption">Étapes du pipeline, accuracy 0,87</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/Mlops">Titanic MLOps</a></h3>
-            <p>Un pipeline CI/CD complet : à chaque push, le modèle est testé, conteneurisé, publié puis réentraîné et orchestré automatiquement.</p>
+            <p>Un pipeline CI/CD complet : à chaque push, le modèle est testé, conteneurisé, publié puis réentraîné et orchestré automatiquement.</p>
             <p class="stack">Docker, GitHub Actions, Jenkins, Prefect</p>
+            <p class="project__links"><a href="https://github.com/selyassine/Mlops">Code sur GitHub</a></p>
           </article>
         </div>
 
         <details class="more">
           <summary>Autres projets</summary>
           <ul>
-            <li><strong>Plateforme BI avec agent conversationnel</strong> (2025) : tableaux de bord Power BI avec sécurité par rôle, agent LangChain et Mistral qui traduit les questions en SQL.</li>
-            <li><strong>API d'agriculture de précision</strong> : modèles TensorFlow servis par FastAPI pour optimiser les rendements.</li>
-            <li><strong>Plateforme web de dons</strong> : application React, Node.js et MongoDB qui met en relation donateurs et bénéficiaires.</li>
-            <li><strong>Analyse de données sociales</strong> : extraction d'indicateurs par machine learning, restitution sous Tableau.</li>
+            <li><strong>Plateforme BI avec agent conversationnel</strong> (2025) : tableaux de bord Power BI avec sécurité par rôle, agent LangChain et Mistral qui traduit les questions en SQL.</li>
+            <li><strong>API d’agriculture de précision</strong> : modèles TensorFlow servis par FastAPI pour optimiser les rendements.</li>
+            <li><strong>Plateforme web de dons</strong> : application React, Node.js et MongoDB qui met en relation donateurs et bénéficiaires.</li>
+            <li><strong>Analyse de données sociales</strong> : extraction d’indicateurs par machine learning, restitution sous Tableau.</li>
           </ul>
         </details>
       </div>
@@ -307,7 +327,7 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-labo">Laboratoire</h2>
-          <p>Quatre calculs actuariels qui tournent dans cette page. Changez une hypothèse : le résultat et le graphique se recalculent aussitôt. Les formules sont celles de mes projets, sur des données illustratives.</p>
+          <p>Quatre calculs actuariels qui tournent dans cette page. Changez une hypothèse : le résultat et le graphique se recalculent aussitôt. Les formules sont celles de mes projets, sur des données illustratives.</p>
         </div>
 
         <div class="lab">
@@ -315,13 +335,13 @@
             <button class="lab__tab" role="tab" id="tab-cl" aria-controls="panel-cl" aria-selected="true" type="button">Provisionnement<span>Chain Ladder</span></button>
             <button class="lab__tab" role="tab" id="tab-xl" aria-controls="panel-xl" aria-selected="false" tabindex="-1" type="button">Réassurance<span>Tranche XL, loi GPD</span></button>
             <button class="lab__tab" role="tab" id="tab-rente" aria-controls="panel-rente" aria-selected="false" tabindex="-1" type="button">Assurance-vie<span>Rente et longévité</span></button>
-            <button class="lab__tab" role="tab" id="tab-ecl" aria-controls="panel-ecl" aria-selected="false" tabindex="-1" type="button">Risque de crédit<span>Provision IFRS 9</span></button>
+            <button class="lab__tab" role="tab" id="tab-ecl" aria-controls="panel-ecl" aria-selected="false" tabindex="-1" type="button">Risque de crédit<span>Provision IFRS 9</span></button>
           </div>
 
           <div class="lab__panel" role="tabpanel" id="panel-cl" aria-labelledby="tab-cl" tabindex="0">
             <div class="lab__intro">
               <h3>Complétez un triangle de sinistres</h3>
-              <p>Paiements cumulés par année de survenance, en milliers d'euros. Modifiez une cellule blanche : les facteurs de développement, les cellules dorées et la provision se recalculent.</p>
+              <p>Paiements cumulés par année de survenance, en milliers d’euros. Modifiez une cellule blanche : les facteurs de développement, les cellules dorées et la provision se recalculent.</p>
             </div>
             <div class="triangle__scroll" tabindex="0" role="region" aria-label="Triangle de développement modifiable">
               <table class="tri" id="tri"></table>
@@ -337,7 +357,7 @@
           <div class="lab__panel" role="tabpanel" id="panel-xl" aria-labelledby="tab-xl" tabindex="0" hidden>
             <div class="lab__intro">
               <h3>Tarifez une tranche en excédent de sinistre</h3>
-              <p>Les sinistres au-delà de 10 M€ suivent une loi de Pareto généralisée. La prime pure est la fréquence multipliée par le coût moyen laissé à la tranche.</p>
+              <p>Les sinistres au-delà de 10 M€ suivent une loi de Pareto généralisée. La prime pure est la fréquence multipliée par le coût moyen laissé à la tranche.</p>
             </div>
             <div class="lab__grid">
               <form class="lab__controls" id="xl-form">
@@ -362,7 +382,7 @@
           <div class="lab__panel" role="tabpanel" id="panel-rente" aria-labelledby="tab-rente" tabindex="0" hidden>
             <div class="lab__intro">
               <h3>Mesurez le coût de la longévité sur une rente</h3>
-              <p>Valeur actuelle probable d'une rente de 10 000 € par an, payée en fin d'année. Baissez la mortalité pour voir le prix d'une population qui vit plus longtemps. Mortalité illustrative de type Makeham, pas une table réglementaire.</p>
+              <p>Valeur actuelle probable d’une rente de 10 000 € par an, payée en fin d’année. Baissez la mortalité pour voir le prix d’une population qui vit plus longtemps. Mortalité illustrative de type Makeham, pas une table réglementaire.</p>
             </div>
             <div class="lab__grid">
               <form class="lab__controls" id="rente-form">
@@ -380,13 +400,13 @@
                 </div>
               </div>
             </div>
-            <p class="lab__foot"><span>Le choc de 20 % est celui du SCR longévité de Solvabilité II. Sur données réelles : <a href="https://github.com/selyassine/VITA">VitaAI</a> et le <a href="https://github.com/selyassine/actuariat-vie-longevite">projet longévité</a>.</span></p>
+            <p class="lab__foot"><span>Le choc de 20 % est celui du SCR longévité de Solvabilité II. Sur données réelles : <a href="https://github.com/selyassine/VITA">VitaAI</a> et le <a href="https://github.com/selyassine/actuariat-vie-longevite">projet longévité</a>.</span></p>
           </div>
 
           <div class="lab__panel" role="tabpanel" id="panel-ecl" aria-labelledby="tab-ecl" tabindex="0" hidden>
             <div class="lab__intro">
-              <h3>Voyez l'effet de falaise du passage en stade 2</h3>
-              <p>Pour un prêt amortissable, IFRS 9 provisionne les pertes attendues à 12 mois en stade 1, puis sur toute la durée de vie dès que le risque augmente fortement. Probabilité de défaut annuelle constante, amortissement linéaire.</p>
+              <h3>Voyez l’effet de falaise du passage en stade 2</h3>
+              <p>Pour un prêt amortissable, IFRS 9 provisionne les pertes attendues à 12 mois en stade 1, puis sur toute la durée de vie dès que le risque augmente fortement. Probabilité de défaut annuelle constante, amortissement linéaire.</p>
             </div>
             <div class="lab__grid">
               <form class="lab__controls" id="ecl-form">
@@ -394,7 +414,7 @@
                 <label>Probabilité de défaut à 1 an <output id="ecl-pd-o"></output><input type="range" id="ecl-pd" min="0.1" max="15" step="0.1" value="2"></label>
                 <label>Perte en cas de défaut <output id="ecl-lgd-o"></output><input type="range" id="ecl-lgd" min="5" max="90" step="1" value="35"></label>
                 <label>Durée restante, en années <output id="ecl-mat-o"></output><input type="range" id="ecl-mat" min="1" max="30" step="1" value="15"></label>
-                <label>Taux d'intérêt effectif <output id="ecl-tie-o"></output><input type="range" id="ecl-tie" min="0" max="8" step="0.25" value="3"></label>
+                <label>Taux d’intérêt effectif <output id="ecl-tie-o"></output><input type="range" id="ecl-tie" min="0" max="8" step="0.25" value="3"></label>
               </form>
               <div>
                 <div class="lab__chart" id="ecl-chart"></div>
@@ -405,7 +425,7 @@
                 </div>
               </div>
             </div>
-            <p class="lab__foot"><span>Sur 2000-2008 et prêt par prêt, avec survie en temps discret et scénarios pondérés : <a href="https://github.com/selyassine/ecl9">ecl9</a>.</span></p>
+            <p class="lab__foot"><span>Sur 2000-2008 et prêt par prêt, avec survie en temps discret et scénarios pondérés : <a href="https://github.com/selyassine/ecl9">ecl9</a>.</span></p>
           </div>
         </div>
       </div>
@@ -416,20 +436,20 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-methode">Méthode</h2>
-          <p>Trois habitudes que l'on retrouve dans chaque dépôt, et que l'on peut vérifier en ouvrant le code.</p>
+          <p>Trois habitudes que l’on retrouve dans chaque dépôt, et que l’on peut vérifier en ouvrant le code.</p>
         </div>
         <div class="method">
           <div>
             <h3>Je valide contre une référence publiée</h3>
-            <p>Avant tout nouveau calcul, je reproduis un résultat connu : Mack (1993) pour le provisionnement, McNeil (1997) pour les valeurs extrêmes. Puis je fais recalculer par un second code indépendant : 50 dossiers IFRS 17 et 50 prêts IFRS 9 refaits en R.</p>
+            <p>Avant tout nouveau calcul, je reproduis un résultat connu : Mack (1993) pour le provisionnement, McNeil (1997) pour les valeurs extrêmes. Puis je fais recalculer par un second code indépendant : 50 dossiers IFRS 17 et 50 prêts IFRS 9 refaits en R.</p>
           </div>
           <div>
             <h3>Je publie aussi ce qui ne marche pas</h3>
-            <p>Dans climatXL, l'effet du climat sur la prime n'est pas démontré, et c'est la conclusion du rapport. Dans ecl9, les deux modèles ne couvrent que 9 à 13 % des pertes de la crise. Dans IFRS 17 Copilot, un réentraînement des embeddings a été mesuré puis abandonné.</p>
+            <p>Dans climatXL, l’effet du climat sur la prime n’est pas démontré, et c’est la conclusion du rapport. Dans ecl9, les deux modèles ne couvrent que 9 à 13 % des pertes de la crise. Dans IFRS 17 Copilot, un réentraînement des embeddings a été mesuré puis abandonné.</p>
           </div>
           <div>
             <h3>Le modèle de langage ne calcule pas</h3>
-            <p>Dans mes outils d'IA, chaque chiffre sort d'un code testé. Le modèle lit les documents, cherche dans la norme, explique et rédige. Quand les données ne permettent pas le calcul, l'outil refuse au lieu de rendre un chiffre faux.</p>
+            <p>Dans mes outils d’IA, chaque chiffre sort d’un code testé. Le modèle lit les documents, cherche dans la norme, explique et rédige. Quand les données ne permettent pas le calcul, l’outil refuse au lieu de rendre un chiffre faux.</p>
           </div>
         </div>
       </div>
@@ -448,15 +468,15 @@
             <div>
               <h3>Master Actuariat</h3>
               <p class="where">Le Mans Université, en double diplôme avec ESPRIT</p>
-              <p>Tarification non-vie, provisionnement (Chain Ladder, Bornhuetter-Ferguson), modèles de mortalité et de survie, Solvabilité II, IFRS 17, ALM, théorie du risque et des valeurs extrêmes.</p>
+              <p>Tarification non-vie, provisionnement (Chain Ladder, Bornhuetter-Ferguson), modèles de mortalité et de survie, Solvabilité II, IFRS 17, ALM, théorie du risque et des valeurs extrêmes.</p>
             </div>
           </li>
           <li>
             <p class="when">Été <time>2026</time></p>
             <div>
-              <h3>Stage en risque de crédit IFRS 9</h3>
+              <h3>Stage en risque de crédit IFRS 9</h3>
               <p class="where">ESPRIT, pôle RDI, Tunis</p>
-              <p>Estimation de la PD, de la LGD et de l'EAD sur données de portefeuille, et calcul des pertes de crédit attendues (ECL) par stade.</p>
+              <p>Estimation de la PD, de la LGD et de l’EAD sur données de portefeuille, et calcul des pertes de crédit attendues (ECL) par stade.</p>
             </div>
           </li>
           <li>
@@ -464,15 +484,15 @@
             <div>
               <h3>Stage développeur mobile et IA</h3>
               <p class="where">Nour Expert Telecom, Tunis</p>
-              <p>Application Flutter de diagnostic automobile ; classification de pannes par CamemBERT (92 % de précision sur 20 000 exemples) ; API FastAPI, Docker, CI/CD Jenkins et supervision Kibana.</p>
+              <p>Application Flutter de diagnostic automobile ; classification de pannes par CamemBERT (92 % de précision sur 20 000 exemples) ; API FastAPI, Docker, CI/CD Jenkins et supervision Kibana.</p>
             </div>
           </li>
           <li>
             <p class="when">Juin <time>2024</time></p>
             <div>
-              <h3>Stage d'observation</h3>
+              <h3>Stage d’observation</h3>
               <p class="where">La Poste Tunisienne, Tunis</p>
-              <p>Opérations financières et d'épargne, flux de données clients, initiation à l'analyse des risques et aux processus de contrôle.</p>
+              <p>Opérations financières et d’épargne, flux de données clients, initiation à l’analyse des risques et aux processus de contrôle.</p>
             </div>
           </li>
           <li>
@@ -499,48 +519,56 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="t-competences">Compétences</h2>
-          <p>Ce que j'utilise dans mes projets, regroupé par domaine.</p>
+          <p>Ce que j’utilise dans mes projets, regroupé par domaine.</p>
         </div>
-        <div class="skills">
+        <dl class="skills">
           <div>
-            <h3>Actuariat</h3>
-            <ul>
-              <li>IFRS 17 : modèle général, PAA, CSM, ajustement pour risque</li>
-              <li>Provisionnement : Chain Ladder, Mack, Bornhuetter-Ferguson, Bootstrap</li>
-              <li>IFRS 9 : pertes de crédit attendues, PD, LGD, EAD</li>
-              <li>Solvabilité II : SCR, courbes EIOPA, ORSA, ALM</li>
-              <li>Tarification GLM, mortalité Lee-Carter, survie</li>
-              <li>VaR, CVaR, Monte-Carlo, valeurs extrêmes</li>
-            </ul>
+            <dt>Actuariat</dt>
+            <dd>
+              <ul>
+                <li>IFRS 17 : modèle général, PAA, CSM, ajustement pour risque</li>
+                <li>Provisionnement : Chain Ladder, Mack, Bornhuetter-Ferguson, Bootstrap</li>
+                <li>IFRS 9 : pertes de crédit attendues, PD, LGD, EAD</li>
+                <li>Solvabilité II : SCR, courbes EIOPA, ORSA, ALM</li>
+                <li>Tarification GLM, mortalité Lee-Carter, survie</li>
+                <li>VaR, CVaR, Monte-Carlo, valeurs extrêmes</li>
+              </ul>
+            </dd>
           </div>
           <div>
-            <h3>Data science et IA</h3>
-            <ul>
-              <li>scikit-learn, LightGBM, XGBoost, SHAP</li>
-              <li>PyTorch, Transformers, NLP, vision (YOLOv8)</li>
-              <li>LLM, RAG, agents LangGraph, évaluation rigoureuse</li>
-              <li>Séries temporelles, analyse de survie</li>
-            </ul>
+            <dt>Data science et IA</dt>
+            <dd>
+              <ul>
+                <li>scikit-learn, LightGBM, XGBoost, SHAP</li>
+                <li>PyTorch, Transformers, NLP, vision (YOLOv8)</li>
+                <li>LLM, RAG, agents LangGraph, évaluation rigoureuse</li>
+                <li>Séries temporelles, analyse de survie</li>
+              </ul>
+            </dd>
           </div>
           <div>
-            <h3>Ingénierie</h3>
-            <ul>
-              <li>Python, R, SQL</li>
-              <li>FastAPI, Docker, GitHub Actions, Jenkins</li>
-              <li>n8n, Prefect, MLflow</li>
-              <li>Next.js, React, TypeScript, Power BI</li>
-              <li>Hedera, smart contracts Solidity</li>
-            </ul>
+            <dt>Ingénierie</dt>
+            <dd>
+              <ul>
+                <li>Python, R, SQL</li>
+                <li>FastAPI, Docker, GitHub Actions, Jenkins</li>
+                <li>n8n, Prefect, MLflow</li>
+                <li>Next.js, React, TypeScript, Power BI</li>
+                <li>Hedera, smart contracts Solidity</li>
+              </ul>
+            </dd>
           </div>
           <div>
-            <h3>Langues</h3>
-            <ul>
-              <li>Arabe : langue maternelle</li>
-              <li>Français : B2, études en français</li>
-              <li>Anglais : B2</li>
-            </ul>
+            <dt>Langues</dt>
+            <dd>
+              <ul>
+                <li>Arabe : langue maternelle</li>
+                <li>Français : B2, études en français</li>
+                <li>Anglais : B2</li>
+              </ul>
+            </dd>
           </div>
-        </div>
+        </dl>
       </div>
     </section>
 
@@ -553,31 +581,30 @@
         </div>
         <div class="certs">
           <div class="certs__group">
-            <h3>NVIDIA Deep Learning Institute</h3>
-            <ul>
-              <li><span>Building RAG Agents with LLMs</span><time>oct. 2026</time></li>
-              <li><span>Building Transformer-Based NLP Applications</span><time>oct. 2026</time></li>
-              <li><span>Applications of AI for Anomaly Detection</span><time>avr. 2026</time></li>
-              <li><span>Rapid Application Development with LLMs</span><time>déc. 2025</time></li>
-              <li><span>Building LLM Applications With Prompt Engineering</span><time>déc. 2025</time></li>
+            <h3 id="c-1">Actuariat et finance</h3>
+            <ul aria-labelledby="c-1">
+                <li><span class="cert__name">Foundations of Insurance and the IFRS 17 Standard</span><span class="cert__org">SAS</span><time>nov. 2026</time></li>
+                <li><span class="cert__name">AIG Actuarial Analyst Job Simulation</span><span class="cert__org">Forage</span><time>nov. 2026</time></li>
+                <li><span class="cert__name">Credit Risk Modeling in Python</span><span class="cert__org">365 Financial Analyst</span><time>nov. 2026</time></li>
             </ul>
           </div>
           <div class="certs__group">
-            <h3>The Hashgraph Association</h3>
-            <ul>
-              <li><span>Hedera Certified Developer Associate (HCDA)</span><time>oct. 2026</time></li>
-              <li><span>Hedera Business Foundation (HBF)</span><time>oct. 2026</time></li>
-              <li><span>Hedera Certified Foundation (HCF)</span><time>oct. 2026</time></li>
+            <h3 id="c-2">IA et données</h3>
+            <ul aria-labelledby="c-2">
+                <li><span class="cert__name">Building RAG Agents with LLMs</span><span class="cert__org">NVIDIA DLI</span><time>oct. 2026</time></li>
+                <li><span class="cert__name">Building Transformer-Based NLP Applications</span><span class="cert__org">NVIDIA DLI</span><time>oct. 2026</time></li>
+                <li><span class="cert__name">Applications of AI for Anomaly Detection</span><span class="cert__org">NVIDIA DLI</span><time>avr. 2026</time></li>
+                <li><span class="cert__name">Rapid Application Development with LLMs</span><span class="cert__org">NVIDIA DLI</span><time>déc. 2025</time></li>
+                <li><span class="cert__name">Building LLM Applications With Prompt Engineering</span><span class="cert__org">NVIDIA DLI</span><time>déc. 2025</time></li>
+                <li><span class="cert__name">Data Analyst Associate</span><span class="cert__org">DataCamp</span><span class="pending">en cours</span></li>
             </ul>
-            <h3>Finance et actuariat</h3>
-            <ul>
-              <li><span>Credit Risk Modeling in Python (365 Financial Analyst)</span><time>nov. 2026</time></li>
-              <li><span>AIG Actuarial Analyst Job Simulation (Forage)</span><time>nov. 2026</time></li>
-              <li><span>Foundations of Insurance and the IFRS 17 Standard (SAS)</span><time>nov. 2026</time></li>
-            </ul>
-            <h3>DataCamp</h3>
-            <ul>
-              <li><span>Data Analyst Associate</span><span class="pending">en cours</span></li>
+          </div>
+          <div class="certs__group">
+            <h3 id="c-3">Blockchain</h3>
+            <ul aria-labelledby="c-3">
+                <li><span class="cert__name">Hedera Certified Developer Associate (HCDA)</span><span class="cert__org">The Hashgraph Association</span><time>oct. 2026</time></li>
+                <li><span class="cert__name">Hedera Business Foundation (HBF)</span><span class="cert__org">The Hashgraph Association</span><time>oct. 2026</time></li>
+                <li><span class="cert__name">Hedera Certified Foundation (HCF)</span><span class="cert__org">The Hashgraph Association</span><time>oct. 2026</time></li>
             </ul>
           </div>
         </div>
@@ -589,10 +616,10 @@
       <div class="wrap contact">
         <div>
           <h2 id="t-contact">Me contacter</h2>
-          <p>Je cherche un stage de fin d'études de 6 mois à partir de janvier 2027, en actuariat, en modélisation des risques ou en data science. Pour un stage, un projet ou une question sur mon travail, écrivez-moi.</p>
+          <p>Je cherche un stage de fin d’études de 6 mois à partir de janvier 2027, en actuariat, en modélisation des risques ou en data science. Pour un stage, un projet ou une question sur mon travail, écrivez-moi.</p>
           <dl class="contact__list">
             <div><dt>E-mail</dt><dd><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></dd></div>
-            <div><dt>Téléphone</dt><dd><a href="tel:+21696919365">+216 96 919 365</a></dd></div>
+            <div><dt>Téléphone</dt><dd><a href="tel:+21696919365">+216 96 919 365</a></dd></div>
             <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/selmi-yassine-437503311/">selmi-yassine</a></dd></div>
             <div><dt>GitHub</dt><dd><a href="https://github.com/selyassine">selyassine</a></dd></div>
             <div><dt>CV</dt><dd><a href="assets/CV_Yassine_Selmi.pdf" download>Télécharger le PDF</a></dd></div>
@@ -613,8 +640,8 @@
             <textarea id="f-message" name="message" rows="6" required></textarea>
           </div>
           <p class="form__error" id="form-error" role="alert" hidden>Remplissez le nom, le sujet et le message.</p>
-          <button class="btn btn--primary" type="submit">Préparer l'e-mail</button>
-          <p class="form__hint">Votre messagerie s'ouvre avec le message déjà rempli, prêt à être envoyé à selmi.yassine@esprit.tn.</p>
+          <button class="btn btn--primary" type="submit">Préparer l’e-mail</button>
+          <p class="form__hint">Votre messagerie s’ouvre avec le message déjà rempli, prêt à être envoyé à selmi.yassine@esprit.tn.</p>
         </form>
       </div>
     </section>
@@ -626,9 +653,9 @@
     <header class="bot__head">
       <div>
         <h2 id="bot-title">Assistant du portfolio</h2>
-        <p>Réponses préparées, tirées de ce site. Aucun modèle de langage : rien n'est inventé.</p>
+        <p>Réponses préparées, tirées de ce site. Aucun modèle de langage : rien n’est inventé.</p>
       </div>
-      <button class="bot__close" id="bot-close" type="button" aria-label="Fermer l'assistant">Fermer</button>
+      <button class="bot__close" id="bot-close" type="button" aria-label="Fermer l’assistant">Fermer</button>
     </header>
     <div class="bot__log" id="bot-log" role="log" aria-live="polite"></div>
     <div class="bot__chips" id="bot-chips"></div>

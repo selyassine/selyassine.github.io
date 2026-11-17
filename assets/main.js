@@ -25,25 +25,35 @@
     alive: "Share of annuitants still alive", aliveKey: "solid line: reduced mortality, dashed: base",
     renteTitle: "Share of annuitants still alive over the years, under base mortality and reduced mortality.",
     yr: t => "yr " + t, eclHead: "Expected loss per year, in €k", eclKey: "light bar: stage 1, all bars: stage 2",
-    eclTitle: "Expected loss for each year of the loan's life. Stage 1 counts only the first year, stage 2 all years.",
+    eclTitle: "Expected loss for each year of the loan’s life. Stage 1 counts only the first year, stage 2 all years.",
     projects: n => n + (n > 1 ? " projects" : " project"),
+    toLight: "Switch to light theme", toDark: "Switch to dark theme",
+    prev: "Previous", next: "Next", close: "Close", of: (i, n) => i + " of " + n,
   } : {
-    today: "aujourd'hui", years: t => "+" + t + " ans",
+    today: "aujourd’hui", years: t => "+" + t + " ans",
     sim: (m, a, b) => `Dans 25 ans : indice médian de <strong>${m}</strong>, et 90 % des scénarios entre ${a} et ${b}.`,
     origin: "Survenance", dev: j => "Dév. " + j, ultimate: "Ultime", factor: "Facteur",
     cell: (y, j) => `Survenance ${y}, développement ${j}`,
     layer: "tranche",
-    xlTitle: "Probabilité qu'un sinistre au-delà du seuil dépasse un montant donné, avec la tranche réassurée en surbrillance.",
+    xlTitle: "Probabilité qu’un sinistre au-delà du seuil dépasse un montant donné, avec la tranche réassurée en surbrillance.",
     age: a => a + " ans", yrs: n => n + (n > 1 ? " ans" : " an"),
     alive: "Part des rentiers encore en vie", aliveKey: "trait plein : mortalité abaissée, pointillé : base",
     renteTitle: "Part des rentiers encore en vie au fil des années, avec la mortalité de base et la mortalité abaissée.",
     yr: t => "an " + t, eclHead: "Perte attendue par année, en k€", eclKey: "barre claire : stade 1, toutes les barres : stade 2",
     eclTitle: "Perte attendue par année de vie du prêt. Le stade 1 ne compte que la première année, le stade 2 toutes les années.",
     projects: n => n + (n > 1 ? " projets" : " projet"),
+    toLight: "Passer au thème clair", toDark: "Passer au thème sombre",
+    prev: "Précédente", next: "Suivante", close: "Fermer", of: (i, n) => i + " sur " + n,
   };
   const f0 = nf(0), f1 = nf(1), f2 = nf(2), f3 = nf(3);
   const sg = v => f1.format(v).replace("-", "−");
   const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  // "#F2B544" et 0.2 donnent "rgba(242, 181, 68, 0.2)" : le canvas ne lit pas les variables CSS.
+  const alpha = (hex, a) => {
+    const h = hex.replace("#", "");
+    const v = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
+    return `rgba(${parseInt(v.slice(0, 2), 16)}, ${parseInt(v.slice(2, 4), 16)}, ${parseInt(v.slice(4, 6), 16)}, ${a})`;
+  };
 
   /* ================= Simulation d'ouverture =================
      Marche aléatoire avec dérive : k(t+1) = k(t) + d + s·e, e ~ N(0,1).
@@ -94,13 +104,15 @@
       const padL = 8, padR = 8, padT = 10, padB = 28;
       const X = t => padL + (t / T) * (w - padL - padR);
       const Y = v => padT + ((hi - v) / (hi - lo)) * (h - padT - padB);
-      const brass = css("--brass"), mist = css("--mist"), line = css("--line"), paper = css("--paper");
+      const brass = css("--proj"), mist = css("--faint"), line = css("--line"), paper = css("--text");
 
       // repères temporels
       ctx.font = "13px " + css("--sans");
       ctx.fillStyle = mist; ctx.strokeStyle = line; ctx.lineWidth = 1;
       for (let t = 0; t <= T; t += 5) {
         ctx.beginPath(); ctx.moveTo(X(t), padT); ctx.lineTo(X(t), h - padB); ctx.stroke();
+        // Sur un écran étroit, une date sur deux pour qu'elles ne se chevauchent pas
+        if (w < 560 && t % 10 !== 0) continue;
         ctx.textAlign = t === 0 ? "left" : t === T ? "right" : "center";
         ctx.fillText(t === 0 ? TXT.today : TXT.years(t), X(t), h - 8);
       }
@@ -113,10 +125,10 @@
       ctx.beginPath();
       for (let t = 0; t <= T; t++) ctx.lineTo(X(t), Y(q95[t]));
       for (let t = T; t >= 0; t--) ctx.lineTo(X(t), Y(q05[t]));
-      ctx.closePath(); ctx.fillStyle = "rgba(200, 163, 90, .13)"; ctx.fill();
+      ctx.closePath(); ctx.fillStyle = alpha(brass, .14); ctx.fill();
 
       // trajectoires
-      ctx.strokeStyle = "rgba(200, 163, 90, .16)"; ctx.lineWidth = 1;
+      ctx.strokeStyle = alpha(brass, .17); ctx.lineWidth = 1;
       for (let i = 0; i < DRAWN; i++) {
         ctx.beginPath();
         for (let t = 0; t <= T; t++) ctx.lineTo(X(t), Y(paths[i][t]));
@@ -160,7 +172,7 @@
     let resizeTimer;
     window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => paths && draw(1), 120); });
     play();
-    return { play };
+    return { play, redraw: () => paths && draw(1) };
   })();
 
   /* ================= Graphiques du laboratoire (SVG) ================= */
@@ -409,12 +421,39 @@
   if (chips.length) filter("tous");
 
   /* ================= Projets : galeries de trois images =================
-     Une miniature remplace la grande image ; sans script, elle ouvre l'image. */
+     Une miniature remplace la grande image ; la grande image ouvre la visionneuse.
+     Sans script, les liens ouvrent simplement les images. */
+  const box = document.createElement("dialog");
+  box.className = "lightbox";
+  box.innerHTML = `<figure class="lightbox__fig"><img class="lightbox__img" alt="">
+    <figcaption class="lightbox__bar"><span class="lightbox__cap"></span><span class="lightbox__count"></span>
+    <button type="button" data-step="-1">${TXT.prev}</button><button type="button" data-step="1">${TXT.next}</button>
+    <button type="button" data-close>${TXT.close}</button></figcaption></figure>`;
+  document.body.appendChild(box);
+  const boxImg = box.querySelector("img"), boxCap = box.querySelector(".lightbox__cap"), boxCount = box.querySelector(".lightbox__count");
+  let boxItems = [], boxIndex = 0;
+  function showInBox(i) {
+    boxIndex = (i + boxItems.length) % boxItems.length;
+    const t = boxItems[boxIndex];
+    boxImg.src = t.href; boxImg.alt = t.dataset.caption;
+    boxCap.textContent = t.dataset.caption;
+    boxCount.textContent = TXT.of(boxIndex + 1, boxItems.length);
+  }
+  box.addEventListener("click", e => {
+    const step = e.target.closest("[data-step]");
+    if (step) showInBox(boxIndex + Number(step.dataset.step));
+    else if (e.target.closest("[data-close]") || e.target === box) box.close();
+  });
+  box.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") showInBox(boxIndex + 1);
+    if (e.key === "ArrowLeft") showInBox(boxIndex - 1);
+  });
+
   document.querySelectorAll(".gallery").forEach(g => {
     const main = g.querySelector(".gallery__main");
     const img = main.querySelector("img");
     const cap = g.querySelector(".gallery__caption");
-    const thumbs = g.querySelectorAll(".gallery__thumb");
+    const thumbs = Array.from(g.querySelectorAll(".gallery__thumb"));
     thumbs.forEach(t => t.addEventListener("click", e => {
       e.preventDefault();
       thumbs.forEach(o => o.removeAttribute("aria-current"));
@@ -422,37 +461,66 @@
       main.href = img.src = t.href;
       img.alt = cap.textContent = t.dataset.caption;
     }));
+    main.addEventListener("click", e => {
+      if (typeof box.showModal !== "function") return;
+      e.preventDefault();
+      boxItems = thumbs;
+      showInBox(thumbs.findIndex(t => t.getAttribute("aria-current") === "true"));
+      box.showModal();
+    });
   });
+
+  /* ================= Thème clair ou sombre =================
+     Suit le réglage de l'appareil, sauf si le visiteur a choisi ; le choix est retenu. */
+  const themeBtn = $("theme-toggle");
+  const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+  const currentTheme = () => document.documentElement.dataset.theme || (systemLight.matches ? "light" : "dark");
+  function syncTheme() {
+    if (themeBtn) {
+      const light = currentTheme() === "light";
+      themeBtn.setAttribute("aria-label", light ? TXT.toDark : TXT.toLight);
+      themeBtn.title = themeBtn.getAttribute("aria-label");
+    }
+    if (sim) sim.redraw();
+  }
+  if (themeBtn) themeBtn.addEventListener("click", () => {
+    const next = currentTheme() === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) { /* stockage indisponible : le choix vaut pour la visite */ }
+    syncTheme();
+  });
+  systemLight.addEventListener("change", () => { if (!document.documentElement.dataset.theme) syncTheme(); });
+  syncTheme();
 
   /* ================= Assistant =================
      Recherche par mots-clés dans des réponses préparées. Aucun modèle de langage, aucun appel réseau. */
   const KB_FR = [
     { k: "disponible disponibilite quand stage debut date commencer pfe fin etudes duree recherche cherche poste",
-      a: "<p>Je cherche un <strong>stage de fin d'études de 6 mois, à partir de janvier 2027</strong>, en actuariat, en modélisation des risques ou en data science.</p><p>Le plus simple est de m'écrire : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
+      a: "<p>Je cherche un <strong>stage de fin d’études de 6 mois, à partir de janvier 2027</strong>, en actuariat, en modélisation des risques ou en data science.</p><p>Le plus simple est de m’écrire : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
     { k: "qui es tu presente presentation profil yassine resume bref",
-      a: "<p>Je suis Yassine Selmi, élève ingénieur en data science à ESPRIT (Tunis) et étudiant en Master Actuariat à Le Mans Université. Les deux diplômes sont attendus en 2027.</p><p>Je construis des outils d'IFRS 17, de provisionnement et de tarification où le code calcule, où le modèle de langage explique, et où chaque chiffre est vérifié.</p>" },
+      a: "<p>Je suis Yassine Selmi, élève ingénieur en data science à ESPRIT (Tunis) et étudiant en Master Actuariat à Le Mans Université. Les deux diplômes sont attendus en 2027.</p><p>Je construis des outils d’IFRS 17, de provisionnement et de tarification où le code calcule, où le modèle de langage explique, et où chaque chiffre est vérifié.</p>" },
     { k: "formation etudes diplome ecole universite master esprit mans ingenieur bac cursus",
       a: "<p><strong>Master Actuariat</strong>, Le Mans Université, en double diplôme avec ESPRIT (2025 à 2027) : tarification, provisionnement, valeurs extrêmes, Solvabilité II, IFRS 17.</p><p><strong>Cycle ingénieur en data science</strong>, ESPRIT, Tunis (2022 à 2027). Baccalauréat mathématiques, mention bien (2021).</p>" },
     { k: "competence competences technique outils langage python r sql stack sais savoir maitrise",
       a: "<p><strong>Actuariat</strong> : tarification GLM, provisionnement (Chain Ladder, Mack, Bornhuetter-Ferguson, bootstrap), valeurs extrêmes, réassurance XL, Solvabilité II, IFRS 17 et IFRS 9.</p><p><strong>Data et outils</strong> : R, Python, SQL, machine learning, LLM et RAG, Shiny, Quarto, FastAPI, Docker, Git.</p><p>Le détail est dans la section <a href='#competences'>Compétences</a>.</p>" },
     { k: "ifrs 17 copilot csm marge note agent rag langgraph multi llm",
-      a: "<p><strong>IFRS 17 Copilot</strong> est un copilote multi-agent : il lit un dossier d'assurance, calcule la marge sur services contractuels et le passif pour sinistres survenus, puis rédige une note citée et vérifiée, soumise à validation humaine.</p><p>Résultat clé : 50 dossiers sur 50 identiques au centime à un script R indépendant. <a href='https://github.com/selyassine/ifrs17-copilot'>Voir le code</a>.</p>" },
+      a: "<p><strong>IFRS 17 Copilot</strong> est un copilote multi-agent : il lit un dossier d’assurance, calcule la marge sur services contractuels et le passif pour sinistres survenus, puis rédige une note citée et vérifiée, soumise à validation humaine.</p><p>Résultat clé : 50 dossiers sur 50 identiques au centime à un script R indépendant. <a href='https://github.com/selyassine/ifrs17-copilot'>Voir le code</a>.</p>" },
     { k: "ecl9 ifrs 9 credit risque pd lgd ead provision freddie lightgbm logistique banque ecl",
-      a: "<p><strong>ecl9</strong> répond à une question : le machine learning change-t-il la provision IFRS 9 ? Sur les prêts Freddie Mac, entraînés avant 2006 et testés sur la crise, LightGBM provisionne 49 % de plus que la régression logistique au 31/12/2007. Mais les deux modèles ne couvrent que 9 à 13 % des pertes constatées ensuite.</p><p><a href='https://selyassine.github.io/ecl9/'>Lire la note</a> ou <a href='https://github.com/selyassine/ecl9'>voir le code</a>. J'ai aussi fait un stage en risque de crédit IFRS 9 à ESPRIT (pôle RDI) à l'été 2026.</p>" },
+      a: "<p><strong>ecl9</strong> répond à une question : le machine learning change-t-il la provision IFRS 9 ? Sur les prêts Freddie Mac, entraînés avant 2006 et testés sur la crise, LightGBM provisionne 49 % de plus que la régression logistique au 31/12/2007. Mais les deux modèles ne couvrent que 9 à 13 % des pertes constatées ensuite.</p><p><a href='https://selyassine.github.io/ecl9/'>Lire la note</a> ou <a href='https://github.com/selyassine/ecl9'>voir le code</a>. J’ai aussi fait un stage en risque de crédit IFRS 9 à ESPRIT (pôle RDI) à l’été 2026.</p>" },
     { k: "climatxl climat reassurance catastrophe gpd valeurs extremes noaa tranche xl shiny evt",
-      a: "<p><strong>climatXL</strong> demande si le climat rend la réassurance catastrophe plus chère. Sur les dommages NOAA 1996-2024, la prime d'une tranche 5 Md$ xs 10 Md$ augmenterait de 27 % d'ici 2035, mais l'intervalle va de −59 % à +142 % : l'effet n'est pas démontré, et c'est la conclusion du rapport.</p><p><a href='https://selyassine.github.io/climatXL/'>Lire le rapport</a>, <a href='https://climatxl.shinyapps.io/climatXL/'>ouvrir l'application</a> ou essayer la tranche XL dans le <a href='#laboratoire'>laboratoire</a>.</p>" },
+      a: "<p><strong>climatXL</strong> demande si le climat rend la réassurance catastrophe plus chère. Sur les dommages NOAA 1996-2024, la prime d’une tranche 5 Md$ xs 10 Md$ augmenterait de 27 % d’ici 2035, mais l’intervalle va de −59 % à +142 % : l’effet n’est pas démontré, et c’est la conclusion du rapport.</p><p><a href='https://selyassine.github.io/climatXL/'>Lire le rapport</a>, <a href='https://climatxl.shinyapps.io/climatXL/'>ouvrir l’application</a> ou essayer la tranche XL dans le <a href='#laboratoire'>laboratoire</a>.</p>" },
     { k: "siap non vie auto tarification glm fraude ibnr yolo vision dommages plateforme excel",
-      a: "<p><strong>SIAP</strong> est une plateforme d'assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude (AUC 0,82), IBNR par Chain Ladder, Mack et bootstrap, expertise de dommages par vision. <a href='https://github.com/selyassine/SIAP'>Voir le code</a>.</p>" },
+      a: "<p><strong>SIAP</strong> est une plateforme d’assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude (AUC 0,82), IBNR par Chain Ladder, Mack et bootstrap, expertise de dommages par vision. <a href='https://github.com/selyassine/SIAP'>Voir le code</a>.</p>" },
     { k: "vita vitaai vie mortalite lee carter scr solvabilite longevite rente alm orsa",
-      a: "<p><strong>VitaAI</strong> simule une compagnie d'assurance-vie en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité à 99,5 %, ALM et ORSA. <a href='https://github.com/selyassine/VITA'>Voir le code</a>.</p><p>Sur le même thème, un projet de groupe du master mesure le coût de la longévité sur une rente : la génération 1950 coûte 5,25 % de plus que celle de 1935.</p>" },
+      a: "<p><strong>VitaAI</strong> simule une compagnie d’assurance-vie en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité à 99,5 %, ALM et ORSA. <a href='https://github.com/selyassine/VITA'>Voir le code</a>.</p><p>Sur le même thème, un projet de groupe du master mesure le coût de la longévité sur une rente : la génération 1950 coûte 5,25 % de plus que celle de 1935.</p>" },
     { k: "claude actuaire skill moteur calcul banc essai mack",
-      a: "<p><strong>claude_actuaire</strong> est un moteur de calcul actuariel livré comme skill pour Claude. Les calculs sont faits par des scripts Python testés contre des résultats publiés : 59 valeurs justes sur 59 au banc d'essai, contre 47 sans code. <a href='https://github.com/selyassine/claude_actuaire'>Voir le code</a>.</p>" },
+      a: "<p><strong>claude_actuaire</strong> est un moteur de calcul actuariel livré comme skill pour Claude. Les calculs sont faits par des scripts Python testés contre des résultats publiés : 59 valeurs justes sur 59 au banc d’essai, contre 47 sans code. <a href='https://github.com/selyassine/claude_actuaire'>Voir le code</a>.</p>" },
     { k: "quant quantai trading finance portefeuille markowitz bourse mlops titanic pipeline jenkins docker",
       a: "<p><strong>QuantAI</strong> est une plateforme de paper trading : ensemble LightGBM, LSTM et Transformer, optimisation Markowitz et Black-Litterman, agent soumis à validation humaine. <strong>Titanic MLOps</strong> est un pipeline CI/CD complet (GitHub Actions, GHCR, Jenkins, Prefect).</p><p>Les deux sont dans la section <a href='#projets'>Projets</a>, filtre « Data et IA ».</p>" },
     { k: "projet projets realisation travaux meilleur principal github portfolio",
       a: "<p>Trois études répondent chacune à une question : <strong>IFRS 17 Copilot</strong>, <strong>ecl9</strong> (IFRS 9) et <strong>climatXL</strong> (réassurance et climat). Viennent ensuite SIAP, VitaAI, claude_actuaire, un projet longévité, QuantAI et un pipeline MLOps.</p><p>Tout est dans la section <a href='#projets'>Projets</a>, avec un filtre par domaine. Demandez-moi un projet par son nom pour le détail.</p>" },
     { k: "certification certifications certificat nvidia hedera sas aig forage datacamp 365",
-      a: "<p>Onze certifications et attestations : cinq NVIDIA Deep Learning Institute (RAG, NLP, détection d'anomalies, LLM), trois Hedera, Credit Risk Modeling in Python (365 Financial Analyst), AIG Actuarial Analyst Job Simulation (Forage) et Foundations of Insurance and the IFRS 17 Standard (SAS).</p><p>La liste datée est dans la section <a href='#certifications'>Certifications</a>.</p>" },
+      a: "<p>Onze certifications et attestations : cinq NVIDIA Deep Learning Institute (RAG, NLP, détection d’anomalies, LLM), trois Hedera, Credit Risk Modeling in Python (365 Financial Analyst), AIG Actuarial Analyst Job Simulation (Forage) et Foundations of Insurance and the IFRS 17 Standard (SAS).</p><p>La liste datée est dans la section <a href='#certifications'>Certifications</a>.</p>" },
     { k: "langue langues anglais francais arabe english parle niveau",
       a: "<p>Arabe : langue maternelle. Français : B2, mes études sont en français. Anglais : B2.</p>" },
     { k: "contact contacter email mail telephone numero linkedin joindre ecrire appeler",
@@ -460,11 +528,11 @@
     { k: "cv curriculum telecharger pdf resume",
       a: "<p>Mon CV est ici : <a href='" + BASE + "assets/CV_Yassine_Selmi.pdf' download>télécharger le PDF</a>.</p>" },
     { k: "experience stage stages entreprise travail professionnel nour telecom poste rdi",
-      a: "<p><strong>Été 2026</strong> : stage en risque de crédit IFRS 9 à ESPRIT (pôle RDI), estimation de la PD, de la LGD et de l'EAD et calcul de l'ECL par stade.</p><p><strong>Été 2025</strong> : stage data science et IA chez Nour Expert Telecom, modèle NLP CamemBERT mis en production (FastAPI, Docker, CI/CD).</p><p><strong>Juin 2024</strong> : stage d'observation à La Poste Tunisienne.</p>" },
+      a: "<p><strong>Été 2026</strong> : stage en risque de crédit IFRS 9 à ESPRIT (pôle RDI), estimation de la PD, de la LGD et de l’EAD et calcul de l’ECL par stade.</p><p><strong>Été 2025</strong> : stage data science et IA chez Nour Expert Telecom, modèle NLP CamemBERT mis en production (FastAPI, Docker, CI/CD).</p><p><strong>Juin 2024</strong> : stage d’observation à La Poste Tunisienne.</p>" },
     { k: "methode verifier verification validation rigueur fiable confiance test tests qualite erreur",
-      a: "<p>Trois habitudes : je reproduis d'abord un résultat publié (Mack 1993, McNeil 1997) et je fais recalculer par un second code indépendant ; je publie aussi les résultats négatifs ; et dans mes outils d'IA, le modèle de langage ne calcule jamais, chaque chiffre sort d'un code testé.</p><p>Voir la section <a href='#methode'>Méthode</a>.</p>" },
+      a: "<p>Trois habitudes : je reproduis d’abord un résultat publié (Mack 1993, McNeil 1997) et je fais recalculer par un second code indépendant ; je publie aussi les résultats négatifs ; et dans mes outils d’IA, le modèle de langage ne calcule jamais, chaque chiffre sort d’un code testé.</p><p>Voir la section <a href='#methode'>Méthode</a>.</p>" },
     { k: "laboratoire calcul calculer simulateur simulation interactif essayer chain ladder triangle demo",
-      a: "<p>Le <a href='#laboratoire'>laboratoire</a> fait tourner quatre calculs dans cette page : un triangle Chain Ladder modifiable, la prime d'une tranche XL sous loi GPD, le coût de la longévité sur une rente, et l'effet de falaise IFRS 9 entre stade 1 et stade 2.</p>" },
+      a: "<p>Le <a href='#laboratoire'>laboratoire</a> fait tourner quatre calculs dans cette page : un triangle Chain Ladder modifiable, la prime d’une tranche XL sous loi GPD, le coût de la longévité sur une rente, et l’effet de falaise IFRS 9 entre stade 1 et stade 2.</p>" },
     { k: "ou habite ville pays tunis tunisie localisation mobilite europe france deplacer",
       a: "<p>Je suis basé à Tunis, en Tunisie. Pour toute question de lieu ou de modalités de stage, écrivez-moi : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
     { k: "bonjour salut hello bonsoir hey coucou",
@@ -490,7 +558,7 @@
     { k: "siap non life motor pricing glm fraud ibnr yolo vision damage platform excel",
       a: "<p><strong>SIAP</strong> is a non-life insurance platform: GLM and LightGBM pricing on 678,000 policies, fraud detection (AUC 0.82), IBNR by Chain Ladder, Mack and bootstrap, and damage assessment by computer vision. <a href='https://github.com/selyassine/SIAP'>See the code</a>.</p>" },
     { k: "vita vitaai life mortality lee carter scr solvency longevity annuity alm orsa",
-      a: "<p><strong>VitaAI</strong> simulates a life insurer in 15 modules: Lee-Carter mortality, reserves, SCR on EIOPA curves, 99.5% longevity VaR, ALM and ORSA. <a href='https://github.com/selyassine/VITA'>See the code</a>.</p><p>On the same theme, a group project of the master's measures the cost of longevity on an annuity: the 1950 generation costs 5.25% more than the 1935 one.</p>" },
+      a: "<p><strong>VitaAI</strong> simulates a life insurer in 15 modules: Lee-Carter mortality, reserves, SCR on EIOPA curves, 99.5% longevity VaR, ALM and ORSA. <a href='https://github.com/selyassine/VITA'>See the code</a>.</p><p>On the same theme, a group project of the master’s measures the cost of longevity on an annuity: the 1950 generation costs 5.25% more than the 1935 one.</p>" },
     { k: "claude actuaire skill engine calculation benchmark mack",
       a: "<p><strong>claude_actuaire</strong> is an actuarial calculation engine shipped as a skill for Claude. Calculations are done by Python scripts tested against published results: 59 correct values out of 59 on the benchmark, against 47 without code. <a href='https://github.com/selyassine/claude_actuaire'>See the code</a>.</p>" },
     { k: "quant quantai trading finance portfolio markowitz stock mlops titanic pipeline jenkins docker",
@@ -516,18 +584,18 @@
     { k: "hello hi hey greetings morning evening",
       a: "<p>Hello. Ask me about my background, my projects, my skills or my availability.</p>" },
     { k: "thanks thank great perfect cheers",
-      a: "<p>You're welcome. To take it further, write to me: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
+      a: "<p>You’re welcome. To take it further, write to me: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>" },
   ];
   const KB = EN ? KB_EN : KB_FR;
   const SUGGESTIONS = EN
     ? ["When are you available?", "What is your best project?", "How do you check your calculations?", "Tell me about ecl9", "How can I contact you?"]
-    : ["Quand es-tu disponible ?", "Quel est ton meilleur projet ?", "Comment vérifies-tu tes calculs ?", "Parle-moi d'ecl9", "Comment te contacter ?"];
+    : ["Quand es-tu disponible ?", "Quel est ton meilleur projet ?", "Comment vérifies-tu tes calculs ?", "Parle-moi d’ecl9", "Comment te contacter ?"];
   const BOT = EN ? {
-    hello: "<p>Hello, I am this portfolio's assistant. Ask about Yassine's background, projects or availability. I answer on his behalf, from the content of this site.</p>",
+    hello: "<p>Hello, I am this portfolio’s assistant. Ask about Yassine’s background, projects or availability. I answer on his behalf, from the content of this site.</p>",
     none: "<p>I have no prepared answer to that question, and I would rather not make one up.</p><p>Try one of the suggested questions, or write to me directly: <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>",
   } : {
-    hello: "<p>Bonjour, je suis l'assistant de ce portfolio. Posez une question sur le parcours, les projets ou la disponibilité de Yassine. Je réponds à sa place, à partir du contenu de ce site.</p>",
-    none: "<p>Je n'ai pas de réponse préparée à cette question, et je préfère ne rien inventer.</p><p>Essayez une des questions proposées, ou écrivez-moi directement : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>",
+    hello: "<p>Bonjour, je suis l’assistant de ce portfolio. Posez une question sur le parcours, les projets ou la disponibilité de Yassine. Je réponds à sa place, à partir du contenu de ce site.</p>",
+    none: "<p>Je n’ai pas de réponse préparée à cette question, et je préfère ne rien inventer.</p><p>Essayez une des questions proposées, ou écrivez-moi directement : <a href='mailto:selmi.yassine@esprit.tn'>selmi.yassine@esprit.tn</a>.</p>",
   };
   const STOP = new Set((EN
     ? "the a an of to in on for with and or is are am was be do does did you your yours me my i we us it its this that what which who how can could would will have has had at by from as not no so if tell about please s t m re d ll ve"
@@ -590,7 +658,10 @@
 
   /* ================= Navigation ================= */
   const nav = document.querySelector(".nav");
-  const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  const onScroll = () => {
+    nav.classList.toggle("is-scrolled", window.scrollY > 8);
+    if (botToggle) botToggle.classList.toggle("is-visible", window.scrollY > window.innerHeight * .6);
+  };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
