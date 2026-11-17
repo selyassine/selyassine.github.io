@@ -21,7 +21,7 @@
   <link rel="preload" href="assets/fonts/lmroman17-regular.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="assets/fonts/inter-400.woff" as="font" type="font/woff" crossorigin>
   <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="stylesheet" href="assets/style.css?v=20261117b">
+  <link rel="stylesheet" href="assets/style.css?v=20261117c">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Yassine Selmi","jobTitle":"Élève ingénieur data science et étudiant en actuariat","url":"https://selyassine.github.io/","email":"mailto:selmi.yassine@esprit.tn","address":{"@type":"PostalAddress","addressLocality":"Tunis","addressCountry":"TN"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"ESPRIT"},{"@type":"CollegeOrUniversity","name":"Le Mans Université"}],"sameAs":["https://github.com/selyassine","https://www.linkedin.com/in/selmi-yassine-437503311/"]}
   </script>
@@ -54,29 +54,27 @@
     <section class="hero" aria-labelledby="titre">
       <div class="wrap hero__grid">
         <div class="hero__text">
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>Disponible dès janvier 2027</p>
-          <h1 id="titre">Je relie l’actuariat et l’IA, et je vérifie chaque chiffre.</h1>
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>Disponible pour un stage de fin d’études de 6 mois, à partir de janvier 2027</p>
+          <h1 id="titre">Je relie le calcul actuariel et l’intelligence artificielle, et je vérifie chaque chiffre.</h1>
           <p class="lead">Élève ingénieur en data science à <strong>ESPRIT</strong> et étudiant en <strong>Master Actuariat à Le Mans Université</strong>. Je construis des outils d’IFRS 17, de provisionnement et de tarification où le code calcule et où le modèle de langage explique.</p>
           <div class="actions">
-            <a class="btn btn--primary" href="assets/CV_Yassine_Selmi.pdf" download>Télécharger mon CV</a>
-            <a class="btn btn--ghost" href="#projets">Voir mes projets</a>
-            <a class="btn btn--quiet" href="#contact">Me contacter</a>
+            <a class="btn btn--primary" href="#projets">Voir mes projets</a>
+            <a class="btn btn--ghost" href="assets/CV_Yassine_Selmi.pdf" download>Télécharger mon CV</a>
           </div>
+          <ul class="links" aria-label="Profils en ligne">
+            <li><a href="https://github.com/selyassine" rel="me">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/selmi-yassine-437503311/" rel="me">LinkedIn</a></li>
+            <li><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></li>
+          </ul>
         </div>
-        <aside class="idcard" aria-labelledby="idcard-title">
-          <div class="idcard__head">
-            <img class="idcard__photo" src="assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait de Yassine Selmi" fetchpriority="high">
-            <div>
-              <p class="idcard__name">Yassine Selmi</p>
-              <p class="idcard__place">Tunis, diplômes en 2027</p>
-              <p class="idcard__links"><a href="https://www.linkedin.com/in/selmi-yassine-437503311/" rel="me">LinkedIn</a><a href="https://github.com/selyassine" rel="me">GitHub</a><a href="mailto:selmi.yassine@esprit.tn">E-mail</a></p>
-            </div>
+        <aside class="idcard" aria-label="En bref">
+          <img class="idcard__photo" src="assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait de Yassine Selmi" fetchpriority="high">
+          <div class="idcard__body">
+            <p class="idcard__name">Yassine Selmi</p>
+            <p class="idcard__place">Tunis, diplômes en 2027</p>
           </div>
-          <h2 class="idcard__title" id="idcard-title">En 30 secondes</h2>
           <dl class="idcard__facts">
-            <div><dt>Je cherche</dt><dd>Un stage de fin d’études de 6 mois, à partir de janvier 2027</dd></div>
-            <div><dt>Spécialités</dt><dd>IFRS 17 et IFRS 9, provisionnement, tarification, réassurance</dd></div>
-            <div><dt>Outils</dt><dd>Python, R, SQL, machine learning, LLM</dd></div>
+            <div><dt>Formation</dt><dd>Ingénieur data science, ESPRIT<br>Master Actuariat, Le Mans Université</dd></div>
             <div><dt>Langues</dt><dd>Arabe, français (B2), anglais (B2)</dd></div>
           </dl>
         </aside>
@@ -84,13 +82,6 @@
 
       <!-- Le moment fort : 5 000 trajectoires simulées en direct -->
       <div class="wrap">
-        <ul class="proofs" aria-label="Chiffres vérifiables, chacun relié au dépôt qui le calcule">
-          <li><a href="https://github.com/selyassine/ifrs17-copilot"><span class="proof__value">50 / 50</span><span class="proof__label">dossiers IFRS 17 recalculés au centime par un script R indépendant</span><span class="proof__src">Source : IFRS 17 Copilot</span></a></li>
-          <li><a href="https://github.com/selyassine/claude_actuaire"><span class="proof__value">59 / 59</span><span class="proof__label">valeurs publiées retrouvées (Mack 1993, McNeil 1997)</span><span class="proof__src">Source : claude_actuaire</span></a></li>
-          <li><a href="https://github.com/selyassine/ecl9"><span class="proof__value">+41 %</span><span class="proof__label">de provision IFRS 9 avec LightGBM au 31 décembre 2007</span><span class="proof__src">Source : ecl9</span></a></li>
-          <li><a href="https://github.com/selyassine/SIAP"><span class="proof__value">678 000</span><span class="proof__label">polices tarifées par GLM et LightGBM</span><span class="proof__src">Source : SIAP</span></a></li>
-        </ul>
-
         <figure class="sim" id="sim">
           <figcaption class="sim__head">
             <h2 class="sim__title">5 000 scénarios de mortalité, simulés à l’instant dans votre navigateur</h2>
@@ -107,6 +98,13 @@
             <button class="replay" id="sim-replay" type="button">Tirer 5 000 nouveaux scénarios</button>
           </div>
         </figure>
+
+        <ul class="proofs" aria-label="Chiffres vérifiables, chacun relié au dépôt qui le calcule">
+          <li><a href="https://github.com/selyassine/ifrs17-copilot"><span class="proof__value">50 / 50</span><span class="proof__label">dossiers IFRS 17 recalculés au centime par un script R indépendant</span><span class="proof__src">Source : IFRS 17 Copilot</span></a></li>
+          <li><a href="https://github.com/selyassine/claude_actuaire"><span class="proof__value">59 / 59</span><span class="proof__label">valeurs publiées retrouvées (Mack 1993, McNeil 1997)</span><span class="proof__src">Source : claude_actuaire</span></a></li>
+          <li><a href="https://github.com/selyassine/ecl9"><span class="proof__value">+41 %</span><span class="proof__label">de provision IFRS 9 avec LightGBM au 31 décembre 2007</span><span class="proof__src">Source : ecl9</span></a></li>
+          <li><a href="https://github.com/selyassine/SIAP"><span class="proof__value">678 000</span><span class="proof__label">polices tarifées par GLM et LightGBM</span><span class="proof__src">Source : SIAP</span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -219,7 +217,6 @@
               </div>
               <figcaption class="gallery__caption">Tarification : prime recommandée</figcaption>
             </figure>
-            <p class="project__domain">Assurance non-vie</p>
             <h3><a href="https://github.com/selyassine/SIAP">SIAP</a></h3>
             <p>Plateforme d’assurance non-vie : tarification GLM et LightGBM sur 678 000 polices, détection de fraude (AUC 0,82), IBNR par Chain Ladder, Mack et Bootstrap, expertise de dommages par vision.</p>
             <p class="stack">LightGBM, XGBoost, YOLOv8, FastAPI, Next.js</p>
@@ -237,7 +234,6 @@
               </div>
               <figcaption class="gallery__caption">Accueil de la plateforme</figcaption>
             </figure>
-            <p class="project__domain">Assurance-vie</p>
             <h3><a href="https://github.com/selyassine/VITA">VitaAI</a></h3>
             <p>Une compagnie d’assurance-vie simulée en 15 modules : mortalité Lee-Carter, provisions, SCR sur courbes EIOPA, VaR de longévité à 99,5 %, ALM et ORSA.</p>
             <p class="stack">Python, pytest, Next.js</p>
@@ -255,7 +251,6 @@
               </div>
               <figcaption class="gallery__caption">Mack (1993) sur le triangle RAA</figcaption>
             </figure>
-            <p class="project__domain">Calcul actuariel</p>
             <h3><a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a></h3>
             <p>Un moteur de calcul actuariel livré comme skill pour Claude, testé contre des résultats publiés (Mack 1993, McNeil 1997) : 59 valeurs justes sur 59 au banc d’essai, contre 47 sans code.</p>
             <p class="stack">Python, pytest, GitHub Actions</p>
@@ -273,7 +268,6 @@
               </div>
               <figcaption class="gallery__caption">Paramètres Lee-Carter a(x), b(x), k(t)</figcaption>
             </figure>
-            <p class="project__domain">Assurance-vie</p>
             <h3><a href="https://github.com/selyassine/actuariat-vie-longevite">Risque de longévité</a></h3>
             <p>Projet de groupe du Master Actuariat : valeur actuelle probable d’une rente de 25 ans pour deux cohortes françaises. La génération 1950 coûte 5,25 % de plus que celle de 1935.</p>
             <p class="stack">R, StMoMo, R Markdown</p>
@@ -291,7 +285,6 @@
               </div>
               <figcaption class="gallery__caption">Backtesting : quatre stratégies comparées</figcaption>
             </figure>
-            <p class="project__domain">Finance quantitative</p>
             <h3><a href="https://github.com/selyassine/Quant">QuantAI</a></h3>
             <p>Trading quantitatif en paper trading : ensemble LightGBM, LSTM et Transformer, optimisation Markowitz et Black-Litterman, backtests, agent soumis à validation humaine.</p>
             <p class="stack">PyTorch, FastAPI, Celery, Next.js</p>
@@ -309,7 +302,6 @@
               </div>
               <figcaption class="gallery__caption">Étapes du pipeline, accuracy 0,87</figcaption>
             </figure>
-            <p class="project__domain">MLOps</p>
             <h3><a href="https://github.com/selyassine/Mlops">Titanic MLOps</a></h3>
             <p>Un pipeline CI/CD complet : à chaque push, le modèle est testé, conteneurisé, publié puis réentraîné et orchestré automatiquement.</p>
             <p class="stack">Docker, GitHub Actions, Jenkins, Prefect</p>
@@ -680,6 +672,6 @@
     </div>
   </footer>
 
-  <script src="assets/main.js?v=20261117b" defer></script>
+  <script src="assets/main.js?v=20261117c" defer></script>
 </body>
 </html>
