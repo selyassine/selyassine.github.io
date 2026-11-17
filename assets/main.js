@@ -27,7 +27,7 @@
     yr: t => "yr " + t, eclHead: "Expected loss per year, in €k", eclKey: "light bar: stage 1, all bars: stage 2",
     eclTitle: "Expected loss for each year of the loan’s life. Stage 1 counts only the first year, stage 2 all years.",
     projects: n => n + (n > 1 ? " projects" : " project"),
-    toLight: "Switch to light theme", toDark: "Switch to dark theme",
+    toLight: "Switch to light theme", toDark: "Switch to dark theme", light: "Light", dark: "Dark",
     prev: "Previous", next: "Next", close: "Close", of: (i, n) => i + " of " + n,
   } : {
     today: "aujourd’hui", years: t => "+" + t + " ans",
@@ -42,7 +42,7 @@
     yr: t => "an " + t, eclHead: "Perte attendue par année, en k€", eclKey: "barre claire : stade 1, toutes les barres : stade 2",
     eclTitle: "Perte attendue par année de vie du prêt. Le stade 1 ne compte que la première année, le stade 2 toutes les années.",
     projects: n => n + (n > 1 ? " projets" : " projet"),
-    toLight: "Passer au thème clair", toDark: "Passer au thème sombre",
+    toLight: "Passer au thème clair", toDark: "Passer au thème sombre", light: "Clair", dark: "Sombre",
     prev: "Précédente", next: "Suivante", close: "Fermer", of: (i, n) => i + " sur " + n,
   };
   const f0 = nf(0), f1 = nf(1), f2 = nf(2), f3 = nf(3);
@@ -471,16 +471,21 @@
   });
 
   /* ================= Thème clair ou sombre =================
-     Suit le réglage de l'appareil, sauf si le visiteur a choisi ; le choix est retenu. */
+     Suit le réglage de l'appareil, sauf si le visiteur a choisi ; le choix est retenu.
+     Le libellé du bouton annonce le thème vers lequel il bascule. */
   const themeBtn = $("theme-toggle");
-  const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+  const themeLabel = themeBtn && themeBtn.querySelector(".nav__theme-label");
+  const systemLight = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : { matches: false };
   const currentTheme = () => document.documentElement.dataset.theme || (systemLight.matches ? "light" : "dark");
   function syncTheme() {
+    const light = currentTheme() === "light";
     if (themeBtn) {
-      const light = currentTheme() === "light";
       themeBtn.setAttribute("aria-label", light ? TXT.toDark : TXT.toLight);
       themeBtn.title = themeBtn.getAttribute("aria-label");
+      if (themeLabel) themeLabel.textContent = light ? TXT.dark : TXT.light;
     }
+    const meta = document.querySelectorAll('meta[name="theme-color"]');
+    meta.forEach(m => m.setAttribute("content", light ? "#F5F7FA" : "#0B1420"));
     if (sim) sim.redraw();
   }
   if (themeBtn) themeBtn.addEventListener("click", () => {
@@ -489,7 +494,9 @@
     try { localStorage.setItem("theme", next); } catch (e) { /* stockage indisponible : le choix vaut pour la visite */ }
     syncTheme();
   });
-  systemLight.addEventListener("change", () => { if (!document.documentElement.dataset.theme) syncTheme(); });
+  const onSystemChange = () => { if (!document.documentElement.dataset.theme) syncTheme(); };
+  if (systemLight.addEventListener) systemLight.addEventListener("change", onSystemChange);
+  else if (systemLight.addListener) systemLight.addListener(onSystemChange);
   syncTheme();
 
   /* ================= Assistant =================
