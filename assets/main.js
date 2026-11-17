@@ -408,6 +408,22 @@
   chips.forEach(c => c.addEventListener("click", () => filter(c.dataset.filter)));
   if (chips.length) filter("tous");
 
+  /* ================= Projets : galeries de trois images =================
+     Une miniature remplace la grande image ; sans script, elle ouvre l'image. */
+  document.querySelectorAll(".gallery").forEach(g => {
+    const main = g.querySelector(".gallery__main");
+    const img = main.querySelector("img");
+    const cap = g.querySelector(".gallery__caption");
+    const thumbs = g.querySelectorAll(".gallery__thumb");
+    thumbs.forEach(t => t.addEventListener("click", e => {
+      e.preventDefault();
+      thumbs.forEach(o => o.removeAttribute("aria-current"));
+      t.setAttribute("aria-current", "true");
+      main.href = img.src = t.href;
+      img.alt = cap.textContent = t.dataset.caption;
+    }));
+  });
+
   /* ================= Assistant =================
      Recherche par mots-clés dans des réponses préparées. Aucun modèle de langage, aucun appel réseau. */
   const KB_FR = [
