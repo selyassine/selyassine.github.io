@@ -471,12 +471,12 @@
   });
 
   /* ================= Thème clair ou sombre =================
-     Suit le réglage de l'appareil, sauf si le visiteur a choisi ; le choix est retenu.
+     Clair par défaut (fixé sur la balise <html>) ; le choix du visiteur est retenu.
      Le libellé du bouton annonce le thème vers lequel il bascule. */
   const themeBtn = $("theme-toggle");
   const themeLabel = themeBtn && themeBtn.querySelector(".nav__theme-label");
   const systemLight = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : { matches: false };
-  const currentTheme = () => document.documentElement.dataset.theme || (systemLight.matches ? "light" : "dark");
+  const currentTheme = () => document.documentElement.dataset.theme || "light";
   function syncTheme() {
     const light = currentTheme() === "light";
     if (themeBtn) {

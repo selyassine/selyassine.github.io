@@ -4,13 +4,13 @@ Portfolio de **Yassine Selmi** : actuariat, data science et IA. En ligne sur [se
 
 - `index.html` : la page (présentation, projets, laboratoire, méthode, parcours, compétences, certifications, contact)
 - `en/index.html` : la même page en anglais ; le script détecte la langue de la page et adapte ses textes et ses formats de nombres
-- `assets/style.css` : styles, sur une grille de 12 colonnes commune à toutes les sections ; thème sombre et thème clair. Le code couleur suit le travail actuariel : bleu pour ce qui est observé ou choisi, ambre pour ce qui est projeté ou estimé
+- `assets/style.css` : styles, sur une grille de 12 colonnes commune à toutes les sections ; thème clair par défaut et thème sombre au choix. Le code couleur suit le travail actuariel : bleu pour ce qui est observé ou choisi, ambre pour ce qui est projeté ou estimé
 - `assets/main.js` : tout ce qui se calcule dans le navigateur
   - la simulation d'ouverture : 5 000 trajectoires d'une marche aléatoire avec dérive ;
   - le laboratoire : triangle Chain Ladder modifiable, tranche XL sous loi de Pareto généralisée, rente et choc de longévité, provision IFRS 9 en stade 1 et 2 ;
   - le filtre des projets par domaine ;
   - les galeries de projets (une miniature remplace la grande image, la grande image ouvre une visionneuse navigable au clavier) ;
-  - le choix du thème, qui suit le réglage de l'appareil tant que le visiteur n'a pas choisi ;
+  - le choix du thème : clair par défaut, sombre au choix, et le choix est retenu ;
   - l'assistant, qui cherche par mots-clés dans des réponses préparées (aucun modèle de langage, aucun appel réseau) ;
   - le formulaire, qui prépare un e-mail.
 - `assets/img/` : portrait et image de partage
