@@ -15,11 +15,12 @@
   <meta property="og:description" content="IFRS 17, reserving, Solvency II, machine learning and LLMs: projects, background and certifications.">
   <meta property="og:image" content="https://selyassine.github.io/assets/img/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#0F1E33">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1E33'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23C8A35A'%3EYS%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1420'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23F2B544'%3EYS%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0B1420" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F5F7FA" media="(prefers-color-scheme: light)">
+  <link rel="preload" href="../assets/fonts/lmroman17-regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-400.woff" as="font" type="font/woff" crossorigin>
+  <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="stylesheet" href="../assets/style.css">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Yassine Selmi","jobTitle":"Data science engineering student and actuarial science student","url":"https://selyassine.github.io/en/","email":"mailto:selmi.yassine@esprit.tn","address":{"@type":"PostalAddress","addressLocality":"Tunis","addressCountry":"TN"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"ESPRIT"},{"@type":"CollegeOrUniversity","name":"Le Mans Université"}],"sameAs":["https://github.com/selyassine","https://www.linkedin.com/in/selmi-yassine-437503311/"]}
@@ -44,6 +45,7 @@
           <li><a class="nav__cta" href="#contact">Contact me</a></li>
         </ul>
       </nav>
+      <button class="nav__theme" id="theme-toggle" type="button" aria-label="Switch to light theme"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
     </div>
   </header>
 
@@ -54,10 +56,9 @@
         <div class="hero__text">
           <p class="status"><span class="status__dot" aria-hidden="true"></span>Available for a 6-month final-year internship, starting January 2027</p>
           <h1 id="titre">I connect actuarial calculation with artificial intelligence, and I check every number.</h1>
-          <p class="lead">Data science engineering student at <strong>ESPRIT</strong> and <strong>MSc Actuarial Science student at Le Mans Université</strong>. I build IFRS 17, reserving and pricing tools where code does the calculation and the language model does the explaining.</p>
+          <p class="lead">Data science engineering student at <strong>ESPRIT</strong> and <strong>MSc Actuarial Science student at Le Mans Université</strong>. I build IFRS 17, reserving and pricing tools where code does the calculation and the language model does the explaining.</p>
           <div class="actions">
             <a class="btn btn--primary" href="#projets">See my projects</a>
-            <a class="btn btn--ghost" href="#laboratoire">Try the lab</a>
             <a class="btn btn--ghost" href="../assets/CV_Yassine_Selmi.pdf" download>Download my CV (in French)</a>
           </div>
           <ul class="links" aria-label="Online profiles">
@@ -66,10 +67,18 @@
             <li><a href="mailto:selmi.yassine@esprit.tn">selmi.yassine@esprit.tn</a></li>
           </ul>
         </div>
-        <figure class="hero__photo">
-          <img src="../assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait of Yassine Selmi" fetchpriority="high">
-          <figcaption>Tunis, graduating in 2027</figcaption>
-        </figure>
+        <aside class="idcard" aria-label="At a glance">
+          <img class="idcard__photo" src="../assets/img/yassine-selmi.webp" width="720" height="720" alt="Portrait of Yassine Selmi" fetchpriority="high">
+          <div class="idcard__body">
+            <p class="idcard__name">Yassine Selmi</p>
+            <p class="idcard__place">Tunis, graduating in 2027</p>
+          </div>
+          <dl class="idcard__facts">
+            <div><dt>Education</dt><dd>Data science engineering, ESPRIT<br>MSc Actuarial Science, Le Mans Université</dd></div>
+            <div><dt>Fields</dt><dd>IFRS 17 and IFRS 9, reserving, reinsurance, pricing</dd></div>
+            <div><dt>Languages</dt><dd>Arabic, French (B2), English (B2)</dd></div>
+          </dl>
+        </aside>
       </div>
 
       <!-- Le moment fort : 5 000 trajectoires simulées en direct -->
@@ -77,21 +86,26 @@
         <figure class="sim" id="sim">
           <figcaption class="sim__head">
             <h2 class="sim__title">5,000 mortality scenarios, simulated just now in your browser</h2>
-            <p class="sim__note">Each line is one possible path of a mortality index over 25 years: a random walk with drift, the engine of the Lee-Carter model I use to measure longevity risk. The light band holds 90% of the scenarios. Illustrative parameters.</p>
+            <p class="sim__note">Each line is one possible path of a mortality index over 25 years: a random walk with drift, the engine of the Lee-Carter model I use to measure longevity risk. Illustrative parameters.</p>
           </figcaption>
           <canvas class="sim__canvas" id="sim-canvas" role="img" aria-label="Fan of simulated paths of a mortality index over 25 years, with the median and the 5% to 95% band."></canvas>
           <div class="sim__foot">
+            <ul class="sim__legend">
+              <li><span class="key key--path" aria-hidden="true"></span>Simulated paths</li>
+              <li><span class="key key--median" aria-hidden="true"></span>Median</li>
+              <li><span class="key key--band" aria-hidden="true"></span>90% of scenarios</li>
+            </ul>
             <p class="sim__result" id="sim-result" aria-live="polite"></p>
             <button class="replay" id="sim-replay" type="button">Draw 5,000 new scenarios</button>
           </div>
         </figure>
 
-        <dl class="facts">
-          <div><dt>Education</dt><dd>Data science engineering at ESPRIT and MSc Actuarial Science at Le Mans Université, graduating in 2027</dd></div>
-          <div><dt>Looking for</dt><dd>A 6-month final-year internship, starting January 2027</dd></div>
-          <div><dt>Fields</dt><dd>IFRS 17 and IFRS 9, reserving, reinsurance, pricing</dd></div>
-          <div><dt>Languages</dt><dd>Arabic, French (B2), English (B2)</dd></div>
-        </dl>
+        <ul class="proofs" aria-label="Checkable figures, each linked to the repository that computes it">
+          <li><a href="https://github.com/selyassine/ifrs17-copilot"><span class="proof__value">50/50</span><span class="proof__label">IFRS 17 files recomputed to the cent by an independent R script</span><span class="proof__src">Source: IFRS 17 Copilot</span></a></li>
+          <li><a href="https://github.com/selyassine/claude_actuaire"><span class="proof__value">59/59</span><span class="proof__label">published values reproduced (Mack 1993, McNeil 1997)</span><span class="proof__src">Source: claude_actuaire</span></a></li>
+          <li><a href="https://github.com/selyassine/ecl9"><span class="proof__value">+41%</span><span class="proof__label">IFRS 9 allowance with LightGBM at 31 December 2007</span><span class="proof__src">Source: ecl9</span></a></li>
+          <li><a href="https://github.com/selyassine/SIAP"><span class="proof__value">678,000</span><span class="proof__label">policies priced with GLM and LightGBM</span><span class="proof__src">Source: SIAP</span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -120,13 +134,13 @@
             <div class="gallery__thumbs">
               <a class="gallery__thumb" href="../assets/img/projets/ifrs17-copilot-1.webp" data-caption="Workspace overview" aria-label="Show image 1: Workspace overview" aria-current="true"><img src="../assets/img/projets/ifrs17-copilot-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               <a class="gallery__thumb" href="../assets/img/projets/ifrs17-copilot-2.webp" data-caption="Agent chain on a case file" aria-label="Show image 2: Agent chain on a case file"><img src="../assets/img/projets/ifrs17-copilot-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
-              <a class="gallery__thumb" href="../assets/img/projets/ifrs17-copilot-3.webp" data-caption="Generated IFRS 17 actuarial note" aria-label="Show image 3: Generated IFRS 17 actuarial note"><img src="../assets/img/projets/ifrs17-copilot-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+              <a class="gallery__thumb" href="../assets/img/projets/ifrs17-copilot-3.webp" data-caption="Generated IFRS 17 actuarial note" aria-label="Show image 3: Generated IFRS 17 actuarial note"><img src="../assets/img/projets/ifrs17-copilot-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
             </div>
             <figcaption class="gallery__caption">Workspace overview</figcaption>
           </figure>
           <div class="feature__body">
-            <p class="kicker">Can a language model write an IFRS 17 memo without making up a number?</p>
-            <h3><a href="https://github.com/selyassine/ifrs17-copilot">IFRS 17 Copilot</a></h3>
+            <p class="kicker">Can a language model write an IFRS 17 memo without making up a number?</p>
+            <h3><a href="https://github.com/selyassine/ifrs17-copilot">IFRS 17 Copilot</a></h3>
             <p>A multi-agent copilot reads an insurance file (PDF, scan, Excel or a spoken question), computes the contractual service margin and the liability for incurred claims, then writes a memo that is cited, checked and submitted for human approval. Code calculates, the model explains.</p>
             <dl class="figures">
               <div><dt>Recomputed by an independent R script</dt><dd>50 / 50 files to the cent</dd></div>
@@ -151,7 +165,7 @@
             <figcaption class="gallery__caption">The answer: +41% allowance at 31/12/2007</figcaption>
           </figure>
           <div class="feature__body">
-            <p class="kicker">Does machine learning really change the IFRS 9 allowance?</p>
+            <p class="kicker">Does machine learning really change the IFRS 9 allowance?</p>
             <h3><a href="https://github.com/selyassine/ecl9">ecl9</a></h3>
             <p>A loan-by-loan expected credit loss engine on Freddie Mac US mortgages. The models are trained on 2000-2005 and tested on 2006-2008: they go through the crisis without having seen it.</p>
             <dl class="figures">
@@ -167,7 +181,7 @@
         <article class="feature" data-dom="nonvie">
           <figure class="gallery feature__media">
             <a class="gallery__main" href="../assets/img/projets/climatxl-1.webp">
-              <img src="../assets/img/projets/climatxl-1.webp" width="1400" height="667" loading="lazy" alt="Shiny pricing app">
+              <img src="../assets/img/projets/climatxl-1.webp" width="1400" height="875" loading="lazy" alt="Shiny pricing app">
             </a>
             <div class="gallery__thumbs">
               <a class="gallery__thumb" href="../assets/img/projets/climatxl-1.webp" data-caption="Shiny pricing app" aria-label="Show image 1: Shiny pricing app" aria-current="true"><img src="../assets/img/projets/climatxl-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
@@ -182,7 +196,7 @@
             <p>An R package that fits extreme value distributions, first stationary and then climate-dependent, to NOAA damages for 1996-2024, and derives the premium of an excess-of-loss layer. The answer over this period: not demonstrably.</p>
             <dl class="figures">
               <div><dt>Pure premium of the layer, 2024 then 2035</dt><dd>$2,176m to $2,762m</dd></div>
-              <div><dt>Validation</dt><dd>McNeil (1997) reproduced</dd></div>
+              <div><dt>Validation</dt><dd>McNeil (1997) reproduced</dd></div>
               <div><dt>Backtest</dt><dd>2013-2024</dd></div>
             </dl>
             <p class="stack">R, targets, testthat, Quarto, Shiny</p>
@@ -195,7 +209,7 @@
           <article class="project" data-dom="nonvie ia">
             <figure class="gallery">
               <a class="gallery__main" href="../assets/img/projets/siap-1.webp">
-                <img src="../assets/img/projets/siap-1.webp" width="1400" height="632" loading="lazy" alt="Pricing: recommended premium">
+                <img src="../assets/img/projets/siap-1.webp" width="1400" height="875" loading="lazy" alt="Pricing: recommended premium">
               </a>
               <div class="gallery__thumbs">
                 <a class="gallery__thumb" href="../assets/img/projets/siap-1.webp" data-caption="Pricing: recommended premium" aria-label="Show image 1: Pricing: recommended premium" aria-current="true"><img src="../assets/img/projets/siap-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
@@ -207,6 +221,7 @@
             <h3><a href="https://github.com/selyassine/SIAP">SIAP</a></h3>
             <p>A non-life insurance platform: GLM and LightGBM pricing on 678,000 policies, fraud detection (AUC 0.82), IBNR by Chain Ladder, Mack and bootstrap, and damage assessment by computer vision.</p>
             <p class="stack">LightGBM, XGBoost, YOLOv8, FastAPI, Next.js</p>
+            <p class="project__links"><a href="https://github.com/selyassine/SIAP">Code on GitHub</a></p>
           </article>
           <article class="project" data-dom="vie">
             <figure class="gallery">
@@ -223,27 +238,29 @@
             <h3><a href="https://github.com/selyassine/VITA">VitaAI</a></h3>
             <p>A life insurer simulated in 15 modules: Lee-Carter mortality, reserves, SCR on EIOPA curves, 99.5% longevity VaR, ALM and ORSA.</p>
             <p class="stack">Python, pytest, Next.js</p>
+            <p class="project__links"><a href="https://github.com/selyassine/VITA">Code on GitHub</a></p>
           </article>
           <article class="project" data-dom="nonvie vie ia">
             <figure class="gallery">
               <a class="gallery__main" href="../assets/img/projets/claude-actuaire-1.webp">
-                <img src="../assets/img/projets/claude-actuaire-1.webp" width="1400" height="752" loading="lazy" alt="Mack (1993) on the RAA triangle">
+                <img src="../assets/img/projets/claude-actuaire-1.webp" width="1400" height="875" loading="lazy" alt="Mack (1993) on the RAA triangle">
               </a>
               <div class="gallery__thumbs">
-                <a class="gallery__thumb" href="../assets/img/projets/claude-actuaire-1.webp" data-caption="Mack (1993) on the RAA triangle" aria-label="Show image 1: Mack (1993) on the RAA triangle" aria-current="true"><img src="../assets/img/projets/claude-actuaire-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
+                <a class="gallery__thumb" href="../assets/img/projets/claude-actuaire-1.webp" data-caption="Mack (1993) on the RAA triangle" aria-label="Show image 1: Mack (1993) on the RAA triangle" aria-current="true"><img src="../assets/img/projets/claude-actuaire-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
                 <a class="gallery__thumb" href="../assets/img/projets/claude-actuaire-2.webp" data-caption="GPD on the Danish fire losses" aria-label="Show image 2: GPD on the Danish fire losses"><img src="../assets/img/projets/claude-actuaire-2-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
                 <a class="gallery__thumb" href="../assets/img/projets/claude-actuaire-3.webp" data-caption="Engine commands and 409 passing tests" aria-label="Show image 3: Engine commands and 409 passing tests"><img src="../assets/img/projets/claude-actuaire-3-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
               </div>
-              <figcaption class="gallery__caption">Mack (1993) on the RAA triangle</figcaption>
+              <figcaption class="gallery__caption">Mack (1993) on the RAA triangle</figcaption>
             </figure>
             <h3><a href="https://github.com/selyassine/claude_actuaire">claude_actuaire</a></h3>
-            <p>An actuarial calculation engine shipped as a skill for Claude, tested against published results (Mack 1993, McNeil 1997): 59 correct values out of 59 on the benchmark, against 47 without code.</p>
+            <p>An actuarial calculation engine shipped as a skill for Claude, tested against published results (Mack 1993, McNeil 1997): 59 correct values out of 59 on the benchmark, against 47 without code.</p>
             <p class="stack">Python, pytest, GitHub Actions</p>
+            <p class="project__links"><a href="https://github.com/selyassine/claude_actuaire">Code on GitHub</a></p>
           </article>
           <article class="project" data-dom="vie">
             <figure class="gallery">
               <a class="gallery__main" href="../assets/img/projets/longevite-1.webp">
-                <img src="../assets/img/projets/longevite-1.webp" width="1400" height="778" loading="lazy" alt="Lee-Carter parameters a(x), b(x), k(t)">
+                <img src="../assets/img/projets/longevite-1.webp" width="1400" height="875" loading="lazy" alt="Lee-Carter parameters a(x), b(x), k(t)">
               </a>
               <div class="gallery__thumbs">
                 <a class="gallery__thumb" href="../assets/img/projets/longevite-1.webp" data-caption="Lee-Carter parameters a(x), b(x), k(t)" aria-label="Show image 1: Lee-Carter parameters a(x), b(x), k(t)" aria-current="true"><img src="../assets/img/projets/longevite-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
@@ -255,6 +272,7 @@
             <h3><a href="https://github.com/selyassine/actuariat-vie-longevite">Longevity risk</a></h3>
             <p>A group project of the MSc Actuarial Science: actuarial present value of a 25-year annuity for two French cohorts. The 1950 generation costs 5.25% more than the 1935 one.</p>
             <p class="stack">R, StMoMo, R Markdown</p>
+            <p class="project__links"><a href="https://github.com/selyassine/actuariat-vie-longevite">Code on GitHub</a></p>
           </article>
           <article class="project" data-dom="ia">
             <figure class="gallery">
@@ -271,11 +289,12 @@
             <h3><a href="https://github.com/selyassine/Quant">QuantAI</a></h3>
             <p>Quantitative trading in paper-trading mode: a LightGBM, LSTM and Transformer ensemble, Markowitz and Black-Litterman optimisation, backtests, and an agent that needs human approval.</p>
             <p class="stack">PyTorch, FastAPI, Celery, Next.js</p>
+            <p class="project__links"><a href="https://github.com/selyassine/Quant">Code on GitHub</a></p>
           </article>
           <article class="project" data-dom="ia">
             <figure class="gallery">
               <a class="gallery__main" href="../assets/img/projets/mlops-1.webp">
-                <img src="../assets/img/projets/mlops-1.webp" width="1400" height="658" loading="lazy" alt="Pipeline stages, accuracy 0.87">
+                <img src="../assets/img/projets/mlops-1.webp" width="1400" height="875" loading="lazy" alt="Pipeline stages, accuracy 0.87">
               </a>
               <div class="gallery__thumbs">
                 <a class="gallery__thumb" href="../assets/img/projets/mlops-1.webp" data-caption="Pipeline stages, accuracy 0.87" aria-label="Show image 1: Pipeline stages, accuracy 0.87" aria-current="true"><img src="../assets/img/projets/mlops-1-mini.webp" width="480" height="300" loading="lazy" alt=""></a>
@@ -287,6 +306,7 @@
             <h3><a href="https://github.com/selyassine/Mlops">Titanic MLOps</a></h3>
             <p>A complete CI/CD pipeline: on every push, the model is tested, containerised, published, then retrained and orchestrated automatically.</p>
             <p class="stack">Docker, GitHub Actions, Jenkins, Prefect</p>
+            <p class="project__links"><a href="https://github.com/selyassine/Mlops">Code on GitHub</a></p>
           </article>
         </div>
 
@@ -315,7 +335,7 @@
             <button class="lab__tab" role="tab" id="tab-cl" aria-controls="panel-cl" aria-selected="true" type="button">Reserving<span>Chain Ladder</span></button>
             <button class="lab__tab" role="tab" id="tab-xl" aria-controls="panel-xl" aria-selected="false" tabindex="-1" type="button">Reinsurance<span>XL layer, GPD</span></button>
             <button class="lab__tab" role="tab" id="tab-rente" aria-controls="panel-rente" aria-selected="false" tabindex="-1" type="button">Life insurance<span>Annuity and longevity</span></button>
-            <button class="lab__tab" role="tab" id="tab-ecl" aria-controls="panel-ecl" aria-selected="false" tabindex="-1" type="button">Credit risk<span>IFRS 9 allowance</span></button>
+            <button class="lab__tab" role="tab" id="tab-ecl" aria-controls="panel-ecl" aria-selected="false" tabindex="-1" type="button">Credit risk<span>IFRS 9 allowance</span></button>
           </div>
 
           <div class="lab__panel" role="tabpanel" id="panel-cl" aria-labelledby="tab-cl" tabindex="0">
@@ -380,13 +400,13 @@
                 </div>
               </div>
             </div>
-            <p class="lab__foot"><span>The 20% shock is the Solvency II longevity SCR shock. On real data: <a href="https://github.com/selyassine/VITA">VitaAI</a> and the <a href="https://github.com/selyassine/actuariat-vie-longevite">longevity project</a>.</span></p>
+            <p class="lab__foot"><span>The 20% shock is the Solvency II longevity SCR shock. On real data: <a href="https://github.com/selyassine/VITA">VitaAI</a> and the <a href="https://github.com/selyassine/actuariat-vie-longevite">longevity project</a>.</span></p>
           </div>
 
           <div class="lab__panel" role="tabpanel" id="panel-ecl" aria-labelledby="tab-ecl" tabindex="0" hidden>
             <div class="lab__intro">
               <h3>See the cliff effect of moving to stage 2</h3>
-              <p>For an amortising loan, IFRS 9 provides for 12-month expected losses in stage 1, then for lifetime losses once credit risk has increased significantly. Constant annual probability of default, straight-line amortisation.</p>
+              <p>For an amortising loan, IFRS 9 provides for 12-month expected losses in stage 1, then for lifetime losses once credit risk has increased significantly. Constant annual probability of default, straight-line amortisation.</p>
             </div>
             <div class="lab__grid">
               <form class="lab__controls" id="ecl-form">
@@ -421,11 +441,11 @@
         <div class="method">
           <div>
             <h3>I validate against a published reference</h3>
-            <p>Before any new calculation, I reproduce a known result: Mack (1993) for reserving, McNeil (1997) for extreme values. Then a second, independent code recomputes the output: 50 IFRS 17 files and 50 IFRS 9 loans redone in R.</p>
+            <p>Before any new calculation, I reproduce a known result: Mack (1993) for reserving, McNeil (1997) for extreme values. Then a second, independent code recomputes the output: 50 IFRS 17 files and 50 IFRS 9 loans redone in R.</p>
           </div>
           <div>
             <h3>I also publish what does not work</h3>
-            <p>In climatXL, the effect of climate on the premium is not demonstrated, and that is the conclusion of the report. In ecl9, both models cover only 9 to 13% of the crisis losses. In IFRS 17 Copilot, an embedding fine-tuning was measured and then dropped.</p>
+            <p>In climatXL, the effect of climate on the premium is not demonstrated, and that is the conclusion of the report. In ecl9, both models cover only 9 to 13% of the crisis losses. In IFRS 17 Copilot, an embedding fine-tuning was measured and then dropped.</p>
           </div>
           <div>
             <h3>The language model does not calculate</h3>
@@ -448,13 +468,13 @@
             <div>
               <h3>MSc Actuarial Science</h3>
               <p class="where">Le Mans Université, double degree with ESPRIT</p>
-              <p>Non-life pricing, reserving (Chain Ladder, Bornhuetter-Ferguson), mortality and survival models, Solvency II, IFRS 17, ALM, risk theory and extreme value theory.</p>
+              <p>Non-life pricing, reserving (Chain Ladder, Bornhuetter-Ferguson), mortality and survival models, Solvency II, IFRS 17, ALM, risk theory and extreme value theory.</p>
             </div>
           </li>
           <li>
             <p class="when">Summer <time>2026</time></p>
             <div>
-              <h3>IFRS 9 credit risk internship</h3>
+              <h3>IFRS 9 credit risk internship</h3>
               <p class="where">ESPRIT, RDI department, Tunis</p>
               <p>Estimation of PD, LGD and EAD on portfolio data, and calculation of expected credit losses (ECL) by stage.</p>
             </div>
@@ -501,46 +521,54 @@
           <h2 id="t-competences">Skills</h2>
           <p>What I use in my projects, grouped by field.</p>
         </div>
-        <div class="skills">
+        <dl class="skills">
           <div>
-            <h3>Actuarial science</h3>
-            <ul>
-              <li>IFRS 17: general model, PAA, CSM, risk adjustment</li>
-              <li>Reserving: Chain Ladder, Mack, Bornhuetter-Ferguson, bootstrap</li>
-              <li>IFRS 9: expected credit losses, PD, LGD, EAD</li>
-              <li>Solvency II: SCR, EIOPA curves, ORSA, ALM</li>
-              <li>GLM pricing, Lee-Carter mortality, survival analysis</li>
-              <li>VaR, CVaR, Monte Carlo, extreme values</li>
-            </ul>
+            <dt>Actuarial science</dt>
+            <dd>
+              <ul>
+                <li>IFRS 17: general model, PAA, CSM, risk adjustment</li>
+                <li>Reserving: Chain Ladder, Mack, Bornhuetter-Ferguson, bootstrap</li>
+                <li>IFRS 9: expected credit losses, PD, LGD, EAD</li>
+                <li>Solvency II: SCR, EIOPA curves, ORSA, ALM</li>
+                <li>GLM pricing, Lee-Carter mortality, survival analysis</li>
+                <li>VaR, CVaR, Monte Carlo, extreme values</li>
+              </ul>
+            </dd>
           </div>
           <div>
-            <h3>Data science and AI</h3>
-            <ul>
-              <li>scikit-learn, LightGBM, XGBoost, SHAP</li>
-              <li>PyTorch, Transformers, NLP, vision (YOLOv8)</li>
-              <li>LLMs, RAG, LangGraph agents, rigorous evaluation</li>
-              <li>Time series, survival analysis</li>
-            </ul>
+            <dt>Data science and AI</dt>
+            <dd>
+              <ul>
+                <li>scikit-learn, LightGBM, XGBoost, SHAP</li>
+                <li>PyTorch, Transformers, NLP, vision (YOLOv8)</li>
+                <li>LLMs, RAG, LangGraph agents, rigorous evaluation</li>
+                <li>Time series, survival analysis</li>
+              </ul>
+            </dd>
           </div>
           <div>
-            <h3>Engineering</h3>
-            <ul>
-              <li>Python, R, SQL</li>
-              <li>FastAPI, Docker, GitHub Actions, Jenkins</li>
-              <li>n8n, Prefect, MLflow</li>
-              <li>Next.js, React, TypeScript, Power BI</li>
-              <li>Hedera, Solidity smart contracts</li>
-            </ul>
+            <dt>Engineering</dt>
+            <dd>
+              <ul>
+                <li>Python, R, SQL</li>
+                <li>FastAPI, Docker, GitHub Actions, Jenkins</li>
+                <li>n8n, Prefect, MLflow</li>
+                <li>Next.js, React, TypeScript, Power BI</li>
+                <li>Hedera, Solidity smart contracts</li>
+              </ul>
+            </dd>
           </div>
           <div>
-            <h3>Languages</h3>
-            <ul>
-              <li>Arabic: native</li>
-              <li>French: B2, studies in French</li>
-              <li>English: B2</li>
-            </ul>
+            <dt>Languages</dt>
+            <dd>
+              <ul>
+                <li>Arabic: native</li>
+                <li>French: B2, studies in French</li>
+                <li>English: B2</li>
+              </ul>
+            </dd>
           </div>
-        </div>
+        </dl>
       </div>
     </section>
 
@@ -553,31 +581,30 @@
         </div>
         <div class="certs">
           <div class="certs__group">
-            <h3>NVIDIA Deep Learning Institute</h3>
-            <ul>
-              <li><span>Building RAG Agents with LLMs</span><time>Oct 2026</time></li>
-              <li><span>Building Transformer-Based NLP Applications</span><time>Oct 2026</time></li>
-              <li><span>Applications of AI for Anomaly Detection</span><time>Apr 2026</time></li>
-              <li><span>Rapid Application Development with LLMs</span><time>Dec 2025</time></li>
-              <li><span>Building LLM Applications With Prompt Engineering</span><time>Dec 2025</time></li>
+            <h3 id="c-1">Actuarial science and finance</h3>
+            <ul aria-labelledby="c-1">
+                <li><span class="cert__name">Foundations of Insurance and the IFRS 17 Standard</span><span class="cert__org">SAS</span><time>Nov 2026</time></li>
+                <li><span class="cert__name">AIG Actuarial Analyst Job Simulation</span><span class="cert__org">Forage</span><time>Nov 2026</time></li>
+                <li><span class="cert__name">Credit Risk Modeling in Python</span><span class="cert__org">365 Financial Analyst</span><time>Nov 2026</time></li>
             </ul>
           </div>
           <div class="certs__group">
-            <h3>The Hashgraph Association</h3>
-            <ul>
-              <li><span>Hedera Certified Developer Associate (HCDA)</span><time>Oct 2026</time></li>
-              <li><span>Hedera Business Foundation (HBF)</span><time>Oct 2026</time></li>
-              <li><span>Hedera Certified Foundation (HCF)</span><time>Oct 2026</time></li>
+            <h3 id="c-2">AI and data</h3>
+            <ul aria-labelledby="c-2">
+                <li><span class="cert__name">Building RAG Agents with LLMs</span><span class="cert__org">NVIDIA DLI</span><time>Oct 2026</time></li>
+                <li><span class="cert__name">Building Transformer-Based NLP Applications</span><span class="cert__org">NVIDIA DLI</span><time>Oct 2026</time></li>
+                <li><span class="cert__name">Applications of AI for Anomaly Detection</span><span class="cert__org">NVIDIA DLI</span><time>Apr 2026</time></li>
+                <li><span class="cert__name">Rapid Application Development with LLMs</span><span class="cert__org">NVIDIA DLI</span><time>Dec 2025</time></li>
+                <li><span class="cert__name">Building LLM Applications With Prompt Engineering</span><span class="cert__org">NVIDIA DLI</span><time>Dec 2025</time></li>
+                <li><span class="cert__name">Data Analyst Associate</span><span class="cert__org">DataCamp</span><span class="pending">in progress</span></li>
             </ul>
-            <h3>Finance and actuarial science</h3>
-            <ul>
-              <li><span>Credit Risk Modeling in Python (365 Financial Analyst)</span><time>Nov 2026</time></li>
-              <li><span>AIG Actuarial Analyst Job Simulation (Forage)</span><time>Nov 2026</time></li>
-              <li><span>Foundations of Insurance and the IFRS 17 Standard (SAS)</span><time>Nov 2026</time></li>
-            </ul>
-            <h3>DataCamp</h3>
-            <ul>
-              <li><span>Data Analyst Associate</span><span class="pending">in progress</span></li>
+          </div>
+          <div class="certs__group">
+            <h3 id="c-3">Blockchain</h3>
+            <ul aria-labelledby="c-3">
+                <li><span class="cert__name">Hedera Certified Developer Associate (HCDA)</span><span class="cert__org">The Hashgraph Association</span><time>Oct 2026</time></li>
+                <li><span class="cert__name">Hedera Business Foundation (HBF)</span><span class="cert__org">The Hashgraph Association</span><time>Oct 2026</time></li>
+                <li><span class="cert__name">Hedera Certified Foundation (HCF)</span><span class="cert__org">The Hashgraph Association</span><time>Oct 2026</time></li>
             </ul>
           </div>
         </div>
